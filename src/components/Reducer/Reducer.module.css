@@ -1,0 +1,9 @@
+.reducer {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+.reducer input,
+.reducer button {
+	width: max-content;
+}

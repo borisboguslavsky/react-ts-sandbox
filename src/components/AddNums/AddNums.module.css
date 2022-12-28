@@ -1,0 +1,9 @@
+.calc {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+.calc input,
+.calc button {
+	width: max-content;
+}

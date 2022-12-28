@@ -1,0 +1,30 @@
+.tree {
+	list-style: none;
+	padding: 0;
+}
+.node {
+	list-style: none;
+	z-index: 1;
+	margin: 0.5rem 0rem;
+	/* display: flex; */
+	flex-direction: column;
+}
+.node.folder {
+	z-index: 2;
+}
+.node.folder ul {
+	margin-left: 0.25rem;
+	padding: 0.5rem 0rem;
+	border-left: 1px solid grey;
+}
+.node.folder span {
+	padding: 0.25rem 1rem 0.25rem 0.5rem;
+	/* background-color: #242424; */
+	border: 1px solid grey;
+	border-radius: 4px;
+	cursor: pointer;
+	user-select: none;
+}
+.node.file span {
+	border: none;
+}

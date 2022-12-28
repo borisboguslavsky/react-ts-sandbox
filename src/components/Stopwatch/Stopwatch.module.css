@@ -1,0 +1,9 @@
+.stopwatch {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+.stopwatch input,
+.stopwatch button {
+	width: max-content;
+}

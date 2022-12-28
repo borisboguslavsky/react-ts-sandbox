@@ -1,0 +1,10 @@
+.increment {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+.increment label,
+.increment input,
+.increment button {
+	width: max-content
+}
