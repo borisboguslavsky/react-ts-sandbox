@@ -1,9 +1,9 @@
 import React, { useState, useRef } from "react";
 import { Row } from "../Row";
 
-import classes from "./Increment.module.css";
+import classes from "./Counter.module.css";
 
-const Increment: React.FC = () => {
+const Counter: React.FC = () => {
 	const [count, setCount] = useState(0);
 
 	const inputRef = useRef<HTMLInputElement>(null);
@@ -37,4 +37,4 @@ const Increment: React.FC = () => {
 	);
 };
 
-export default Increment;
+export default Counter;

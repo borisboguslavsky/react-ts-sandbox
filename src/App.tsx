@@ -8,7 +8,7 @@ import Stopwatch from "./components/Stopwatch/Stopwatch";
 import TodoList from "./components/ToDo/ToDo";
 import Login from "./components/Login/Login";
 import ReducerExample from "./components/Reducer/Reducer";
-import Increment from "./components/Increment/Increment";
+import Counter from "./components/Counter/Counter";
 
 function App() {
 	return (
@@ -28,8 +28,8 @@ function App() {
 			<Card title="ToDo List" description="A basic ToDo list component where users can add and remove items to the list.">
 				<TodoList />
 			</Card>
-			<Card title="Increment" description="A counter component where users can increment and decrement the counter by the entered value.">
-				<Increment />
+			<Card title="Counter" description="A counter component where users can increment and decrement the counter by the entered value.">
+				<Counter />
 			</Card>
 			<Card title="Calculator" description="A basic calculator app where users can add, subtract, multiply, and divide two numbers.">
 				<Calculator />
