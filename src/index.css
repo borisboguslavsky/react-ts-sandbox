@@ -1,5 +1,6 @@
 * {
 	box-sizing: border-box;
+  color:rgb(72, 72, 72)
 }
 
 :root {
@@ -11,7 +12,7 @@
 
 body {
   margin: 0;
-  background-color: grey;
+  background-color: rgb(219, 219, 219);
 }
 
 h1, h2, h3, h4, h5, h6 {

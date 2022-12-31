@@ -4,7 +4,7 @@
 	flex-direction: column;
 	background-color: white;
 	border-radius: 4px;
-	box-shadow: 0px 0px 20px black;
+	box-shadow: 0px 0px 20px rgba(0,0,0,0.25);;
 	padding: 1rem;
 	/* height: 400px;
 	overflow: auto; */

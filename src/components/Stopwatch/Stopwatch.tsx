@@ -50,7 +50,7 @@ const Stopwatch = () => {
 				<button onClick={pausePlayHandler}>{isPaused ? 'Play' : 'Pause'}</button>
 				<button onClick={resetHandler}>Reset</button>
 			</Row>
-			<ul style={{border: '1px solid grey', listStyle: 'none', padding: '1rem'}}>
+			<ul className={classes.laps}>
 				{laps.length > 0 && laps.map((lap, index) => {
 					return <li key={`lap_${index}`}>Lap {index+1} - {convertSecondsToTimeString(lap)}</li>
 				})}

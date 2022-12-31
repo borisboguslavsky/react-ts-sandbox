@@ -10,7 +10,7 @@ interface ReducerState {
 	allFieldsPopulated: boolean
 }
 
-type ReducerTypes = 'CHANGE' | 'REVERSE' | 'UPPER' | 'LOWER'
+type ReducerTypes = 'CHANGE' | 'REVERSE' | 'UPPER' | 'LOWER' | 'RESET'
 
 interface RedcuerAction {
 	type: ReducerTypes
@@ -54,6 +54,14 @@ const reducerFunction = (state: ReducerState, action: RedcuerAction) => {
 			field2: state.field2.toLowerCase(),
 			field3: state.field3.toLowerCase(),
 			allFieldsPopulated: state.allFieldsPopulated
+		}
+	}
+	if (action.type === 'RESET') {
+		return {
+			field1: "it's rough",
+			field2: "it's coarse",
+			field3: "and it gets everywhere",
+			allFieldsPopulated: true
 		}
 	}
 	return state;
@@ -101,9 +109,10 @@ const ReducerExample = () => {
 					onChange={changeHandler}
 				/>
 				<Row>
-					<button onClick={(e) => submitHandler(e, 'REVERSE')}>Reverse All</button>
-					<button onClick={(e) => submitHandler(e, 'UPPER')}>Uppercase All</button>
-					<button onClick={(e) => submitHandler(e, 'LOWER')}>Lowercase All</button>
+					<button onClick={(e) => submitHandler(e, 'REVERSE')}>Reverse</button>
+					<button onClick={(e) => submitHandler(e, 'UPPER')}>Uppercase</button>
+					<button onClick={(e) => submitHandler(e, 'LOWER')}>Lowercase</button>
+					<button onClick={(e) => submitHandler(e, 'RESET')}>Reset</button>
 				</Row>
 			</form>
 			<h3>

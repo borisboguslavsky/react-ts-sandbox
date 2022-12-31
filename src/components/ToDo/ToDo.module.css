@@ -7,6 +7,7 @@
 	margin-top: 0.5rem;
 	border: 1px solid grey;
 	padding: 1rem;
+	border-radius: 4px;
 }
 .listItems p {
 	margin: 0;
