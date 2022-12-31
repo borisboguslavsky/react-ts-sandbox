@@ -5,9 +5,7 @@ import Row from "../Row";
 import classes from "./Calculator.module.css";
 
 const Calculator = () => {
-	const [result, setResult] = useState<number | string | undefined>(
-		`Click "Add" Button`
-	);
+	const [result, setResult] = useState<number | string | undefined>('');
 
 	const num1Ref = useRef<HTMLInputElement>(null);
 	const num2Ref = useRef<HTMLInputElement>(null);
@@ -68,13 +66,13 @@ const Calculator = () => {
 				<button onClick={multiplyHandler}>Multiply</button>
 				<button onClick={divideHandler}>Divide</button>
 			</Row>
-			<h3>
+			{result && <h3>
 				Result:
 				<br />
 				<span className={result ? classes.valid : classes.invalid}>
-					{result && result}
+					{result}
 				</span>
-			</h3>
+			</h3>}
 		</div>
 	);
 };
