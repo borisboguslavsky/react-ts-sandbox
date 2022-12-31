@@ -34,7 +34,7 @@ function App() {
 			<WrapperComponent title="Todo list">
 				<TodoList />
 			</WrapperComponent>
-		</div>
+    </div>
 	);
 }
 

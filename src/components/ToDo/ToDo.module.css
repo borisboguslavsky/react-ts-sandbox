@@ -1,0 +1,26 @@
+.todo {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+.todo input, .todo button {
+	width: max-content;
+}
+.listItems {
+	border: 1px solid grey;
+	padding: 1rem;
+}
+.listItems p {
+	margin: 0;
+}
+.todo ul {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+.todo li {
+	padding: 0px;
+	margin: 0px;
+	display: flex;
+	justify-content: space-between;
+}

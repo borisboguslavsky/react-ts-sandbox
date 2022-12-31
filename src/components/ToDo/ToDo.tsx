@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react";
 
+import classes from './ToDo.module.css'
+
 const NewItem: React.FC<{
 	addItem: (item: TodoItem) => void;
 }> = (props) => {
@@ -7,6 +9,7 @@ const NewItem: React.FC<{
 
 	const addItemHandler = (e: React.FormEvent) => {
 		e.preventDefault();
+		if (textInputRef.current!.value === "") return;
 		// console.log(textInputRef.current?.value)
 		props.addItem({
 			id: new Date().getTime().toString(),
@@ -63,10 +66,12 @@ const TodoList: React.FC = () => {
 	};
 
 	return (
-		<div>
+		<div className={classes.todo}>
 			<NewItem addItem={addItem} />
-			<Items items={items} removeItem={removeItem} />
-			{items.length === 0 && <h3>List is empty! Add items using the above text field...</h3>}
+			<div className={classes.listItems}>
+				<Items items={items} removeItem={removeItem} />
+				{items.length === 0 && <p>List is empty!</p>}
+			</div>
 		</div>
 	);
 };
