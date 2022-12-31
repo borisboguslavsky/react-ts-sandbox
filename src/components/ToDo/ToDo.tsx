@@ -15,6 +15,7 @@ const NewItem: React.FC<{
 			id: new Date().getTime().toString(),
 			text: textInputRef.current!.value,
 		});
+		textInputRef.current!.value = "";
 	};
 
 	return (
@@ -31,7 +32,7 @@ const Items: React.FC<{
 	removeItem: (id: string) => void;
 }> = (props) => {
 	return (
-		<ul>
+		<>
 			{props.items.map((item) => {
 				return (
 					<li key={item.id}>
@@ -40,7 +41,7 @@ const Items: React.FC<{
 					</li>
 				);
 			})}
-		</ul>
+		</>
 	);
 };
 
@@ -68,10 +69,10 @@ const TodoList: React.FC = () => {
 	return (
 		<div className={classes.todo}>
 			<NewItem addItem={addItem} />
-			<div className={classes.listItems}>
+			<ul className={classes.listItems}>
 				<Items items={items} removeItem={removeItem} />
-				{items.length === 0 && <p>List is empty!</p>}
-			</div>
+				{items.length === 0 && <li style={{justifyContent: 'center'}}>List is empty.</li>}
+			</ul>
 		</div>
 	);
 };

@@ -36,13 +36,15 @@ const Node: React.FC<{node: TreeNode}> = (props) => {
 
 	return(
 		<li className={css}>
-			<span onClick={nodeCLickHandler}>
+			<span onClick={nodeCLickHandler} className={showChildren ? classes.expanded : classes.collapsed}>
 				{props.node.children && !showChildren && '▶ '}
 				{props.node.children && showChildren && '▼ '}
+				{props.node.children && '🗁 '}
+				{!props.node.children && '🗎 '}
 				{props.node.name}
 			</span>
 			{props.node.children && showChildren && 
-				<ul style={{paddingLeft: "1rem"}}>
+				<ul>
 					{props.node.children!.map((child, index) => {
 						return(
 							<Node key={`${props.node.name}_${index}`} node={child} />

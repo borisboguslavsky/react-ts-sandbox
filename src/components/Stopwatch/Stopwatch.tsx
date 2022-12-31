@@ -54,7 +54,7 @@ const Stopwatch = () => {
 				{laps.length > 0 && laps.map((lap, index) => {
 					return <li key={`lap_${index}`}>Lap {index+1} - {convertSecondsToTimeString(lap)}</li>
 				})}
-				{laps.length === 0 && <li>No laps recorded.</li>}
+				{laps.length === 0 && <li style={{textAlign: 'center'}}>No laps recorded.</li>}
 			</ul>
 			<Row>
 				<button onClick={addLapHandler}>Lap</button>

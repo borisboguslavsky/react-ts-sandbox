@@ -9,17 +9,11 @@
 	padding: 1rem;
 	border-radius: 4px;
 }
-.listItems p {
-	margin: 0;
-}
-.todo ul {
-	list-style: none;
-	padding: 0px;
-	margin: 0px;
-}
 .todo li {
 	padding: 0px;
 	margin: 0px;
+	margin-bottom: 0.25rem;
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 }

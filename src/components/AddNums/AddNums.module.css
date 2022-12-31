@@ -3,9 +3,6 @@
 	flex-direction: column;
 	gap: 0.25rem;
 }
-.calc button {
-	width: max-content;
-}
 .calc h3 {
 	text-align: center;
 }
