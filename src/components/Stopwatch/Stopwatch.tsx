@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import Row from "../Row"
 
 import classes from './Stopwatch.module.css'
 
@@ -44,21 +45,21 @@ const Stopwatch = () => {
 
 	return (
 		<div className={classes.stopwatch}>
-			<h3 style={{marginTop: '0', padding: '0'}}>{convertSecondsToTimeString(secondsElapsed)}</h3>
-			<div>
+			<h2>{convertSecondsToTimeString(secondsElapsed)}</h2>
+			<Row>
 				<button onClick={pausePlayHandler}>{isPaused ? 'Play' : 'Pause'}</button>
 				<button onClick={resetHandler}>Reset</button>
-			</div>
+			</Row>
 			<ul style={{border: '1px solid grey', listStyle: 'none', padding: '1rem'}}>
 				{laps.length > 0 && laps.map((lap, index) => {
 					return <li key={`lap_${index}`}>Lap {index+1} - {convertSecondsToTimeString(lap)}</li>
 				})}
 				{laps.length === 0 && <li>No laps recorded.</li>}
 			</ul>
-			<div>
+			<Row>
 				<button onClick={addLapHandler}>Lap</button>
 				<button onClick={clearLapsHandler}>Clear laps</button>
-			</div>
+			</Row>
 		</div>
 	)
 }

@@ -20,20 +20,12 @@ let DUMMY_DATA = {name: 'root', children: [
     {name: "index.html"},
     {name: "index.css"},
   ]},
-  {name: "src", children: [
-    {name: "components", children: [
-      {name: "Tree.tsx"},
-      {name: "Tree.module.css"},
-    ]},
-    {name: "Header.tsx"},
-    {name: "Header.module.css"},
-  ]},
   {name: "README.md"},
 ]}
 
 const Node: React.FC<{node: TreeNode}> = (props) => {
 
-	const [showChildren, setShowChildren] = useState<boolean>(false);
+	const [showChildren, setShowChildren] = useState<boolean>(true);
 
 	const nodeCLickHandler = (event: React.MouseEvent): void => {
 		event.stopPropagation()
@@ -43,8 +35,8 @@ const Node: React.FC<{node: TreeNode}> = (props) => {
 	const css = `${classes.node} ${props.node.children ? classes.folder : classes.file}`
 
 	return(
-		<li className={css} onClick={nodeCLickHandler}>
-			<span>
+		<li className={css}>
+			<span onClick={nodeCLickHandler}>
 				{props.node.children && !showChildren && '▶ '}
 				{props.node.children && showChildren && '▼ '}
 				{props.node.name}

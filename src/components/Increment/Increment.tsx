@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { Row } from "../Row";
 
 import classes from "./Increment.module.css";
 
@@ -21,11 +22,17 @@ const Increment: React.FC = () => {
 
 	return (
 		<div className={classes.increment}>
-			<input type="number" ref={inputRef} />
-			<button onClick={incrementHandler}>Increment</button>
-			<button onClick={decrementHandler}>Decrement</button>
-			<h3>Counter: {count}</h3>
-			<button onClick={() => setCount(0)}>Reset</button>
+			<label htmlFor="incrementDecrementInput">Amount:</label>
+			<input id="incrementDecrementInput" type="number" ref={inputRef} defaultValue={1}/>
+			<Row>
+				<button onClick={incrementHandler}>Increment</button>
+				<button onClick={decrementHandler}>Decrement</button>
+				<button onClick={() => setCount(0)}>Reset</button>
+			</Row>
+			<h3>
+				Count:<br/>
+				<span>{count}</span>
+			</h3>
 		</div>
 	);
 };

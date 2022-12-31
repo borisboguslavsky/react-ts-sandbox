@@ -1,9 +1,17 @@
-.reducer {
+.reducer form{
 	display: flex;
 	flex-direction: column;
 	gap: 0.25rem;
 }
-.reducer input,
-.reducer button {
-	width: max-content;
+
+.reducer h3 {
+	text-align: center;
+}
+
+.populated {
+	color: green;
+}
+
+.notPopulated {
+	color: red;
 }

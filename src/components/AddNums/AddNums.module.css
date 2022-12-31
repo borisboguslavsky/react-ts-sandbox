@@ -3,7 +3,15 @@
 	flex-direction: column;
 	gap: 0.25rem;
 }
-.calc input,
 .calc button {
 	width: max-content;
+}
+.calc h3 {
+	text-align: center;
+}
+.valid {
+	color: green;
+}
+.invalid {
+	color: lightcoral
 }

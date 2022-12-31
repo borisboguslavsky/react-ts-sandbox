@@ -1,8 +1,6 @@
 .wrapper {
-display: flex;
-width: calc(50% - 1rem);
-/* width: 30%; */
-	/* flex-basis: auto; */
+	display: flex;
+	width: calc(50% - 1rem);
 	flex-direction: column;
 	background-color: white;
 	border-radius: 4px;
@@ -13,7 +11,7 @@ width: calc(50% - 1rem);
 	flex-grow: 0;
 }
 
-.wrapper h2 {
+.title {
 	margin: 0;
 	padding-bottom: 1rem;
 	border-bottom: 1px solid rgba(0,0,0,0.125);

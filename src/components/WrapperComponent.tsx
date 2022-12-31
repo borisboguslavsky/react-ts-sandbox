@@ -8,7 +8,7 @@ interface WrapperComponentProps {
 const WrapperComponent: React.FC<WrapperComponentProps> = (props) => {
 	return(
 		<div className={classes.wrapper}>
-			<h2>{props.title}</h2>
+			<h2 className={classes.title}>{props.title}</h2>
 			{props.children}
 		</div>
 	)

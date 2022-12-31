@@ -1,4 +1,5 @@
 import React, { useReducer } from "react"
+import Row from "../Row"
 
 import classes from './Reducer.module.css'
 
@@ -62,9 +63,9 @@ const ReducerExample = () => {
 	// Using useReducer()
 	// const [state, dispatchFn] = useReducer(reducerFn, initialState, initialFn)
 	const initialState: ReducerState = {
-		field1: 'Its rough',
-		field2: 'Its coarse',
-		field3: 'And it gets everywhere',
+		field1: "it's rough",
+		field2: "it's coarse",
+		field3: "and it gets everywhere",
 		allFieldsPopulated: true
 	}
 	const [formState, dispatchForm] = useReducer(reducerFunction, initialState, undefined)
@@ -82,8 +83,8 @@ const ReducerExample = () => {
 	}
 
 	return(
-		<div>
-			<form className={classes.reducer}>
+		<div className={classes.reducer}>
+			<form>
 				<input type="text" 
 					id="field1"
 					value={formState.field1}
@@ -99,11 +100,18 @@ const ReducerExample = () => {
 					value={formState.field3}
 					onChange={changeHandler}
 				/>
-				<button onClick={(e) => submitHandler(e, 'REVERSE')}>Reverse All</button>
-				<button onClick={(e) => submitHandler(e, 'UPPER')}>Uppercase All</button>
-				<button onClick={(e) => submitHandler(e, 'LOWER')}>Lowercase All</button>
+				<Row>
+					<button onClick={(e) => submitHandler(e, 'REVERSE')}>Reverse All</button>
+					<button onClick={(e) => submitHandler(e, 'UPPER')}>Uppercase All</button>
+					<button onClick={(e) => submitHandler(e, 'LOWER')}>Lowercase All</button>
+				</Row>
 			</form>
-			<h3>All fields populated: {formState.allFieldsPopulated.toString()}</h3>
+			<h3>
+				All fields populated: <br/>
+				<span className={formState.allFieldsPopulated ? classes.populated : classes.notPopulated}>
+					{formState.allFieldsPopulated.toString().toUpperCase()}
+				</span>
+			</h3>
 		</div>
 	)
 }

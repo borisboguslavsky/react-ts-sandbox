@@ -1,4 +1,6 @@
 import { useRef, useState } from "react"
+import Col from "../Col";
+import Row from "../Row";
 
 import classes from './AddNums.module.css'
 
@@ -18,24 +20,37 @@ const AddNums = () => {
 
 	return(
 		<div className={classes.calc}>
-			<label htmlFor="val1">Number 1:</label>
-			<input
-				id="val1"
-				ref={num1Ref}
-				type="text"
-			/>
-			<label htmlFor="val2">Number 2:</label>
-			<input
-				id="val2"
-				ref={num2Ref}
-				type="text"
-			/>
+			<Row>
+				<Col>
+					<label htmlFor="val1">Number 1:</label>
+					<input
+						id="val1"
+						ref={num1Ref}
+						defaultValue={2}
+						type="text"
+					/>
+				</Col>
+				<Col>
+					<label htmlFor="val2">Number 2:</label>
+					<input
+						id="val2"
+						ref={num2Ref}
+						defaultValue={3}
+						type="text"
+					/>
+				</Col>
+			</Row>
 			<button
 				onClick={addHandler}
 			>
 				Add
 			</button>
-			<h3>Result: {!result ? 'NaN' : result}</h3>
+			<h3>
+				Result:<br/>
+				<span className={result ? classes.valid : classes.invalid}>
+					{!result ? 'NaN' : result}
+				</span>
+			</h3>
 		</div>
 	)
 }

@@ -3,7 +3,8 @@
 	flex-direction: column;
 	gap: 0.25rem;
 }
-.stopwatch input,
-.stopwatch button {
-	width: max-content;
+.stopwatch h2 {
+	margin: 0;
+	margin-bottom: 1rem;
+	text-align: center;
 }

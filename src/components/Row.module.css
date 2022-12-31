@@ -1,0 +1,9 @@
+.row {
+	/* width: 100%; */
+	display: flex;
+	gap: 0.25rem;
+	justify-content: space-between;
+}
+.row button {
+	flex: 1;
+}

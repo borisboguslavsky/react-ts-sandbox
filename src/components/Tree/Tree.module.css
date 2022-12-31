@@ -25,6 +25,12 @@
 	cursor: pointer;
 	user-select: none;
 }
+.node.folder span:hover {
+	background-color: skyblue;
+}
+.node.folder span:active {
+	background-color: orange;
+}
 .node.file span {
 	border: none;
 }
