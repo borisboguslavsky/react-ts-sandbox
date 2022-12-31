@@ -81,30 +81,31 @@ const ReducerExample = () => {
 		dispatchForm({type: 'CHANGE', field: field, value: value})
 	}
 
-	return(<section>
-		<h2>Reducer with useReducer()</h2>
-		<form className={classes.reducer}>
-			<input type="text" 
-				id="field1"
-				value={formState.field1}
-				onChange={changeHandler}
-			/>
-			<input type="text" 
-				id="field2"
-				value={formState.field2}
-				onChange={changeHandler}
-			/>
-			<input type="text" 
-				id="field3"
-				value={formState.field3}
-				onChange={changeHandler}
-			/>
-			<button onClick={(e) => submitHandler(e, 'REVERSE')}>Reverse All</button>
-			<button onClick={(e) => submitHandler(e, 'UPPER')}>Uppercase All</button>
-			<button onClick={(e) => submitHandler(e, 'LOWER')}>Lowercase All</button>
-		</form>
-		<h3>All fields populated: {formState.allFieldsPopulated.toString()}</h3>
-	</section>)
+	return(
+		<div>
+			<form className={classes.reducer}>
+				<input type="text" 
+					id="field1"
+					value={formState.field1}
+					onChange={changeHandler}
+				/>
+				<input type="text" 
+					id="field2"
+					value={formState.field2}
+					onChange={changeHandler}
+				/>
+				<input type="text" 
+					id="field3"
+					value={formState.field3}
+					onChange={changeHandler}
+				/>
+				<button onClick={(e) => submitHandler(e, 'REVERSE')}>Reverse All</button>
+				<button onClick={(e) => submitHandler(e, 'UPPER')}>Uppercase All</button>
+				<button onClick={(e) => submitHandler(e, 'LOWER')}>Lowercase All</button>
+			</form>
+			<h3>All fields populated: {formState.allFieldsPopulated.toString()}</h3>
+		</div>
+	)
 }
 
 export default ReducerExample

@@ -20,16 +20,13 @@ const Increment: React.FC = () => {
 	};
 
 	return (
-		<section>
-			<h2>Increment & Decrement</h2>
-			<div className={classes.increment}>
-				<input type="number" ref={inputRef} />
-				<button onClick={incrementHandler}>Increment</button>
-				<button onClick={decrementHandler}>Decrement</button>
-				<h3>Counter: {count}</h3>
-				<button onClick={() => setCount(0)}>Reset</button>
-			</div>
-		</section>
+		<div className={classes.increment}>
+			<input type="number" ref={inputRef} />
+			<button onClick={incrementHandler}>Increment</button>
+			<button onClick={decrementHandler}>Decrement</button>
+			<h3>Counter: {count}</h3>
+			<button onClick={() => setCount(0)}>Reset</button>
+		</div>
 	);
 };
 

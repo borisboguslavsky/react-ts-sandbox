@@ -63,12 +63,11 @@ const TodoList: React.FC = () => {
 	};
 
 	return (
-		<section>
-			<h2>ToDo List</h2>
+		<div>
 			<NewItem addItem={addItem} />
 			<Items items={items} removeItem={removeItem} />
 			{items.length === 0 && <h3>List is empty! Add items using the above text field...</h3>}
-		</section>
+		</div>
 	);
 };
 

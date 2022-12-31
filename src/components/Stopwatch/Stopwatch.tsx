@@ -42,9 +42,8 @@ const Stopwatch = () => {
 		setLaps([])
 	}
 
-	return (<section>
+	return (
 		<div className={classes.stopwatch}>
-			<h2>Stopwatch</h2>
 			<h3 style={{marginTop: '0', padding: '0'}}>{convertSecondsToTimeString(secondsElapsed)}</h3>
 			<div>
 				<button onClick={pausePlayHandler}>{isPaused ? 'Play' : 'Pause'}</button>
@@ -61,7 +60,7 @@ const Stopwatch = () => {
 				<button onClick={clearLapsHandler}>Clear laps</button>
 			</div>
 		</div>
-	</section>)
+	)
 }
 
 export default Stopwatch

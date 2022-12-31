@@ -17,29 +17,26 @@ const AddNums = () => {
 	}
 
 	return(
-		<section>
-			<h2>Add Numbers with useRef()</h2>
-			<div className={classes.calc}>
-				<label htmlFor="val1">Number 1:</label>
-				<input
-					id="val1"
-					ref={num1Ref}
-					type="text"
-				/>
-				<label htmlFor="val2">Number 2:</label>
-				<input
-					id="val2"
-					ref={num2Ref}
-					type="text"
-				/>
-				<button
-					onClick={addHandler}
-				>
-					Add
-				</button>
-				<h3>Result: {!result ? 'NaN' : result}</h3>
-			</div>
-		</section>
+		<div className={classes.calc}>
+			<label htmlFor="val1">Number 1:</label>
+			<input
+				id="val1"
+				ref={num1Ref}
+				type="text"
+			/>
+			<label htmlFor="val2">Number 2:</label>
+			<input
+				id="val2"
+				ref={num2Ref}
+				type="text"
+			/>
+			<button
+				onClick={addHandler}
+			>
+				Add
+			</button>
+			<h3>Result: {!result ? 'NaN' : result}</h3>
+		</div>
 	)
 }
 

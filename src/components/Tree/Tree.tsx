@@ -63,12 +63,13 @@ const Node: React.FC<{node: TreeNode}> = (props) => {
 }
 
 const Tree: React.FC = () => {
-	return (<section>
-		<h2>Recursive file tree</h2>
-		<ul className={classes.tree}>
-			{<Node node={DUMMY_DATA} />}
-		</ul>
-	</section>);
+	return (
+		<div>
+			<ul className={classes.tree}>
+				{<Node node={DUMMY_DATA} />}
+			</ul>
+		</div>
+	);
 };
 
 export default Tree;

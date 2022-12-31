@@ -37,8 +37,7 @@ const Login: React.FC = () => {
 	};
 
 	return (
-		<section>
-			<h2>Login Form with fetch()</h2>
+		<div>
 			<form 
 				className={classes.login}
 				onSubmit={submitHandler}
@@ -66,7 +65,7 @@ const Login: React.FC = () => {
 				readOnly
 				value={loginData}
 			/>
-		</section>
+		</div>
 	);
 };
 
