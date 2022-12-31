@@ -8,8 +8,7 @@ import classes from './Login.module.css'
 const Login: React.FC = () => {
 	const [emailValue, setEmailValue] = useState("");
 	const [passwordValue, setPasswordValue] = useState("");
-	const [loginData, setLoginData] = useState("")
-	const [message, setMessage] = useState("")
+	const [output, setOutput] = useState("")
 
 	const emailIsValid = emailValue.includes('@');
 	const passwordIsValid = passwordValue.length > 4;
@@ -27,16 +26,21 @@ const Login: React.FC = () => {
 	const submitHandler = async (e: React.FormEvent) => {
 		e.preventDefault();
 		if (!emailIsValid || !passwordIsValid) {
-			setMessage('Form invalid. Email must contain an "@" character, and password must be > 4 chars.')
+			setOutput('Form invalid. Email must contain an "@" character, and password must be > 4 chars.')
 			return;
 		}
 		console.log(emailValue, passwordValue)
 		let user = randInt(1, 10)
-		const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${user}`)
-		const data = await response.json();
-		console.log(data)
-		setLoginData(JSON.stringify(data, null, 2))
-		setMessage('Success')
+		setOutput('Loading...')
+		try {
+			const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${user}`)
+			const data = await response.json();
+			console.log(data)
+			setOutput(JSON.stringify(data, null, 2))
+		} catch(err) {
+			console.log(err)
+			setOutput('Error with API response...')
+		}
 	};
 
 	return (
@@ -72,7 +76,7 @@ const Login: React.FC = () => {
 			<textarea 
 				className={classes.result}
 				readOnly
-				value={message !== 'Success' ? message : loginData}
+				value={output ? output : ''}
 			/>
 		</div>
 	);
