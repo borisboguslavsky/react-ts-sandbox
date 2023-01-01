@@ -4,7 +4,7 @@ This repo is just a small collection of basic React components written in TypeSc
 
 # Live Demo
 
-Should eventually be up on GitHub pages...
+https://borisboguslavsky.github.io/react-ts-practice/
 
 # Components
 
