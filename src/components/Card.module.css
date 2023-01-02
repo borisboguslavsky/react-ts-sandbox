@@ -1,6 +1,6 @@
 .wrapper {
 	display: flex;
-	width: calc(50% - 1rem);
+	width: calc(33.333% - 1.5rem);
 	flex-direction: column;
 	background-color: white;
 	border-radius: 4px;
@@ -28,4 +28,16 @@
 	padding-bottom: 1rem;
 	margin-bottom: 1rem;
 	border-bottom: 1px solid rgba(0,0,0,0.125);
+}
+
+@media (max-width: 1000px) {
+	.wrapper {
+		width: calc(50% - 1rem)
+	}
+}
+
+@media (max-width: 600px) {
+	.wrapper {
+		width: calc(100% - 1rem)
+	}
 }
