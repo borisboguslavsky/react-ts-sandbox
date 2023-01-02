@@ -37,7 +37,7 @@ const Items: React.FC<{
 				return (
 					<li key={item.id}>
 						{item.text}
-						<button onClick={(e) => props.removeItem(item.id)}>X</button>
+						<button onClick={(e) => props.removeItem(item.id)}>✕</button>
 					</li>
 				);
 			})}
