@@ -10,6 +10,7 @@ https://borisboguslavsky.github.io/react-ts-practice/
 
 |Component|Filename|Description
 |:---|:---|:---|
+|Context|UseContext.tsx|A component with a nested child component that utilizes the useContext() hook to access/update app-wide state via a custom Provider component.|
 |File Tree|Tree.tsx|A file tree component that rescursively renders a series of nested unordered lists that represent a file structure.|
 |Login|Login.tsx|A login form with basic validation that sends a request to [JSON Placeholder](https://jsonplaceholder.typicode.com/) if the form is valid and outputs the response in the textarea below.|
 |Reducer|Reducer.tsx|A series of text input fields that utilize the useReducer() hook to execute actions across all of them.|
