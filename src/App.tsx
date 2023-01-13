@@ -2,6 +2,7 @@ import classes from "./App.module.css";
 
 import Card from "./components/Card";
 
+import Delay from "./components/Delay/Delay";
 import UseContext from "./components/UseContext/UseContext";
 import Tree from "./components/Tree/Tree";
 import Calculator from "./components/Calculator/Calculator";
@@ -14,6 +15,9 @@ import Counter from "./components/Counter/Counter";
 function App() {
 	return (
 		<div className={classes.main}>
+			<Card title="Delay" description="A component that uses a promise to display an entered message after a specified delay (in ms).">
+				<Delay />
+			</Card>
 			<Card title="Context" description="A component with a nested child component that utilizes the useContext() hook to access/update app-wide state via a custom Provider component.">
 				<UseContext />
 			</Card>
