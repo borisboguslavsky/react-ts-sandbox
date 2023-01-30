@@ -1,9 +1,0 @@
-.row {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.25rem;
-	justify-content: space-between;
-}
-.row button {
-	flex: 1;
-}

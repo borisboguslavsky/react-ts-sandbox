@@ -1,7 +1,5 @@
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useState } from 'react'
 import NestedComponent from './NestedComponent'
-
-import classes from './UseContext.module.css'
 
 export const DUMMY_DATA = [4, 8, 15, 16, 23, 42]
 
@@ -46,11 +44,11 @@ const AppContextProvider: React.FC<{children: React.ReactNode}> = (props) => {
 
 const UseContext = () => {
 	return(
-		<div className={classes.context}>
+		<>
 			<AppContextProvider>
 				<NestedComponent/>
 			</AppContextProvider>
-		</div>
+		</>
 	)
 }
 

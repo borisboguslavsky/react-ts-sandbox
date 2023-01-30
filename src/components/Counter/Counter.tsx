@@ -1,7 +1,6 @@
+import { Button, TextField, Typography } from "@mui/material";
+import { Box } from "@mui/system";
 import React, { useState, useRef } from "react";
-import { Row } from "../Row";
-
-import classes from "./Counter.module.css";
 
 const Counter: React.FC = () => {
 	const [count, setCount] = useState(0);
@@ -21,19 +20,26 @@ const Counter: React.FC = () => {
 	};
 
 	return (
-		<div className={classes.increment}>
-			<label htmlFor="incrementDecrementInput">Amount:</label>
-			<input id="incrementDecrementInput" type="number" ref={inputRef} defaultValue={1}/>
-			<Row>
-				<button onClick={incrementHandler}>Increment</button>
-				<button onClick={decrementHandler}>Decrement</button>
-				<button onClick={() => setCount(0)}>Reset</button>
-			</Row>
-			<h3>
-				Count:<br/>
-				<span>{count}</span>
-			</h3>
-		</div>
+		<>
+			<Box sx={{ textAlign: 'center' }}>
+				<Typography variant="h2" textAlign={"center"} lineHeight={1}>
+					{count}
+				</Typography>
+			</Box>
+			<TextField
+				label="Amount:"
+				InputLabelProps={{ shrink: true }}
+				id="incrementDecrementInput"
+				type="number"
+				inputRef={inputRef}
+				defaultValue={1}
+			/>
+			<Box sx={{ display: 'flex', gap: '0.5rem' }}>
+				<Button variant="outlined" fullWidth onClick={incrementHandler}>Increment</Button>
+				<Button variant="outlined" fullWidth onClick={decrementHandler}>Decrement</Button>
+				<Button variant="outlined" fullWidth onClick={() => setCount(0)}>Reset</Button>
+			</Box>
+		</>
 	);
 };
 

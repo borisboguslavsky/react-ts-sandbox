@@ -3,6 +3,9 @@
 	padding: 0;
 	margin: 0;
 }
+ul.tree > li:first-child {
+	margin-top: 0;
+}
 .node {
 	list-style: none;
 	z-index: 1;
@@ -30,6 +33,8 @@
 	border-bottom-right-radius: 0px;
 	cursor: pointer;
 	user-select: none;
+	display: flex;
+	width: min-content;
 }
 .node.folder > span.collapsed {
 	border-bottom: 1px solid grey;

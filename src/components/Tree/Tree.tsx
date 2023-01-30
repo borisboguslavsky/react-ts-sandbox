@@ -1,3 +1,4 @@
+import { ChevronRight, Folder, InsertDriveFile, KeyboardArrowDown, KeyboardArrowRight } from "@mui/icons-material";
 import React, { useState } from "react";
 
 import classes from "./Tree.module.css";
@@ -37,10 +38,13 @@ const Node: React.FC<{node: TreeNode}> = (props) => {
 	return(
 		<li className={css}>
 			<span onClick={nodeCLickHandler} className={showChildren ? classes.expanded : classes.collapsed}>
-				{props.node.children && !showChildren && '▶ '}
-				{props.node.children && showChildren && '▼ '}
-				{props.node.children && '🗁 '}
-				{!props.node.children && '🗎 '}
+				{/* {props.node.children && !showChildren && '▶ '} */}
+				{props.node.children && !showChildren && <KeyboardArrowRight />}
+				{/* {props.node.children && showChildren && '▼ '} */}
+				{props.node.children && showChildren && <KeyboardArrowDown />}
+				{/* {props.node.children && '🗁 '} */}
+				{props.node.children && <Folder sx={{ marginRight: '0.5rem'}}/>}
+				{!props.node.children && <InsertDriveFile sx={{ marginRight: '0.5rem'}}/>}
 				{props.node.name}
 			</span>
 			{props.node.children && showChildren && 
@@ -58,11 +62,9 @@ const Node: React.FC<{node: TreeNode}> = (props) => {
 
 const Tree: React.FC = () => {
 	return (
-		<div>
-			<ul className={classes.tree}>
-				{<Node node={DUMMY_DATA} />}
-			</ul>
-		</div>
+		<ul className={classes.tree}>
+			{<Node node={DUMMY_DATA} />}
+		</ul>
 	);
 };
 

@@ -1,9 +1,0 @@
-.delay {
-	display: flex;
-	flex-direction: column;
-	gap: 0.25rem;
-}
-.delay textarea {
-	flex: 1;
-	min-height: 3rem;
-}

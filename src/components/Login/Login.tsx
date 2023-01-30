@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 
-import Row from "../Row";
-import Col from "../Col";
-
-import classes from './Login.module.css'
+import { Button, FormLabel, TextareaAutosize, TextField } from "@mui/material";
+import { Box } from "@mui/system";
 
 const Login: React.FC = () => {
 	const [emailValue, setEmailValue] = useState("");
@@ -44,41 +42,40 @@ const Login: React.FC = () => {
 	};
 
 	return (
-		<div>
-			<form 
-				className={classes.login}
+		<>
+			<form
 				onSubmit={submitHandler}
+				style={{
+					display: "flex",
+					flexDirection: "column",
+					gap: "1rem",
+				}}
 			>
-				<Row>
-					<Col>
-						<label htmlFor="emailField">Email</label>
-						<input
-							id="emailField"
-							type="email"
-							value={emailValue}
-							onChange={(e) => setEmailValue(e.target.value)}
-						/>
-					</Col>
-					<Col>
-						<label htmlFor="passwordField">Password</label>
-						<input
-							id="passwordField"
-							type="password"
-							value={passwordValue}
-							onChange={(e) => setPasswordValue(e.target.value)}
-						/>
-					</Col>
-				</Row>
-				{/* {message && <h4>{message}</h4>} */}
-				<button type="submit">Submit</button>
+				<TextField
+					label="Email"
+					InputLabelProps={{ shrink: true }}
+					id="emailField"
+					type="email"
+					value={emailValue}
+					onChange={(e) => setEmailValue(e.target.value)}
+				/>
+				<TextField
+					label="Password"
+					InputLabelProps={{ shrink: true }}
+					id="passwordField"
+					type="password"
+					value={passwordValue}
+					onChange={(e) => setPasswordValue(e.target.value)}
+				/>
+				<Button type="submit" variant="contained">
+					Submit
+				</Button>
 			</form>
-			<h3>API Response:</h3>
-			<textarea 
-				className={classes.result}
-				readOnly
-				value={output ? output : ''}
-			/>
-		</div>
+			<Box sx={{ display: "flex", flexDirection: "column" }}>
+				<FormLabel>API Response:</FormLabel>
+				<TextareaAutosize readOnly value={output ? output : ""} minRows={8} />
+			</Box>
+		</>
 	);
 };
 

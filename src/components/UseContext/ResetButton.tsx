@@ -1,3 +1,4 @@
+import { Button } from "@mui/material"
 import { useContext } from "react"
 import { AppContext, DUMMY_DATA } from "./UseContext"
 
@@ -12,9 +13,9 @@ const ResetButton = () => {
 	}
 
 	return(
-		<button onClick={resetNumbers}>
+		<Button onClick={resetNumbers} variant='contained'>
 			Reset
-		</button>
+		</Button>
 	)
 }
 

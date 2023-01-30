@@ -1,7 +1,8 @@
+import { Button, Card, TextField } from "@mui/material"
+import { Box } from "@mui/system"
 import { useContext } from "react"
-import Row from "../Row"
 import ResetButton from "./ResetButton"
-import { AppContext, DUMMY_DATA } from "./UseContext"
+import { AppContext } from "./UseContext"
 
 const NestedComponent = () => {
 	const appCtx = useContext(AppContext)
@@ -24,30 +25,46 @@ const NestedComponent = () => {
 		})
 	}
 
-	return(
+	return (
 		<>
-			<Row>
-				Times Incremented: {appCtx.timesIncremented}
-			</Row>
-			<Row>
-				Times Decremented: {appCtx.timesDecremented}
-			</Row>
-			<Row>
+			<Box sx={{ display: 'flex', gap: '0.5rem'}}>
+				<TextField
+					label="Times Incremented:"
+					type="number"
+					InputLabelProps={{ shrink: true }}
+					value={appCtx.timesIncremented}
+					sx={{ pointerEvents: 'none' }}
+					inputProps={
+						{ readOnly: true, }
+					}
+				/>
+				<TextField
+					label="Times Decremented:"
+					type="number"
+					InputLabelProps={{ shrink: true }}
+					value={appCtx.timesDecremented}
+					sx={{ pointerEvents: 'none' }}
+					inputProps={
+						{ readOnly: true, }
+					}
+				/>
+			</Box>
+			<Card sx={{ display: 'flex', justifyContent: 'space-around', marginY: '1rem' }}>
 				{appCtx.data.map((num, index) => {
-					return <p key={`key_${index}`}>{num}</p>
+					return <p key={`key_${index}`}>{num}</p>;
 				})}
-			</Row>
-			<Row>
-				<button onClick={incrementNumbers}>
+			</Card>
+			<Box sx={{ display: 'flex', gap: '0.25rem' }}>
+				<Button fullWidth onClick={incrementNumbers} variant="outlined">
 					Increment
-				</button>
-				<button onClick={decrementNumbers}>
+				</Button>
+				<Button fullWidth onClick={decrementNumbers} variant="outlined">
 					Decrement
-				</button>
+				</Button>
 				<ResetButton />
-			</Row>
+			</Box>
 		</>
-	)
+	);
 }
 
 export default NestedComponent

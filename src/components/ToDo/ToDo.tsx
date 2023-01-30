@@ -1,6 +1,6 @@
+import { Button, Card, IconButton, ListItem, ListItemText, TextField } from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
 import React, { useState, useRef } from "react";
-
-import classes from './ToDo.module.css'
 
 const NewItem: React.FC<{
 	addItem: (item: TodoItem) => void;
@@ -20,9 +20,16 @@ const NewItem: React.FC<{
 
 	return (
 		<form onSubmit={addItemHandler} style={{display: 'flex', flexDirection: "column", gap: "0.25rem"}}>
-			<label htmlFor="addItem">Add item: </label>
-			<input id="addItem" type="text" ref={textInputRef} />
-			<button type="submit">Add Item</button>
+			<TextField
+				label="Add Item"
+				InputLabelProps={{ shrink: true }}
+				placeholder="What do you need to do?"
+				type="text" 
+				inputRef={textInputRef}
+			/>
+			<Button variant='contained' type="submit" sx={{ marginTop: '0.5rem'}}>
+				Add Item
+			</Button>
 		</form>
 	);
 };
@@ -67,13 +74,29 @@ const TodoList: React.FC = () => {
 	};
 
 	return (
-		<div className={classes.todo}>
+		<>
 			<NewItem addItem={addItem} />
-			<ul className={classes.listItems}>
-				<Items items={items} removeItem={removeItem} />
-				{items.length === 0 && <li style={{justifyContent: 'center'}}>List is empty.</li>}
-			</ul>
-		</div>
+			<Card>
+				{items.map((item, index) => {
+					return (
+						<ListItem
+							secondaryAction={
+								<IconButton edge="end" aria-label="delete" onClick={() => removeItem(item.id)}>
+									<DeleteIcon />
+								</IconButton>
+							}
+						>
+							<ListItemText primary={`${index+1}. ${item.text}`} />
+						</ListItem>
+					);
+				})}
+				{items.length === 0 && 
+					<ListItem>
+						<ListItemText primary="Todo list is empty..." />
+					</ListItem>
+				}
+			</Card>
+		</>
 	);
 };
 

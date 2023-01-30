@@ -1,67 +1,95 @@
-import { useEffect, useState } from "react"
-import Row from "../Row"
-
-import classes from './Stopwatch.module.css'
+import { useEffect, useState } from "react";
+import {
+	Button,
+	Typography,
+	Box,
+	Card,
+	ListItem,
+	ListItemText,
+} from "@mui/material";
 
 const Stopwatch = () => {
+	const [isPaused, setIsPaused] = useState(true);
+	const [millisecondsElapsed, setMillisecondsElapsed] = useState(214822);
 
-	const [isPaused, setIsPaused] = useState(false)
-	const [secondsElapsed, setSecondsElapsed] = useState(0)
+	const [laps, setLaps] = useState<number[]>([]);
 
-	const [laps, setLaps] = useState<number[]>([])
-	
 	useEffect(() => {
-		if (isPaused) return
+		if (isPaused) return;
 		const timer = setInterval(() => {
-			setSecondsElapsed(num => num + 1)
-		}, 1000)
-		return () => {clearInterval(timer)}
-	}, [isPaused])
+			setMillisecondsElapsed((num) => num + 100);
+		}, 100);
+		return () => {
+			clearInterval(timer);
+		};
+	}, [isPaused]);
 
 	const pausePlayHandler = () => {
-		setIsPaused(bool => !bool)
-	}
+		setIsPaused((bool) => !bool);
+	};
 
-	const convertSecondsToTimeString = (seconds: number) => {
-		// let h = Math.floor((seconds/60)/60)
-		let m = Math.floor(seconds/60).toString()
-		let s = (seconds % 60).toString()
-		if (s.length === 1) s = '0' + s
-		return(`${m}:${s}`)
-	}
+	const convertMillisecondsToTimerString = (milliseconds: number) => {
+		let minutes = Math.floor(milliseconds / 1000 / 60);
+		let seconds = Math.floor((milliseconds / 1000) % 60)
+		let ms = (milliseconds - (seconds * 1000)).toString().slice(0, 2);
+		ms = ms === '0' ? '00': ms
+		let secondsString = seconds.toString();
+		if (secondsString.length === 1) secondsString = "0" + secondsString;
+		return `${minutes}:${secondsString}:${ms}`;
+	};
 
 	const resetHandler = () => {
-		setSecondsElapsed(0)
-	}
+		setIsPaused(true)
+		setMillisecondsElapsed(0);
+		setLaps([])
+	};
 
 	const addLapHandler = () => {
-		setSecondsElapsed(0)
-		setLaps(laps => [...laps, secondsElapsed])
-	}
-
-	const clearLapsHandler = () => {
-		setLaps([])
-	}
+		setIsPaused(false);
+		setMillisecondsElapsed(0);
+		setLaps((laps) => [...laps, millisecondsElapsed]);
+	};
 
 	return (
-		<div className={classes.stopwatch}>
-			<h2>{convertSecondsToTimeString(secondsElapsed)}</h2>
-			<Row>
-				<button onClick={pausePlayHandler}>{isPaused ? 'Play' : 'Pause'}</button>
-				<button onClick={resetHandler}>Reset</button>
-			</Row>
-			<ul className={classes.laps}>
-				{laps.length > 0 && laps.map((lap, index) => {
-					return <li key={`lap_${index}`}>Lap {index+1} - {convertSecondsToTimeString(lap)}</li>
-				})}
-				{laps.length === 0 && <li style={{textAlign: 'center'}}>No laps recorded.</li>}
-			</ul>
-			<Row>
-				<button onClick={addLapHandler}>Lap</button>
-				<button onClick={clearLapsHandler}>Clear laps</button>
-			</Row>
-		</div>
-	)
-}
+		<>
+			<Typography variant="h2" textAlign={"center"} lineHeight={1}>
+				{convertMillisecondsToTimerString(millisecondsElapsed)}
+			</Typography>
 
-export default Stopwatch
+			<Box>
+				<Box style={{ display: "flex", gap: "0.25rem" }}>
+					<Button fullWidth variant="outlined" onClick={pausePlayHandler}>
+						{isPaused ? (millisecondsElapsed === 0 ? "Start" : "Resume") : "Pause"}
+					</Button>
+					<Button fullWidth variant='outlined' onClick={addLapHandler}>
+						Lap
+					</Button>
+					<Button fullWidth variant="outlined" onClick={resetHandler}>
+						Reset
+					</Button>
+				</Box>
+
+				<Card sx={{ marginY: "1rem" }}>
+					{laps.map((lap, index) => {
+						return (
+							<ListItem key={`lap_${index}`}>
+								<ListItemText
+									primary={`Lap ${index + 1} - ${convertMillisecondsToTimerString(
+										lap
+									)}`}
+								/>
+							</ListItem>
+						);
+					})}
+					{laps.length === 0 && (
+						<ListItem>
+							<ListItemText primary="No laps recorded..." />
+						</ListItem>
+					)}
+				</Card>
+			</Box>
+		</>
+	);
+};
+
+export default Stopwatch;

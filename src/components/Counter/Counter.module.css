@@ -1,9 +1,0 @@
-.increment {
-	display: flex;
-	flex-direction: column;
-	gap: 0.25rem;
-}
-
-.increment h3 {
-	text-align: center;
-}
