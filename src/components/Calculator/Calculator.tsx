@@ -30,6 +30,7 @@ const Calculator = () => {
 				<TextField
 					label="Number 1:"
 					InputLabelProps={{ shrink: true }}
+					fullWidth
 					id="val1"
 					inputRef={num1Ref}
 					defaultValue={2}
@@ -38,6 +39,7 @@ const Calculator = () => {
 				<TextField
 					label="Number 2:"
 					InputLabelProps={{ shrink: true }}
+					fullWidth
 					id="val2"
 					inputRef={num2Ref}
 					defaultValue={3}

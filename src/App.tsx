@@ -20,7 +20,7 @@ function App() {
 			<Grid container spacing={2}>
 				
 					<Card
-						title="mui + react-hook-form"
+						title="React-Hook-Form"
 						description="A component that uses Material UI form elements and the react-hook-form library to control the overall form."
 					>
 						<ReactHookForm />
@@ -28,7 +28,7 @@ function App() {
 
 				
 					<Card
-						title="delay"
+						title="Delay"
 						description="A component that uses a promise to display an entered message after a specified delay (in ms)."
 					>
 						<Delay />
@@ -36,7 +36,7 @@ function App() {
 
 				
 					<Card
-						title="useContext() example"
+						title="Example: useContext()"
 						description="A component with a nested child component that utilizes the useContext() hook to access/update app-wide state via a custom Provider component."
 					>
 						<UseContext />
@@ -44,7 +44,7 @@ function App() {
 
 				
 					<Card
-						title="file tree"
+						title="File Tree"
 						description="A file tree component that rescursively renders a series of nested unordered lists that represent a file structure."
 					>
 						<Tree />
@@ -52,7 +52,7 @@ function App() {
 
 				
 					<Card
-						title="login"
+						title="Mock Login"
 						description="A login form with basic validation that sends a request to https://jsonplaceholder.typicode.com/ if the form is valid and outputs the response in the textarea below."
 					>
 						<Login />
@@ -60,7 +60,7 @@ function App() {
 
 				
 					<Card
-						title="useReducer() example"
+						title="Example: useReducer()"
 						description="A series of text input fields that utilize the useReducer() hook to execute actions across all of them."
 					>
 						<ReducerExample />
@@ -68,7 +68,7 @@ function App() {
 
 				
 					<Card
-						title="stopwatch"
+						title="Stopwatch"
 						description="A basic stopwatch component where users can pause/resume the timer and record/clear lap times."
 					>
 						<Stopwatch />
@@ -76,7 +76,7 @@ function App() {
 
 				
 					<Card
-						title="todo"
+						title="Todo List"
 						description="A basic ToDo list component where users can add and remove items to the list."
 					>
 						<TodoList />
@@ -84,7 +84,7 @@ function App() {
 
 				
 					<Card
-						title="counter"
+						title="Counter"
 						description="A counter component where users can increment and decrement the counter by the entered value."
 					>
 						<Counter />
@@ -92,7 +92,7 @@ function App() {
 
 				
 				<Card
-					title="calculator"
+					title="Calculator"
 					description="A basic calculator app where users can add, subtract, multiply, and divide two numbers."
 				>
 					<Calculator />

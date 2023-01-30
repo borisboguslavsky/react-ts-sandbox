@@ -6,6 +6,7 @@ import {
 	Card,
 	ListItem,
 	ListItemText,
+	FormLabel,
 } from "@mui/material";
 
 const Stopwatch = () => {
@@ -56,20 +57,21 @@ const Stopwatch = () => {
 				{convertMillisecondsToTimerString(millisecondsElapsed)}
 			</Typography>
 
-			<Box>
-				<Box style={{ display: "flex", gap: "0.25rem" }}>
-					<Button fullWidth variant="outlined" onClick={pausePlayHandler}>
-						{isPaused ? (millisecondsElapsed === 0 ? "Start" : "Resume") : "Pause"}
-					</Button>
-					<Button fullWidth variant='outlined' onClick={addLapHandler}>
-						Lap
-					</Button>
-					<Button fullWidth variant="outlined" onClick={resetHandler}>
-						Reset
-					</Button>
-				</Box>
+			<Box style={{ display: "flex", gap: "0.25rem" }}>
+				<Button fullWidth variant="outlined" onClick={pausePlayHandler}>
+					{isPaused ? (millisecondsElapsed === 0 ? "Start" : "Resume") : "Pause"}
+				</Button>
+				<Button fullWidth variant='outlined' onClick={addLapHandler}>
+					Lap
+				</Button>
+				<Button fullWidth variant="outlined" onClick={resetHandler}>
+					Reset
+				</Button>
+			</Box>
 
-				<Card sx={{ marginY: "1rem" }}>
+			<Box sx={{ display: 'flex', flexDirection: 'column' }}>
+				<FormLabel>Laps:</FormLabel>
+				<Card sx={{ marginBottom: "1rem" }}>
 					{laps.map((lap, index) => {
 						return (
 							<ListItem key={`lap_${index}`}>

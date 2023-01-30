@@ -1,6 +1,7 @@
-import { Button, Card, IconButton, ListItem, ListItemText, TextField } from "@mui/material";
+import { Button, Card, FormLabel, IconButton, ListItem, ListItemText, TextField } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import React, { useState, useRef } from "react";
+import { Box } from "@mui/system";
 
 const NewItem: React.FC<{
 	addItem: (item: TodoItem) => void;
@@ -76,7 +77,9 @@ const TodoList: React.FC = () => {
 	return (
 		<>
 			<NewItem addItem={addItem} />
-			<Card>
+			<Box sx={{ display: 'flex', flexDirection: 'column' }}>
+				<FormLabel>List Items:</FormLabel>
+				<Card>
 				{items.map((item, index) => {
 					return (
 						<ListItem
@@ -96,6 +99,7 @@ const TodoList: React.FC = () => {
 					</ListItem>
 				}
 			</Card>
+			</Box>
 		</>
 	);
 };
