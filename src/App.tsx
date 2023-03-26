@@ -13,12 +13,20 @@ import Login from "./components/Login/Login";
 import ReducerExample from "./components/Reducer/Reducer";
 import Counter from "./components/Counter/Counter";
 import ReactHookForm from "./components/ReactHookForm/ReactHookForm";
+import VendingMachine from './components/VendingMachine/VendingMachine';
 
 function App() {
 	return (
 		<Box sx={{ flexGrow: 1, maxWidth: '1200px', padding: '36px'}}>
 			<Grid container spacing={2}>
 				
+					<Card
+						title="XState Vending Machine"
+						description="A state machine example using the XState library."
+					>
+						<VendingMachine />
+					</Card>
+
 					<Card
 						title="React-Hook-Form"
 						description="A component that uses Material UI form elements and the react-hook-form library to control the overall form."

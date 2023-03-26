@@ -1,10 +1,22 @@
-import { TextField, Autocomplete, Checkbox, Button, Box, Chip } from "@mui/material"
+import {
+	TextField,
+	Autocomplete,
+	Checkbox,
+	Button,
+	Box,
+	Chip,
+	RadioGroup,
+	Radio,
+	FormControlLabel,
+	FormLabel,
+} from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
 
 interface FormValues {
 	firstName: string;
 	lastName: string;
-  autocomplete: string[]
+	autocomplete: string[];
+	radioGroup: string;
 }
 
 export const ReactHookForm = () => {
@@ -52,7 +64,7 @@ export const ReactHookForm = () => {
 			<Controller
 				name="autocomplete"
 				control={control}
-				defaultValue={['A', 'B']}
+				defaultValue={["A", "B"]}
 				render={({ field: { onChange, value }, fieldState: { error } }) => (
 					<Autocomplete
 						multiple
@@ -61,34 +73,73 @@ export const ReactHookForm = () => {
 						options={["A", "B", "C"]}
 						value={value}
 						onChange={(event, newValue) => {
-							onChange(newValue)
+							onChange(newValue);
 						}}
 						renderInput={(params) => {
-							return <TextField
-								{...params}
-								InputLabelProps={{ shrink: true }}
-								label="Autocomplete"
-								placeholder={'Select Values...'}
-							/>
+							return (
+								<TextField
+									{...params}
+									InputLabelProps={{ shrink: true }}
+									label="Autocomplete"
+									placeholder={"Select Values..."}
+								/>
+							);
 						}}
 						renderTags={(value: readonly string[], getTagProps) => {
 							return value.map((option: string, index: number) => {
-								return <Chip
-									variant={'filled'}
-									label={option}
-									{...getTagProps({index})}
-								/>
-							})
+								return (
+									<Chip
+										variant={"filled"}
+										label={option}
+										{...getTagProps({ index })}
+									/>
+								);
+							});
 						}}
 						renderOption={(props, option, state) => {
-							return <li {...props}>
-								<Checkbox checked={state.selected} />
-								{option}
-							</li>
+							return (
+								<li {...props}>
+									<Checkbox checked={state.selected} />
+									{option}
+								</li>
+							);
 						}}
 					/>
 				)}
 			/>
+			<Controller
+				name="radioGroup"
+				control={control}
+				defaultValue={"Option 2"}
+				render={({ field: { onChange, value }, fieldState: { error } }) => (
+					<>
+						<RadioGroup
+							aria-labelledby="demo-radio-buttons-group-label"
+							defaultValue="2"
+							onChange={() => {}}
+							name="radio-buttons-group"
+							row
+						>
+							<FormControlLabel
+								value="1"
+								control={<Radio />}
+								label="Option 1"
+							/>
+							<FormControlLabel
+								value="2"
+								control={<Radio />}
+								label="Option 2"
+							/>
+							<FormControlLabel
+								value="3"
+								control={<Radio />}
+								label="Option 3"
+							/>
+						</RadioGroup>
+					</>
+				)}
+			/>
+
 			<Box sx={{ display: "flex", gap: "0.5rem", justifyContent: "center" }}>
 				<Button variant="outlined" onClick={() => console.log("Clear Form")}>
 					Clear
@@ -98,7 +149,7 @@ export const ReactHookForm = () => {
 				</Button>
 			</Box>
 		</form>
-	)
-}
+	);
+};
 
-export default ReactHookForm
+export default ReactHookForm;

@@ -6,11 +6,11 @@ import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 
 interface WrapperComponentProps {
 	title: string;
-	description?: string;
+	description?: string | React.ReactNode;
 	children?: React.ReactNode;
 }
 
-const WrapperComponent: React.FC<WrapperComponentProps> = (props) => {
+const WrapperComponent: React.FC<WrapperComponentProps> = ({title, description, children}) => {
 	const [showDescription, setShowDescription] = useState(false);
 
 	return (
@@ -18,9 +18,9 @@ const WrapperComponent: React.FC<WrapperComponentProps> = (props) => {
 			<Paper elevation={3} sx={{ padding: '16px', display: 'flex', flexDirection: 'column', overflow: 'hidden'}}>
 				<Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
 					<Typography variant='h5'>
-						{props.title}
+						{title}
 					</Typography>
-					{props.description && (
+					{description && (
 						<Button
 							// variant='outlined'
 							onClick={() => setShowDescription((bool) => !bool)}
@@ -30,13 +30,15 @@ const WrapperComponent: React.FC<WrapperComponentProps> = (props) => {
 						</Button>
 					)}
 				</Box>
-				{props.description && showDescription && (
-					<Typography variant="body2" sx={{ marginBottom: '1rem' }}>
-						{props.description}
-					</Typography>
+				{description && showDescription && (
+					typeof description === "string" 
+					? <Typography variant="body2" sx={{ marginBottom: '1rem' }}>
+							{description}
+						</Typography>
+					: description
 				)}
 				<Box sx={{ marginTop: '0.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-					{props.children}
+					{children}
 				</Box>
 			</Paper>
 		</Grid>

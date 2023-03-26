@@ -1,5 +1,13 @@
-import { Button, Card, FormLabel, IconButton, ListItem, ListItemText, TextField } from "@mui/material";
-import DeleteIcon from '@mui/icons-material/Delete';
+import {
+	Button,
+	Card,
+	FormLabel,
+	IconButton,
+	ListItem,
+	ListItemText,
+	TextField,
+} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 import React, { useState, useRef } from "react";
 import { Box } from "@mui/system";
 
@@ -20,15 +28,18 @@ const NewItem: React.FC<{
 	};
 
 	return (
-		<form onSubmit={addItemHandler} style={{display: 'flex', flexDirection: "column", gap: "0.25rem"}}>
+		<form
+			onSubmit={addItemHandler}
+			style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}
+		>
 			<TextField
 				label="Add Item"
 				InputLabelProps={{ shrink: true }}
 				placeholder="What do you need to do?"
-				type="text" 
+				type="text"
 				inputRef={textInputRef}
 			/>
-			<Button variant='contained' type="submit" sx={{ marginTop: '0.5rem'}}>
+			<Button variant="contained" type="submit" sx={{ marginTop: "0.5rem" }}>
 				Add Item
 			</Button>
 		</form>
@@ -77,28 +88,32 @@ const TodoList: React.FC = () => {
 	return (
 		<>
 			<NewItem addItem={addItem} />
-			<Box sx={{ display: 'flex', flexDirection: 'column' }}>
+			<Box sx={{ display: "flex", flexDirection: "column" }}>
 				<FormLabel>List Items:</FormLabel>
-				<Card>
-				{items.map((item, index) => {
-					return (
-						<ListItem
-							secondaryAction={
-								<IconButton edge="end" aria-label="delete" onClick={() => removeItem(item.id)}>
-									<DeleteIcon />
-								</IconButton>
-							}
-						>
-							<ListItemText primary={`${index+1}. ${item.text}`} />
+				<Card elevation={6}>
+					{items.map((item, index) => {
+						return (
+							<ListItem
+								secondaryAction={
+									<IconButton
+										edge="end"
+										aria-label="delete"
+										onClick={() => removeItem(item.id)}
+									>
+										<DeleteIcon />
+									</IconButton>
+								}
+							>
+								<ListItemText primary={`${index + 1}. ${item.text}`} />
+							</ListItem>
+						);
+					})}
+					{items.length === 0 && (
+						<ListItem>
+							<ListItemText primary="Todo list is empty..." />
 						</ListItem>
-					);
-				})}
-				{items.length === 0 && 
-					<ListItem>
-						<ListItemText primary="Todo list is empty..." />
-					</ListItem>
-				}
-			</Card>
+					)}
+				</Card>
 			</Box>
 		</>
 	);

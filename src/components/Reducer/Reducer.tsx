@@ -138,6 +138,7 @@ const ReducerExample = () => {
 				Reset
 			</Button>
 			<Card
+				elevation={6}
 				sx={{
 					padding: "0.5rem",
 					display: "flex",
@@ -148,9 +149,9 @@ const ReducerExample = () => {
 				<Typography>All fields populated:</Typography>
 				<FormControlLabel
 					control={
-						<Checkbox 
-							sx={{ pointerEvents: 'none'}}
-							checked={formState.allFieldsPopulated} 	
+						<Checkbox
+							sx={{ pointerEvents: "none" }}
+							checked={formState.allFieldsPopulated}
 						/>
 					}
 					label={formState.allFieldsPopulated.toString()}

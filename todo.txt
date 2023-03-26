@@ -1,0 +1,3 @@
+[ ] Implement MUI Theme in react-ts-practice project
+[ ] Hook up XState to Vending Machine Component
+[ ] Add functionality to 'clear' button in react-hook-form component
