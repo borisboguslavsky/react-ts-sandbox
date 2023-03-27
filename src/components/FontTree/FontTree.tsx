@@ -6,7 +6,8 @@ import TreeItem from "@mui/lab/TreeItem";
 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Paper } from "@mui/material";
+import { minHeight } from "@mui/system";
 
 export const FontTree = () => {
 	const [expanded, setExpanded] = useState<string[]>([]);
@@ -37,6 +38,26 @@ export const FontTree = () => {
 	};
 	return (
 		<>
+			<Paper
+				sx={{
+					minHeight: "120px",
+					padding: "12px",
+					display: "flex",
+					flexWrap: "wrap",
+					gap: "8px",
+					flex: 0,
+					"& span": {
+						padding: "6px",
+						bgcolor: "#e1e1e1",
+						borderRadius: "4px",
+					},
+				}}
+				elevation={3}
+			>
+				{selected.map((font) => (
+					<span key={font}>{font}</span>
+				))}
+			</Paper>
 			<TreeView
 				aria-label="controlled"
 				defaultCollapseIcon={<ExpandMoreIcon />}
@@ -51,14 +72,16 @@ export const FontTree = () => {
 					return (
 						<TreeItem
 							key={`fontTreeFamily_${i}`}
-							nodeId={`${i}`}
+							// nodeId={`${i}`}
+							nodeId={`${fontFamily.label}`}
 							label={fontFamily.label}
 						>
 							{fontFamily.children.map((font, j) => {
 								return (
 									<TreeItem
 										key={`fontTreeSubFont_${i}_${j}`}
-										nodeId={`${i}_${j}`}
+										// nodeId={`${i}_${j}`}
+										nodeId={font.label}
 										label={font.label}
 									/>
 								);
