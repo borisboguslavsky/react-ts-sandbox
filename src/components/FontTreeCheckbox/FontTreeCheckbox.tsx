@@ -2,7 +2,14 @@ import React from "react";
 import { TreeView, TreeItem } from "@mui/lab";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { Checkbox, FormControlLabel } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import {
+	Button,
+	Checkbox,
+	FormControlLabel,
+	List,
+	ListItem,
+} from "@mui/material";
 import { RenderTree, data } from "./sampleData";
 
 export default function RecursiveTreeView() {
@@ -80,12 +87,48 @@ export default function RecursiveTreeView() {
 	);
 
 	return (
-		<TreeView
-			defaultCollapseIcon={<ExpandMoreIcon />}
-			defaultExpanded={["0", "3", "4"]}
-			defaultExpandIcon={<ChevronRightIcon />}
-		>
-			{renderTree(data)}
-		</TreeView>
+		<>
+			<List
+				sx={{
+					height: "160px",
+					padding: "12px",
+					display: "flex",
+					flexWrap: "wrap",
+					gap: "8px",
+					border: "1px solid #bebebe",
+					borderRadius: "4px",
+					justifyContent: "flex-start",
+					alignItems: "flex-start",
+					overflowY: "auto",
+				}}
+			>
+				{selected.map((font) => (
+					<ListItem
+						key={font}
+						sx={{
+							padding: "0px",
+							paddingLeft: "4px",
+							bgcolor: "#e1e1e1",
+							borderRadius: "4px",
+							width: "inherit",
+							display: "flex",
+							gap: "4px",
+						}}
+					>
+						{font}
+						<Button sx={{ minWidth: "inherit" }} size={"small"}>
+							<CloseIcon />
+						</Button>
+					</ListItem>
+				))}
+			</List>
+			<TreeView
+				defaultCollapseIcon={<ExpandMoreIcon />}
+				defaultExpanded={["0", "3", "4"]}
+				defaultExpandIcon={<ChevronRightIcon />}
+			>
+				{renderTree(data)}
+			</TreeView>
+		</>
 	);
 }
