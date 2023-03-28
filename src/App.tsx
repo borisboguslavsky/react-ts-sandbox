@@ -16,11 +16,21 @@ import Counter from "./components/Counter/Counter";
 import ReactHookForm from "./components/ReactHookForm/ReactHookForm";
 import VendingMachine from "./components/VendingMachine/VendingMachine";
 import { FontTree } from "./components/FontTree/FontTree";
+import FontTreeCheckbox from "./components/FontTreeCheckbox/FontTreeCheckbox";
 
 function App() {
 	return (
 		<Box sx={{ flexGrow: 1, maxWidth: "1200px", padding: "36px" }}>
 			<Grid container spacing={2}>
+				<Grid item xs={12} md={6} lg={4}>
+					<Card
+						title="Tree Select"
+						description="A tree view component with selectable nodes depicting a font tree with font families and sub-fonts"
+					>
+						<FontTreeCheckbox />
+					</Card>
+				</Grid>
+
 				<Grid item xs={12} md={6} lg={4}>
 					<Card
 						title="Tree Select"

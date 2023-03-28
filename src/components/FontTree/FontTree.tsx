@@ -6,8 +6,8 @@ import TreeItem from "@mui/lab/TreeItem";
 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { Box, Button, Paper } from "@mui/material";
-import { minHeight } from "@mui/system";
+import { Box, Button, List, ListItem, Paper } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 export const FontTree = () => {
 	const [expanded, setExpanded] = useState<string[]>([]);
@@ -38,26 +38,40 @@ export const FontTree = () => {
 	};
 	return (
 		<>
-			<Paper
+			<List
 				sx={{
-					minHeight: "120px",
+					height: "160px",
 					padding: "12px",
 					display: "flex",
 					flexWrap: "wrap",
 					gap: "8px",
-					flex: 0,
-					"& span": {
-						padding: "6px",
-						bgcolor: "#e1e1e1",
-						borderRadius: "4px",
-					},
+					border: "1px solid #bebebe",
+					borderRadius: "4px",
+					justifyContent: "flex-start",
+					alignItems: "flex-start",
+					overflowY: "auto",
 				}}
-				elevation={3}
 			>
 				{selected.map((font) => (
-					<span key={font}>{font}</span>
+					<ListItem
+						key={font}
+						sx={{
+							padding: "0px",
+							paddingLeft: "4px",
+							bgcolor: "#e1e1e1",
+							borderRadius: "4px",
+							width: "inherit",
+							display: "flex",
+							gap: "4px",
+						}}
+					>
+						{font}
+						<Button sx={{ minWidth: "inherit" }} size={"small"}>
+							<CloseIcon />
+						</Button>
+					</ListItem>
 				))}
-			</Paper>
+			</List>
 			<TreeView
 				aria-label="controlled"
 				defaultCollapseIcon={<ExpandMoreIcon />}
