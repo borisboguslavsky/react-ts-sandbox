@@ -11,6 +11,7 @@ import {
 	ListItem,
 } from "@mui/material";
 import { RenderTree, data } from "./sampleData";
+import { FontNode, placeholderFonts } from "./FontTreeData";
 
 export default function RecursiveTreeView() {
 	const [selected, setSelected] = React.useState<string[]>([]);
