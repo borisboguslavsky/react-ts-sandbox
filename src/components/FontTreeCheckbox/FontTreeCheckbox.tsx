@@ -16,12 +16,12 @@ import { FontNode, placeholderFonts } from "./FontTreeData";
 export default function RecursiveTreeView() {
 	const [selected, setSelected] = React.useState<string[]>([]);
 
-	function getChildById(node: RenderTree, id: string) {
+	function getChildById(node: FontNode, id: string) {
 		let array: string[] = [];
 
-		function getAllChild(nodes: RenderTree | null) {
+		function getAllChild(nodes: FontNode | null) {
 			if (nodes === null) return [];
-			array.push(nodes.id);
+			array.push(nodes.label);
 			if (Array.isArray(nodes.children)) {
 				nodes.children.forEach((node) => {
 					array = [...array, ...getAllChild(node)];
@@ -31,8 +31,8 @@ export default function RecursiveTreeView() {
 			return array;
 		}
 
-		function getNodeById(nodes: RenderTree, id: string) {
-			if (nodes.id === id) {
+		function getNodeById(nodes: FontNode, id: string) {
+			if (nodes.label === id) {
 				return nodes;
 			} else if (Array.isArray(nodes.children)) {
 				let result = null;
@@ -50,8 +50,8 @@ export default function RecursiveTreeView() {
 		return getAllChild(getNodeById(node, id));
 	}
 
-	function getOnChange(checked: boolean, nodes: RenderTree) {
-		const allNode: string[] = getChildById(data, nodes.id);
+	function getOnChange(checked: boolean, nodes: FontNode) {
+		const allNode: string[] = getChildById(nodes, nodes.label);
 		let array = checked
 			? [...selected, ...allNode]
 			: selected.filter((value) => !allNode.includes(value));
@@ -61,23 +61,23 @@ export default function RecursiveTreeView() {
 		setSelected(array);
 	}
 
-	const renderTree = (nodes: RenderTree) => (
+	const renderTree = (nodes: FontNode) => (
 		<TreeItem
-			key={nodes.id}
-			nodeId={nodes.id}
+			key={nodes.label}
+			nodeId={nodes.label}
 			label={
 				<FormControlLabel
 					control={
 						<Checkbox
-							checked={selected.some((item) => item === nodes.id)}
+							checked={selected.some((item) => item === nodes.label)}
 							onChange={(event) =>
 								getOnChange(event.currentTarget.checked, nodes)
 							}
 							onClick={(e) => e.stopPropagation()}
 						/>
 					}
-					label={<>{nodes.name}</>}
-					key={nodes.id}
+					label={<>{nodes.label}</>}
+					key={nodes.label}
 				/>
 			}
 		>
@@ -125,10 +125,9 @@ export default function RecursiveTreeView() {
 			</List>
 			<TreeView
 				defaultCollapseIcon={<ExpandMoreIcon />}
-				defaultExpanded={["0", "3", "4"]}
 				defaultExpandIcon={<ChevronRightIcon />}
 			>
-				{renderTree(data)}
+				{renderTree(placeholderFonts)}
 			</TreeView>
 		</>
 	);
