@@ -61,31 +61,35 @@ export default function RecursiveTreeView() {
 		setSelected(array);
 	}
 
-	const renderTree = (nodes: FontNode) => (
-		<TreeItem
-			key={nodes.label}
-			nodeId={nodes.label}
-			label={
-				<FormControlLabel
-					control={
-						<Checkbox
-							checked={selected.some((item) => item === nodes.label)}
-							onChange={(event) =>
-								getOnChange(event.currentTarget.checked, nodes)
-							}
-							onClick={(e) => e.stopPropagation()}
-						/>
-					}
-					label={<>{nodes.label}</>}
-					key={nodes.label}
-				/>
-			}
-		>
-			{Array.isArray(nodes.children)
-				? nodes.children.map((node) => renderTree(node))
-				: null}
-		</TreeItem>
-	);
+	const renderTree = (node: FontNode) => {
+		const nodeCount = node.children ? ` (${node.children.length})` : "";
+		const nodeLabel = `${node.label}${nodeCount}`;
+		return (
+			<TreeItem
+				key={node.label}
+				nodeId={node.label}
+				label={
+					<FormControlLabel
+						control={
+							<Checkbox
+								checked={selected.some((item) => item === node.label)}
+								onChange={(event) =>
+									getOnChange(event.currentTarget.checked, node)
+								}
+								onClick={(e) => e.stopPropagation()}
+							/>
+						}
+						label={<>{nodeLabel}</>}
+						key={node.label}
+					/>
+				}
+			>
+				{Array.isArray(node.children)
+					? node.children.map((subNode) => renderTree(subNode))
+					: null}
+			</TreeItem>
+		);
+	};
 
 	return (
 		<>
