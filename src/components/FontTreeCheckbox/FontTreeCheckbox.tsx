@@ -10,8 +10,8 @@ import {
 	List,
 	ListItem,
 } from "@mui/material";
-import { RenderTree, data } from "./sampleData";
-import { FontNode, placeholderFonts } from "./FontTreeData";
+import { FontNode } from "./FontTreeData";
+import { largeFontSet } from "../FontTree/LargeFontSet";
 
 export default function RecursiveTreeView() {
 	const [selected, setSelected] = React.useState<string[]>([]);
@@ -62,8 +62,22 @@ export default function RecursiveTreeView() {
 	}
 
 	const renderTree = (node: FontNode) => {
-		const nodeCount = node.children ? ` (${node.children.length})` : "";
+		const isRoot = node.children && node.index === undefined;
+		const isFamily = node.children && node.index !== undefined;
+		const isFont = node.family !== undefined;
+
+		// TODO: memoize root node count
+		let nodeCount = "";
+		if (isRoot && node.children) {
+			nodeCount = ` (${node.children.reduce(
+				(acc, cur) => acc + cur.children!.length,
+				0
+			)})`;
+		} else if (isFamily) {
+			nodeCount = node.children ? ` (${node.children.length})` : "";
+		}
 		const nodeLabel = `${node.label}${nodeCount}`;
+
 		return (
 			<TreeItem
 				key={node.label}
@@ -130,8 +144,10 @@ export default function RecursiveTreeView() {
 			<TreeView
 				defaultCollapseIcon={<ExpandMoreIcon />}
 				defaultExpandIcon={<ChevronRightIcon />}
+				sx={{ height: 300, overflowY: "auto" }}
+				expanded={["Installed Fonts"]}
 			>
-				{renderTree(placeholderFonts)}
+				{renderTree(largeFontSet)}
 			</TreeView>
 		</>
 	);

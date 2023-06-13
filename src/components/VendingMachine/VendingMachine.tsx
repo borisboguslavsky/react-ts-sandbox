@@ -1,14 +1,19 @@
+import { useMachine } from "@xstate/react";
 import {
 	Box,
 	Button,
 	Card,
+	Divider,
 	List,
 	ListItem,
 	ListItemText,
 	Typography,
 } from "@mui/material";
+import { vMachine } from "./vendingMachine_stateMachine";
 
 const VendingMachine: React.FC = () => {
+	const [state, send] = useMachine(vMachine);
+
 	return (
 		<>
 			<Typography>Available Drinks:</Typography>
@@ -17,37 +22,63 @@ const VendingMachine: React.FC = () => {
 				<List>
 					<ListItem>
 						<ListItemText primary="Coca Cola" />
-						<Button variant="outlined" sx={{ marginLeft: "auto" }}>
-							Select
-						</Button>
+						<ListItemText
+							primary="50¢"
+							sx={{ marginLeft: "auto", textAlign: "end", paddingRight: "8px" }}
+						/>
+						<Button variant="outlined">Select</Button>
 					</ListItem>
 					<ListItem>
 						<ListItemText primary="Root Beer" />
-						<Button variant="outlined" sx={{ marginLeft: "auto" }}>
-							Select
-						</Button>
+						<ListItemText
+							primary="50¢"
+							sx={{ marginLeft: "auto", textAlign: "end", paddingRight: "8px" }}
+						/>
+						<Button variant="outlined">Select</Button>
 					</ListItem>
 					<ListItem>
 						<ListItemText primary="La Croix" />
-						<Button variant="outlined" sx={{ marginLeft: "auto" }}>
-							Select
-						</Button>
+						<ListItemText
+							primary="50¢"
+							sx={{ marginLeft: "auto", textAlign: "end", paddingRight: "8px" }}
+						/>
+						<Button variant="outlined">Select</Button>
 					</ListItem>
 				</List>
 			</Card>
 
-			<Box sx={{ display: "flex", justifyContent: "space-between" }}>
-				<Typography color={"green"}>Coins Inserted: 0¢ / 55¢</Typography>
-				<Typography>Coins In Return: 0¢</Typography>
-			</Box>
-			<Box sx={{ display: "flex", gap: "0.25rem" }}>
-				<Button fullWidth>+5¢</Button>
-				<Button fullWidth>+10¢</Button>
-				<Button fullWidth>+55¢</Button>
-				<Button fullWidth variant="outlined">
-					Return
-				</Button>
-			</Box>
+			<Typography>Actions:</Typography>
+
+			<Card elevation={6} sx={{ padding: "12px" }}>
+				<Box sx={{ display: "flex", gap: "0.25rem" }}>
+					<Button onClick={() => send("ADD5")} fullWidth>
+						+5¢
+					</Button>
+					<Button onClick={() => send("ADD10")} fullWidth>
+						+10¢
+					</Button>
+					<Button onClick={() => send("ADD25")} fullWidth>
+						+25¢
+					</Button>
+					<Button onClick={() => send("RETURN")} fullWidth variant="outlined">
+						Return
+					</Button>
+				</Box>
+			</Card>
+
+			<Typography>State:</Typography>
+
+			<Card
+				elevation={6}
+				sx={{ padding: "12px", display: "flex", flexDirection: "column" }}
+			>
+				<Box sx={{ display: "flex", justifyContent: "space-between" }}>
+					<Typography color={"green"}>Coins Inserted: 0¢ / 50¢</Typography>
+					<Typography>Coins In Return: 0¢</Typography>
+				</Box>
+				<Divider orientation="horizontal" sx={{ marginY: "12px" }} />
+				<Typography color={"orange"}>Drink in dispenser: NONE</Typography>
+			</Card>
 		</>
 	);
 };
