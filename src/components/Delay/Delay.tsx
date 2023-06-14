@@ -1,28 +1,34 @@
-import { useRef, useState } from 'react'
-import { Button, Box, FormLabel, TextareaAutosize, TextField } from '@mui/material'
+import { useRef, useState } from "react";
+import {
+	Button,
+	Box,
+	FormLabel,
+	TextareaAutosize,
+	TextField,
+} from "@mui/material";
 
 export const Delay: React.FC = () => {
-	const messageRef = useRef<HTMLInputElement>(null)
-	const delayRef = useRef<HTMLInputElement>(null)
+	const messageRef = useRef<HTMLInputElement>(null);
+	const delayRef = useRef<HTMLInputElement>(null);
 
 	const [isLoading, setIsLoading] = useState(false);
-	const [output, setOutput] = useState('');
+	const [output, setOutput] = useState("");
 
 	const getMessageAfterDelay = (): Promise<string> => {
 		return new Promise((resolve, reject) => {
 			setTimeout(() => {
-				resolve(messageRef.current!.value)
-			}, Number(delayRef.current!.value))
-		})	
-	}
+				resolve(messageRef.current!.value);
+			}, Number(delayRef.current!.value));
+		});
+	};
 
 	const onGoHandler = async () => {
-		setIsLoading(true)
-		setOutput('')
+		setIsLoading(true);
+		setOutput("");
 		const result = await getMessageAfterDelay();
-		setOutput(result)
+		setOutput(result);
 		setIsLoading(false);
-	}	
+	};
 
 	return (
 		<>
@@ -55,6 +61,6 @@ export const Delay: React.FC = () => {
 			</Box>
 		</>
 	);
-}
+};
 
 export default Delay;

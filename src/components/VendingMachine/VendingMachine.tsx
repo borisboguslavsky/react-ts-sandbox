@@ -51,13 +51,13 @@ const VendingMachine: React.FC = () => {
 
 			<Card elevation={6} sx={{ padding: "12px" }}>
 				<Box sx={{ display: "flex", gap: "0.25rem" }}>
-					<Button onClick={() => send("ADD5")} fullWidth>
+					<Button onClick={() => send({ type: "ADD5", amount: 5 })} fullWidth>
 						+5¢
 					</Button>
-					<Button onClick={() => send("ADD10")} fullWidth>
+					<Button onClick={() => send({ type: "ADD10", amount: 10 })} fullWidth>
 						+10¢
 					</Button>
-					<Button onClick={() => send("ADD25")} fullWidth>
+					<Button onClick={() => send({ type: "ADD25", amount: 25 })} fullWidth>
 						+25¢
 					</Button>
 					<Button onClick={() => send("RETURN")} fullWidth variant="outlined">

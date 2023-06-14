@@ -9,7 +9,9 @@ import {
 	Radio,
 	FormControlLabel,
 	FormLabel,
+	TextareaAutosize,
 } from "@mui/material";
+import React from "react";
 import { useForm, Controller } from "react-hook-form";
 
 interface FormValues {
@@ -19,10 +21,29 @@ interface FormValues {
 	radioGroup: string;
 }
 
+const emptyFormValues = {
+	firstName: "",
+	lastName: "",
+	autocomplete: [],
+	radioGroup: "",
+};
+
+const defaultFormValues = {
+	firstName: "Someone",
+	lastName: "Someonerson",
+	autocomplete: ["A", "B"],
+	radioGroup: "Option 2",
+};
+
 export const ReactHookForm = () => {
-	const { handleSubmit, control } = useForm<FormValues>();
+	const { handleSubmit, control, reset } = useForm<FormValues>({
+		defaultValues: defaultFormValues,
+	});
+
+	const [formData, setFormData] = React.useState<FormValues>(defaultFormValues);
 
 	const onSubmitFormHandler = (data: any) => {
+		setFormData(data);
 		console.log(data);
 	};
 
@@ -38,7 +59,6 @@ export const ReactHookForm = () => {
 			<Controller
 				name="firstName"
 				control={control}
-				defaultValue="Someone"
 				render={({ field: { onChange, value }, fieldState: { error } }) => (
 					<TextField
 						label="First Name"
@@ -51,7 +71,6 @@ export const ReactHookForm = () => {
 			<Controller
 				name="lastName"
 				control={control}
-				defaultValue="Someonerson"
 				render={({ field: { onChange, value }, fieldState: { error } }) => (
 					<TextField
 						label="Last Name"
@@ -64,7 +83,6 @@ export const ReactHookForm = () => {
 			<Controller
 				name="autocomplete"
 				control={control}
-				defaultValue={["A", "B"]}
 				render={({ field: { onChange, value }, fieldState: { error } }) => (
 					<Autocomplete
 						multiple
@@ -110,7 +128,6 @@ export const ReactHookForm = () => {
 			<Controller
 				name="radioGroup"
 				control={control}
-				defaultValue={"Option 2"}
 				render={({ field: { onChange, value }, fieldState: { error } }) => (
 					<>
 						<RadioGroup
@@ -141,12 +158,37 @@ export const ReactHookForm = () => {
 			/>
 
 			<Box sx={{ display: "flex", gap: "0.5rem", justifyContent: "center" }}>
-				<Button variant="outlined" onClick={() => console.log("Clear Form")}>
+				<Button
+					variant="outlined"
+					onClick={() => {
+						setFormData(emptyFormValues);
+						reset(emptyFormValues);
+					}}
+				>
 					Clear
+				</Button>
+				<Button
+					variant="outlined"
+					onClick={() => {
+						setFormData(defaultFormValues);
+						reset(defaultFormValues);
+					}}
+				>
+					Defaults
 				</Button>
 				<Button type="submit" variant="contained">
 					Submit
 				</Button>
+			</Box>
+			<Box sx={{ display: "flex", flexDirection: "column" }}>
+				<FormLabel>Form Submission:</FormLabel>
+				<TextareaAutosize
+					aria-label={"Output"}
+					readOnly={true}
+					value={JSON.stringify(formData, null, 2)}
+					minRows={4}
+					style={{ padding: "8px" }}
+				/>
 			</Box>
 		</form>
 	);
