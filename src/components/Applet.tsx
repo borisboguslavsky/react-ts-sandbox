@@ -1,24 +1,19 @@
 import { useState } from "react";
 
-import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
-import { Box, Button, Typography, Paper } from "@mui/material";
+import { Box, Button, Typography, Paper, Grid } from "@mui/material";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 
-interface WrapperComponentProps {
+interface AppletProps {
 	title: string;
 	description?: string | React.ReactNode;
 	children?: React.ReactNode;
 }
 
-const WrapperComponent: React.FC<WrapperComponentProps> = ({
-	title,
-	description,
-	children,
-}) => {
+const Applet: React.FC<AppletProps> = ({ title, description, children }) => {
 	const [showDescription, setShowDescription] = useState(true);
 
 	return (
-		<Grid xs={12} lg={4} md={6} sm={12}>
+		<Grid item xs={12} lg={4} md={6}>
 			<Paper
 				elevation={12}
 				sx={{
@@ -76,4 +71,4 @@ const WrapperComponent: React.FC<WrapperComponentProps> = ({
 	);
 };
 
-export default WrapperComponent;
+export default Applet;

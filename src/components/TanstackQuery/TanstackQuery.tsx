@@ -43,7 +43,7 @@ type QueryArg =
 	| "starships"
 	| "vehicles";
 
-export const TanstackQuery = () => {
+const TanstackQuery = () => {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<UI />
@@ -133,3 +133,5 @@ export const UI = () => {
 		</Box>
 	);
 };
+
+export default TanstackQuery;

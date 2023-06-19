@@ -9,7 +9,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { Box, Button, List, ListItem, Paper } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
-export const FontTree = () => {
+const FontTree = () => {
 	const [expanded, setExpanded] = useState<string[]>([]);
 	const [selected, setSelected] = useState<string[]>([]);
 
@@ -115,3 +115,5 @@ export const FontTree = () => {
 		</>
 	);
 };
+
+export default FontTree;
