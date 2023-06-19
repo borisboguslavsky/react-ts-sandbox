@@ -4,22 +4,36 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import CloseIcon from "@mui/icons-material/Close";
 import {
+	Box,
 	Button,
 	Checkbox,
 	FormControlLabel,
 	List,
 	ListItem,
 } from "@mui/material";
-import { FontNode } from "./FontTreeData";
-import { largeFontSet } from "../FontTree/LargeFontSet";
+import { largeFontSet } from "./TreeSelectData";
 
-export default function RecursiveTreeView() {
+export interface FontNode {
+	label: string;
+	name: string | string[];
+	index: number;
+	children?: FontNode[];
+	family?: string;
+	parent?: number;
+}
+
+/**
+ * Reference CodeSandboxes:
+ * https://codesandbox.io/s/treeview-with-styled-checkboxes-gi4rm?file=/src/App.tsx
+ * https://codesandbox.io/s/strange-euclid-ywcjxt?file=/src/App.js
+ */
+const TreeSelect = () => {
 	const [selected, setSelected] = React.useState<string[]>([]);
 
-	function getChildById(node: FontNode, id: string) {
+	const getChildById = (node: FontNode, id: string) => {
 		let array: string[] = [];
 
-		function getAllChild(nodes: FontNode | null) {
+		const getAllChild = (nodes: FontNode | null) => {
 			if (nodes === null) return [];
 			array.push(nodes.label);
 			if (Array.isArray(nodes.children)) {
@@ -29,9 +43,9 @@ export default function RecursiveTreeView() {
 				});
 			}
 			return array;
-		}
+		};
 
-		function getNodeById(nodes: FontNode, id: string) {
+		const getNodeById = (nodes: FontNode, id: string) => {
 			if (nodes.label === id) {
 				return nodes;
 			} else if (Array.isArray(nodes.children)) {
@@ -45,12 +59,12 @@ export default function RecursiveTreeView() {
 			}
 
 			return null;
-		}
+		};
 
 		return getAllChild(getNodeById(node, id));
-	}
+	};
 
-	function getOnChange(checked: boolean, nodes: FontNode) {
+	const getOnChange = (checked: boolean, nodes: FontNode) => {
 		const allNode: string[] = getChildById(nodes, nodes.label);
 		let array = checked
 			? [...selected, ...allNode]
@@ -59,7 +73,7 @@ export default function RecursiveTreeView() {
 		array = array.filter((v, i) => array.indexOf(v) === i);
 
 		setSelected(array);
-	}
+	};
 
 	const renderTree = (node: FontNode) => {
 		const isRoot = node.children && node.index === undefined;
@@ -106,49 +120,73 @@ export default function RecursiveTreeView() {
 	};
 
 	return (
-		<>
-			<List
+		<Box>
+			<Box
 				sx={{
-					height: "160px",
-					padding: "12px",
-					display: "flex",
-					flexWrap: "wrap",
-					gap: "8px",
+					minHeight: "200px",
+					maxHeight: "200px",
 					border: "1px solid #bebebe",
 					borderRadius: "4px",
-					justifyContent: "flex-start",
-					alignItems: "flex-start",
+					borderBottomLeftRadius: "0px",
+					borderBottomRightRadius: "0px",
 					overflowY: "auto",
+					padding: "12px",
 				}}
 			>
-				{selected.map((font) => (
-					<ListItem
-						key={font}
-						sx={{
-							padding: "0px",
-							paddingLeft: "4px",
-							bgcolor: "#e1e1e1",
-							borderRadius: "4px",
-							width: "inherit",
-							display: "flex",
-							gap: "4px",
-						}}
-					>
-						{font}
-						<Button sx={{ minWidth: "inherit" }} size={"small"}>
-							<CloseIcon />
-						</Button>
-					</ListItem>
-				))}
-			</List>
-			<TreeView
-				defaultCollapseIcon={<ExpandMoreIcon />}
-				defaultExpandIcon={<ChevronRightIcon />}
-				sx={{ height: 300, overflowY: "auto" }}
-				expanded={["Installed Fonts"]}
+				<List
+					sx={{
+						padding: "0px",
+						display: "flex",
+						flexWrap: "wrap",
+						gap: "8px",
+						overflowY: "auto",
+					}}
+				>
+					{selected.map((font) => (
+						<ListItem
+							key={font}
+							sx={{
+								padding: "0px",
+								paddingLeft: "4px",
+								bgcolor: "#e1e1e1",
+								borderRadius: "4px",
+								width: "inherit",
+								display: "flex",
+								gap: "4px",
+							}}
+						>
+							{font}
+							<Button sx={{ minWidth: "inherit" }} size={"small"}>
+								<CloseIcon />
+							</Button>
+						</ListItem>
+					))}
+				</List>
+			</Box>
+			<Box
+				sx={{
+					minHeight: "200px",
+					maxHeight: "200px",
+					border: "1px solid #bebebe",
+					borderTop: "none",
+					borderRadius: "4px",
+					borderTopLeftRadius: "0px",
+					borderTopRightRadius: "0px",
+					overflowY: "auto",
+					padding: "0px",
+				}}
 			>
-				{renderTree(largeFontSet)}
-			</TreeView>
-		</>
+				<TreeView
+					defaultCollapseIcon={<ExpandMoreIcon />}
+					defaultExpandIcon={<ChevronRightIcon />}
+					sx={{ height: 300, overflowY: "auto" }}
+					expanded={["Installed Fonts"]}
+				>
+					{renderTree(largeFontSet)}
+				</TreeView>
+			</Box>
+		</Box>
 	);
-}
+};
+
+export default TreeSelect;

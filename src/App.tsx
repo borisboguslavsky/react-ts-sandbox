@@ -13,8 +13,7 @@ import ReducerExample from "./components/Reducer/Reducer";
 import Counter from "./components/Counter/Counter";
 import ReactHookForm from "./components/ReactHookForm/ReactHookForm";
 import VendingMachine from "./components/VendingMachine/VendingMachine";
-import FontTree from "./components/FontTree/FontTree";
-import FontTreeCheckbox from "./components/FontTreeCheckbox/FontTreeCheckbox";
+import FontTreeCheckbox from "./components/TreeSelect/TreeSelect";
 import TanstackQuery from "./components/TanstackQuery/TanstackQuery";
 
 function App() {
@@ -39,17 +38,10 @@ function App() {
 			</Applet>
 
 			<Applet
-				title="Tree Select (v2)"
+				title="Tree Select"
 				description="A tree view component with selectable nodes depicting a font tree with font families and sub-fonts. Uses MUI <TreeView>"
 			>
 				<FontTreeCheckbox />
-			</Applet>
-
-			<Applet
-				title="Tree Select (v1)"
-				description="A tree view component with selectable nodes depicting a font tree with font families and sub-fonts. Uses MUI <TreeView>"
-			>
-				<FontTree />
 			</Applet>
 
 			<Applet

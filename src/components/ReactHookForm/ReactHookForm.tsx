@@ -40,10 +40,11 @@ export const ReactHookForm = () => {
 		defaultValues: defaultFormValues,
 	});
 
-	const [formData, setFormData] = React.useState<FormValues>(defaultFormValues);
+	const [submittedFormData, setSubmittedFormData] =
+		React.useState<FormValues>();
 
 	const onSubmitFormHandler = (data: any) => {
-		setFormData(data);
+		setSubmittedFormData(data);
 		console.log(data);
 	};
 
@@ -157,11 +158,14 @@ export const ReactHookForm = () => {
 				)}
 			/>
 
-			<Box sx={{ display: "flex", gap: "0.5rem", justifyContent: "center" }}>
+			<Box
+				sx={{ display: "flex", gap: "0.5rem", justifyContent: "space-between" }}
+			>
 				<Button
 					variant="outlined"
+					fullWidth
 					onClick={() => {
-						setFormData(emptyFormValues);
+						setSubmittedFormData(undefined);
 						reset(emptyFormValues);
 					}}
 				>
@@ -169,14 +173,15 @@ export const ReactHookForm = () => {
 				</Button>
 				<Button
 					variant="outlined"
+					fullWidth
 					onClick={() => {
-						setFormData(defaultFormValues);
+						setSubmittedFormData(undefined);
 						reset(defaultFormValues);
 					}}
 				>
 					Defaults
 				</Button>
-				<Button type="submit" variant="contained">
+				<Button type="submit" variant="contained" fullWidth>
 					Submit
 				</Button>
 			</Box>
@@ -185,7 +190,9 @@ export const ReactHookForm = () => {
 				<TextareaAutosize
 					aria-label={"Output"}
 					readOnly={true}
-					value={JSON.stringify(formData, null, 2)}
+					value={
+						submittedFormData ? JSON.stringify(submittedFormData, null, 2) : ""
+					}
 					minRows={4}
 					style={{ padding: "8px" }}
 				/>
