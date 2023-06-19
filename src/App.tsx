@@ -17,8 +17,7 @@ import ReactHookForm from "./components/ReactHookForm/ReactHookForm";
 import VendingMachine from "./components/VendingMachine/VendingMachine";
 import { FontTree } from "./components/FontTree/FontTree";
 import FontTreeCheckbox from "./components/FontTreeCheckbox/FontTreeCheckbox";
-import { RcTreeSelect } from "./components/RcTreeSelect/RcTreeSelect";
-import { ReactQuery } from "./components/ReactQuery/ReactQuery";
+import { TanstackQuery } from "./components/TanstackQuery/TanstackQuery";
 
 function App() {
 	return (
@@ -35,10 +34,10 @@ function App() {
 
 				<Grid item xs={12} md={6} lg={4}>
 					<Card
-						title="React Query"
+						title="Tanstack Query"
 						description="A component that users @tanstack/react-query to fetch data from the Star Wars API."
 					>
-						<ReactQuery />
+						<TanstackQuery />
 					</Card>
 				</Grid>
 

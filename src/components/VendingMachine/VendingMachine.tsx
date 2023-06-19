@@ -18,7 +18,7 @@ const VendingMachine: React.FC = () => {
 		<>
 			<Typography>Available Drinks:</Typography>
 
-			<Card elevation={6}>
+			<Card elevation={2}>
 				<List>
 					<ListItem>
 						<ListItemText primary="Coca Cola" />
@@ -49,7 +49,7 @@ const VendingMachine: React.FC = () => {
 
 			<Typography>Actions:</Typography>
 
-			<Card elevation={6} sx={{ padding: "12px" }}>
+			<Card elevation={2} sx={{ padding: "12px" }}>
 				<Box sx={{ display: "flex", gap: "0.25rem" }}>
 					<Button onClick={() => send({ type: "ADD5", amount: 5 })} fullWidth>
 						+5¢
@@ -69,7 +69,7 @@ const VendingMachine: React.FC = () => {
 			<Typography>State:</Typography>
 
 			<Card
-				elevation={6}
+				elevation={2}
 				sx={{ padding: "12px", display: "flex", flexDirection: "column" }}
 			>
 				<Box sx={{ display: "flex", justifyContent: "space-between" }}>

@@ -77,7 +77,7 @@ const Stopwatch = () => {
 
 			<Box sx={{ display: "flex", flexDirection: "column" }}>
 				<FormLabel>Laps:</FormLabel>
-				<Card elevation={6} sx={{ marginBottom: "1rem" }}>
+				<Card elevation={2} sx={{ py: "6px", mt: "6px" }}>
 					{laps.map((lap, index) => {
 						return (
 							<ListItem key={`lap_${index}`}>

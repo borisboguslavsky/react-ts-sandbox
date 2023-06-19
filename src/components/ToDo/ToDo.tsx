@@ -46,24 +46,6 @@ const NewItem: React.FC<{
 	);
 };
 
-const Items: React.FC<{
-	items: { id: string; text: string }[];
-	removeItem: (id: string) => void;
-}> = (props) => {
-	return (
-		<>
-			{props.items.map((item) => {
-				return (
-					<li key={item.id}>
-						{item.text}
-						<button onClick={(e) => props.removeItem(item.id)}>✕</button>
-					</li>
-				);
-			})}
-		</>
-	);
-};
-
 interface TodoItem {
 	id: string;
 	text: string;
@@ -90,10 +72,11 @@ const TodoList: React.FC = () => {
 			<NewItem addItem={addItem} />
 			<Box sx={{ display: "flex", flexDirection: "column" }}>
 				<FormLabel>List Items:</FormLabel>
-				<Card elevation={6}>
+				<Card elevation={2} sx={{ py: "6px", mt: "6px" }}>
 					{items.map((item, index) => {
 						return (
 							<ListItem
+								key={item.id}
 								secondaryAction={
 									<IconButton
 										edge="end"

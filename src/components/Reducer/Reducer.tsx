@@ -138,7 +138,7 @@ const ReducerExample = () => {
 				Reset
 			</Button>
 			<Card
-				elevation={6}
+				elevation={2}
 				sx={{
 					padding: "0.5rem",
 					display: "flex",

@@ -50,7 +50,7 @@ const NestedComponent = () => {
 			<Box sx={{ display: "flex", flexDirection: "column" }}>
 				<FormLabel>Context Data:</FormLabel>
 				<Card
-					elevation={6}
+					elevation={2}
 					sx={{
 						display: "flex",
 						justifyContent: "space-around",
