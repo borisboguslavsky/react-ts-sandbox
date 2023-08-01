@@ -30,10 +30,13 @@ export interface FontNode {
 const TreeSelect = () => {
 	const [selected, setSelected] = React.useState<string[]>([]);
 
-	const getChildById = (node: FontNode, id: string) => {
+	//node is always the root "Parent"
+	//id is id of node clicked
+	function getChildById(node: FontNode, id: string) {
 		let array: string[] = [];
 
-		const getAllChild = (nodes: FontNode | null) => {
+		//returns an array of nodes ids: clicked node id and all children node ids
+		function getAllChild(nodes: FontNode | null) {
 			if (nodes === null) return [];
 			array.push(nodes.label);
 			if (Array.isArray(nodes.children)) {
@@ -43,9 +46,10 @@ const TreeSelect = () => {
 				});
 			}
 			return array;
-		};
+		}
 
-		const getNodeById = (nodes: FontNode, id: string) => {
+		//returns the node object that was selected
+		function getNodeById(nodes: FontNode, id: string) {
 			if (nodes.label === id) {
 				return nodes;
 			} else if (Array.isArray(nodes.children)) {
@@ -59,39 +63,24 @@ const TreeSelect = () => {
 			}
 
 			return null;
-		};
+		}
 
 		return getAllChild(getNodeById(node, id));
-	};
+	}
 
-	const getOnChange = (checked: boolean, nodes: FontNode) => {
+	function getOnChange(checked: boolean, nodes: FontNode) {
+		//gets all freshly selected or unselected nodes
 		const allNode: string[] = getChildById(nodes, nodes.label);
+		//combines newly selected nodes with existing selection
+		//or filters out newly deselected nodes from existing selection
 		let array = checked
 			? [...selected, ...allNode]
 			: selected.filter((value) => !allNode.includes(value));
 
-		array = array.filter((v, i) => array.indexOf(v) === i);
-
 		setSelected(array);
-	};
+	}
 
-	const renderTree = (node: FontNode) => {
-		const isRoot = node.children && node.index === undefined;
-		const isFamily = node.children && node.index !== undefined;
-		const isFont = node.family !== undefined;
-
-		// TODO: memoize root node count
-		let nodeCount = "";
-		if (isRoot && node.children) {
-			nodeCount = ` (${node.children.reduce(
-				(acc, cur) => acc + cur.children!.length,
-				0
-			)})`;
-		} else if (isFamily) {
-			nodeCount = node.children ? ` (${node.children.length})` : "";
-		}
-		const nodeLabel = `${node.label}${nodeCount}`;
-
+	const RenderTreeWithCheckboxes = (node: FontNode) => {
 		return (
 			<TreeItem
 				key={node.label}
@@ -104,16 +93,16 @@ const TreeSelect = () => {
 								onChange={(event) =>
 									getOnChange(event.currentTarget.checked, node)
 								}
-								onClick={(e) => e.stopPropagation()}
+								// onClick={(e) => e.stopPropagation()}
 							/>
 						}
-						label={<>{nodeLabel}</>}
+						label={<>{node.label}</>}
 						key={node.label}
 					/>
 				}
 			>
 				{Array.isArray(node.children)
-					? node.children.map((subNode) => renderTree(subNode))
+					? node.children.map((subNode) => RenderTreeWithCheckboxes(subNode))
 					: null}
 			</TreeItem>
 		);
@@ -179,10 +168,10 @@ const TreeSelect = () => {
 				<TreeView
 					defaultCollapseIcon={<ExpandMoreIcon />}
 					defaultExpandIcon={<ChevronRightIcon />}
-					sx={{ height: 300, overflowY: "auto" }}
+					sx={{ overflowY: "auto" }}
 					expanded={["Installed Fonts"]}
 				>
-					{renderTree(largeFontSet)}
+					{RenderTreeWithCheckboxes(largeFontSet)}
 				</TreeView>
 			</Box>
 		</Box>
