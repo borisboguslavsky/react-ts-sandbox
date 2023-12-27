@@ -3,90 +3,82 @@ import { Box } from "@mui/system";
 import { useRef, useState } from "react";
 
 const Calculator = () => {
-	const [result, setResult] = useState<number | string | undefined>("");
+  const [result, setResult] = useState<number | string | undefined>("");
 
-	const num1Ref = useRef<HTMLInputElement>(null);
-	const num2Ref = useRef<HTMLInputElement>(null);
+  const num1Ref = useRef<HTMLInputElement>(null);
+  const num2Ref = useRef<HTMLInputElement>(null);
 
-	const addHandler = () => {
-		setResult(
-			parseFloat(num1Ref.current!.value) + parseFloat(num2Ref.current!.value)
-		);
-	};
+  const addHandler = () => {
+    setResult(parseFloat(num1Ref.current!.value) + parseFloat(num2Ref.current!.value));
+  };
 
-	const subtractHandler = () => {
-		setResult(
-			parseFloat(num1Ref.current!.value) - parseFloat(num2Ref.current!.value)
-		);
-	};
+  const subtractHandler = () => {
+    setResult(parseFloat(num1Ref.current!.value) - parseFloat(num2Ref.current!.value));
+  };
 
-	const multiplyHandler = () => {
-		setResult(
-			parseFloat(num1Ref.current!.value) * parseFloat(num2Ref.current!.value)
-		);
-	};
+  const multiplyHandler = () => {
+    setResult(parseFloat(num1Ref.current!.value) * parseFloat(num2Ref.current!.value));
+  };
 
-	const divideHandler = () => {
-		setResult(
-			parseFloat(num1Ref.current!.value) / parseFloat(num2Ref.current!.value)
-		);
-	};
+  const divideHandler = () => {
+    setResult(parseFloat(num1Ref.current!.value) / parseFloat(num2Ref.current!.value));
+  };
 
-	return (
-		<>
-			<Box sx={{ display: "flex", gap: "0.25rem" }}>
-				<TextField
-					label="Number 1:"
-					InputLabelProps={{ shrink: true }}
-					fullWidth
-					id="val1"
-					inputRef={num1Ref}
-					defaultValue={2}
-					type="number"
-				/>
-				<TextField
-					label="Number 2:"
-					InputLabelProps={{ shrink: true }}
-					fullWidth
-					id="val2"
-					inputRef={num2Ref}
-					defaultValue={3}
-					type="number"
-				/>
-			</Box>
-			<Box sx={{ display: "flex", gap: "0.25rem" }}>
-				<Button variant="outlined" fullWidth onClick={addHandler}>
-					Add
-				</Button>
-				<Button variant="outlined" fullWidth onClick={subtractHandler}>
-					Subtract
-				</Button>
-				<Button variant="outlined" fullWidth onClick={multiplyHandler}>
-					Multiply
-				</Button>
-				<Button variant="outlined" fullWidth onClick={divideHandler}>
-					Divide
-				</Button>
-			</Box>
+  return (
+    <>
+      <Box sx={{ display: "flex", gap: "0.25rem" }}>
+        <TextField
+          label="Number 1:"
+          InputLabelProps={{ shrink: true }}
+          fullWidth
+          id="val1"
+          inputRef={num1Ref}
+          defaultValue={2}
+          type="number"
+        />
+        <TextField
+          label="Number 2:"
+          InputLabelProps={{ shrink: true }}
+          fullWidth
+          id="val2"
+          inputRef={num2Ref}
+          defaultValue={3}
+          type="number"
+        />
+      </Box>
+      <Box sx={{ display: "flex", gap: "0.25rem" }}>
+        <Button variant="outlined" fullWidth onClick={addHandler}>
+          Add
+        </Button>
+        <Button variant="outlined" fullWidth onClick={subtractHandler}>
+          Subtract
+        </Button>
+        <Button variant="outlined" fullWidth onClick={multiplyHandler}>
+          Multiply
+        </Button>
+        <Button variant="outlined" fullWidth onClick={divideHandler}>
+          Divide
+        </Button>
+      </Box>
 
-			<Box
-				sx={{
-					display: "flex",
-					justifyContent: "center",
-					alignItems: "center",
-					gap: "1rem",
-				}}
-			>
-				<TextField
-					label="Result:"
-					InputLabelProps={{ shrink: true }}
-					fullWidth
-					id="result"
-					value={result}
-				/>
-			</Box>
-		</>
-	);
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "1rem",
+        }}
+      >
+        <TextField
+          label="Result:"
+          InputLabelProps={{ shrink: true }}
+          fullWidth
+          id="result"
+          value={result}
+        />
+      </Box>
+    </>
+  );
 };
 
 export default Calculator;

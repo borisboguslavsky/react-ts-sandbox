@@ -1,6 +1,6 @@
 * {
-	box-sizing: border-box;
-  color:rgb(72, 72, 72)
+  box-sizing: border-box;
+  color: rgb(72, 72, 72);
 }
 
 :root {
@@ -17,6 +17,11 @@ body {
   background-color: rgb(219, 219, 219);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 400;
 }

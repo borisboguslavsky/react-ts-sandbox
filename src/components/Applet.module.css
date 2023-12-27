@@ -1,48 +1,48 @@
 .wrapper {
-	display: flex;
-	width: calc(33.333% - 1.5rem);
-	flex-direction: column;
-	background-color: white;
-	border-radius: 4px;
-	box-shadow: 0px 0px 10px rgba(0,0,0,0.375);;
-	padding: 1rem;
-	/* height: 400px;
+  display: flex;
+  width: calc(33.333% - 1.5rem);
+  flex-direction: column;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.375);
+  padding: 1rem;
+  /* height: 400px;
 	overflow: auto; */
-	flex-grow: 0;
+  flex-grow: 0;
 }
 .title {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin: 0;
-	padding-bottom: 1rem;
-	border-bottom: 1px solid rgba(0,0,0,0.125);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 .title h2 {
-	margin: 0.5rem 0rem;
-	font-weight: 400;
+  margin: 0.5rem 0rem;
+  font-weight: 400;
 }
 button.infoButton {
-	font-size: 1.75rem;
-	/* line-height: 1.75rem; */
-	/* padding: 0rem 0.375rem 0.25rem 0.375rem; */
-	padding: 0.125rem 0.5rem;
+  font-size: 1.75rem;
+  /* line-height: 1.75rem; */
+  /* padding: 0rem 0.375rem 0.25rem 0.375rem; */
+  padding: 0.125rem 0.5rem;
 }
 
 .description {
-	padding-bottom: 1rem;
-	border-bottom: 1px solid rgba(0,0,0,0.125);
-	word-break: break-word;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  word-break: break-word;
 }
 
 @media (max-width: 1000px) {
-	.wrapper {
-		width: calc(50% - 1rem)
-	}
+  .wrapper {
+    width: calc(50% - 1rem);
+  }
 }
 
 @media (max-width: 600px) {
-	.wrapper {
-		width: calc(100% - 1rem)
-	}
+  .wrapper {
+    width: calc(100% - 1rem);
+  }
 }
