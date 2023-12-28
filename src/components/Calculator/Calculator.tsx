@@ -1,6 +1,22 @@
 import { Box, Button, Grid, TextField, Typography, ButtonProps } from "@mui/material";
 import { useState } from "react";
 
+/**
+ * Strips all '.' characters from the input string except for the first one.
+ */
+const stripDotsAfterFirst = (input: string) => {
+  const dotIndex = input.indexOf(".");
+
+  if (dotIndex !== -1) {
+    const firstPart = input.substring(0, dotIndex + 1); // Include the first '.' in the substring
+    const restOfString = input.substring(dotIndex + 1).replace(/\./g, ""); // Remove '.' from the rest of the string
+
+    return firstPart + restOfString;
+  }
+
+  return input; // If no '.' is found, return the original string
+};
+
 interface CalcButtonProps extends ButtonProps {
   text: string;
   wide?: boolean;
@@ -57,7 +73,7 @@ const Calculator = () => {
         let str = curVal.toString().slice(0, -1);
         if (str[str.length - 1] === ".") str = str.slice(0, -1);
         if (str === "") return 0;
-        return Number(str);
+        return inDecimalMode ? parseFloat(str) : parseInt(str);
       });
       setOperator(null);
     }
@@ -99,19 +115,20 @@ const Calculator = () => {
       setInDecimalMode(true);
     }
 
-    if ([0, 1, 2, 3, 4, 5, 6, 7, 8, 9].includes(Number(input))) {
+    if ([0, 1, 2, 3, 4, 5, 6, 7, 8, 9].includes(parseInt(input))) {
       if (!inDecimalMode) {
         setValue((curVal) => {
-          if (!curVal) return Number(input);
-          return Number(curVal.toString() + input);
+          if (!curVal) return parseInt(input);
+          return parseInt(curVal.toString() + input);
         });
       } else {
         setValue((curVal) => {
-          if (!curVal) return Number("0." + input);
+          // TODO: leading zeroes in decimal don't work with this
+          if (!curVal) return parseFloat("0." + input);
           const valString = curVal.toString().includes(".")
             ? curVal.toString() + input
             : curVal.toString() + "." + input;
-          return Number(valString);
+          return parseFloat(valString);
         });
       }
     }
@@ -129,10 +146,12 @@ const Calculator = () => {
     }
   };
 
+  const stringifiedValue = value ? stripDotsAfterFirst(`${value}${inDecimalMode ? "." : ""}`) : "";
+
   return (
     <Box>
       <TextField
-        value={value}
+        value={stringifiedValue}
         InputProps={{ readOnly: true }}
         sx={{
           mb: 2,

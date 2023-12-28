@@ -1,11 +1,14 @@
 import {
   Button,
   Card,
+  Checkbox,
   FormLabel,
   IconButton,
+  List,
   ListItem,
   ListItemText,
   TextField,
+  Typography,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import React, { useState, useRef } from "react";
@@ -74,28 +77,37 @@ const TodoList: React.FC = () => {
     <>
       <NewItem addItem={addItem} />
       <Box sx={{ display: "flex", flexDirection: "column" }}>
-        <FormLabel>List Items:</FormLabel>
-        <Card elevation={2} sx={{ py: "6px", mt: "6px" }}>
-          {items.map((item, index) => {
-            return (
-              <ListItem
-                key={item.id}
-                secondaryAction={
-                  <IconButton edge="end" aria-label="delete" onClick={() => removeItem(item.id)}>
-                    <DeleteIcon />
-                  </IconButton>
-                }
-              >
-                <ListItemText primary={`${index + 1}. ${item.text}`} />
-              </ListItem>
-            );
-          })}
-          {items.length === 0 && (
-            <ListItem>
-              <ListItemText primary="Todo list is empty..." />
-            </ListItem>
-          )}
-        </Card>
+        {items.length > 0 && (
+          <Card elevation={2} sx={{ p: 1 }}>
+            <List
+              sx={{
+                p: 0,
+                listStyle: "none",
+              }}
+            >
+              {items.map((item, index) => {
+                return (
+                  <ListItem
+                    key={item.id}
+                    sx={{ p: 0 }}
+                    secondaryAction={
+                      <IconButton
+                        edge="end"
+                        aria-label="delete"
+                        onClick={() => removeItem(item.id)}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    }
+                  >
+                    <Checkbox />
+                    <Typography>{item.text}</Typography>
+                  </ListItem>
+                );
+              })}
+            </List>
+          </Card>
+        )}
       </Box>
     </>
   );

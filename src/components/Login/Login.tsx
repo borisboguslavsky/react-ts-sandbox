@@ -45,33 +45,34 @@ const Login: React.FC = () => {
 
   return (
     <>
-      <form
-        onSubmit={submitHandler}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "1rem",
-        }}
-      >
-        <TextField
-          label="Email"
-          InputLabelProps={{ shrink: true }}
-          id="emailField"
-          type="email"
-          value={emailValue}
-          onChange={(e) => setEmailValue(e.target.value)}
-        />
-        <TextField
-          label="Password"
-          InputLabelProps={{ shrink: true }}
-          id="passwordField"
-          type="password"
-          value={passwordValue}
-          onChange={(e) => setPasswordValue(e.target.value)}
-        />
-        <Button type="submit" variant="contained">
-          Submit
-        </Button>
+      <form onSubmit={submitHandler}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+          }}
+        >
+          <TextField
+            label="Email"
+            InputLabelProps={{ shrink: true }}
+            id="emailField"
+            type="email"
+            value={emailValue}
+            onChange={(e) => setEmailValue(e.target.value)}
+          />
+          <TextField
+            label="Password"
+            InputLabelProps={{ shrink: true }}
+            id="passwordField"
+            type="password"
+            value={passwordValue}
+            onChange={(e) => setPasswordValue(e.target.value)}
+          />
+          <Button type="submit" variant="contained">
+            Submit
+          </Button>
+        </Box>
       </form>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         <FormLabel>API Response:</FormLabel>

@@ -1,5 +1,5 @@
-import { Button, Card, FormControlLabel, TextField, Typography, Checkbox } from "@mui/material";
 import { Box } from "@mui/system";
+import { Button, Card, FormControlLabel, TextField, Typography, Checkbox } from "@mui/material";
 import React, { useReducer } from "react";
 
 interface ReducerState {
@@ -91,7 +91,7 @@ const ReducerExample = () => {
 
   return (
     <>
-      <Box sx={{ display: "flex", gap: 1 }}>
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
         <TextField
           label="Field 1"
           InputLabelProps={{ shrink: true }}
@@ -100,14 +100,14 @@ const ReducerExample = () => {
           onChange={changeHandler}
         />
         <TextField
-          label="Field 1"
+          label="Field 2"
           InputLabelProps={{ shrink: true }}
           id="field2"
           value={formState.field2}
           onChange={changeHandler}
         />
         <TextField
-          label="Field 1"
+          label="Field 3"
           InputLabelProps={{ shrink: true }}
           id="field3"
           value={formState.field3}
@@ -128,23 +128,15 @@ const ReducerExample = () => {
       <Button variant="contained" onClick={(e) => submitHandler(e, "RESET")}>
         Reset
       </Button>
-      <Card
-        elevation={2}
+      <Box
         sx={{
-          padding: "0.5rem",
           display: "flex",
-          justifyContent: "space-between",
           alignItems: "center",
         }}
       >
-        <Typography>All fields populated:</Typography>
-        <FormControlLabel
-          control={
-            <Checkbox sx={{ pointerEvents: "none" }} checked={formState.allFieldsPopulated} />
-          }
-          label={formState.allFieldsPopulated.toString()}
-        />
-      </Card>
+        <Checkbox readOnly disabled checked={formState.allFieldsPopulated} />
+        <Typography>All fields populated</Typography>
+      </Box>
     </>
   );
 };

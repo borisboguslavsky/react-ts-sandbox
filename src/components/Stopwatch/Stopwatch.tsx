@@ -1,14 +1,32 @@
 import { useEffect, useMemo, useState } from "react";
-import {
-  Button,
-  Typography,
-  Box,
-  Card,
-  ListItem,
-  ListItemText,
-  FormLabel,
-  List,
-} from "@mui/material";
+import { Button, Typography, Box, Card, FormLabel } from "@mui/material";
+import React from "react";
+
+const convertMillisecondsToTimerString = (
+  milliseconds: number,
+  options?: {
+    showHours?: boolean;
+    showMinutes?: boolean;
+  }
+) => {
+  const hours = Math.floor(milliseconds / 3600000);
+  const minutes = Math.floor((milliseconds % 3600000) / 60000);
+  const seconds = Math.floor((milliseconds % 60000) / 1000);
+  const remainingMs = milliseconds % 1000;
+
+  const paddedHours = hours.toString().padStart(2, "0");
+  const paddedMinutes = minutes.toString().padStart(2, "0");
+  const paddedSeconds = seconds.toString().padStart(2, "0");
+  const paddedMilliseconds = remainingMs.toString().padStart(3, "0");
+
+  const showHours = options?.showHours ?? hours > 0;
+  const showMinutes = options?.showMinutes ?? minutes > 0;
+
+  const formattedTime = `${showHours ? paddedHours + ":" : ""}${
+    showMinutes ? paddedMinutes + ":" : ""
+  }${paddedSeconds}.${paddedMilliseconds}`;
+  return formattedTime;
+};
 
 const Stopwatch = () => {
   const [isPaused, setIsPaused] = useState(true);
@@ -38,43 +56,24 @@ const Stopwatch = () => {
     setIsPaused((bool) => !bool);
   };
 
-  const convertMillisecondsToTimerString = (milliseconds: number) => {
-    const hours = Math.floor(milliseconds / 3600000);
-    const minutes = Math.floor((milliseconds % 3600000) / 60000);
-    const seconds = Math.floor((milliseconds % 60000) / 1000);
-    const remainingMs = milliseconds % 1000;
-
-    const paddedHours = hours.toString().padStart(2, "0");
-    const paddedMinutes = minutes.toString().padStart(2, "0");
-    const paddedSeconds = seconds.toString().padStart(2, "0");
-    const paddedMilliseconds = remainingMs.toString().padStart(3, "0");
-
-    const formattedTime = `${hours > 0 ? paddedHours + ":" : ""}${
-      minutes > 0 ? paddedMinutes + ":" : ""
-    }${paddedSeconds}.${paddedMilliseconds}`;
-    return formattedTime;
-  };
-
   const resetHandler = () => {
     setIsPaused(true);
     setMillisecondsElapsed(0);
+    setPausedTime(0);
     setLaps([]);
   };
 
   const addLapHandler = () => {
-    setIsPaused(false);
-    setMillisecondsElapsed(0);
-    setPausedTime(0);
     setLaps((laps) => [...laps, millisecondsElapsed]);
   };
 
   return (
     <>
-      <Typography variant="h2" textAlign={"center"} lineHeight={1}>
+      <Typography variant="h2" textAlign={"center"} lineHeight={1} marginBottom={1}>
         {convertMillisecondsToTimerString(millisecondsElapsed)}
       </Typography>
 
-      <Box style={{ display: "flex", gap: "0.25rem" }}>
+      <Box sx={{ display: "flex", gap: 1 }}>
         <Button fullWidth variant="outlined" onClick={pausePlayHandler}>
           {isPaused ? (millisecondsElapsed === 0 ? "Start" : "Resume") : "Pause"}
         </Button>
@@ -96,58 +95,50 @@ const Stopwatch = () => {
         </Button>
       </Box>
 
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
-        <FormLabel>Laps:</FormLabel>
-        <Card
-          elevation={2}
-          sx={{
-            p: 2,
-            display: "flex",
-            flexDirection: "column",
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "flex-start",
-            "& > *": {
-              m: 0,
-              p: 0,
-              width: "100%",
-            },
-            "& ol": {
-              listStyle: "none",
-              counterReset: "item",
-              "& li": {
-                counterIncrement: "item",
-                "&:before": {
-                  content: "counter(item)",
-                  mr: 1,
-                  opacity: 0.5,
-                },
-                "& span:nth-of-type(2)": {
-                  opacity: 0.5,
+      {laps.length > 0 && (
+        <Box sx={{ display: "flex", flexDirection: "column" }}>
+          <Card
+            elevation={2}
+            sx={{
+              py: 2,
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              columnGap: 1,
+              "& > p": {
+                m: 0,
+                textAlign: "center",
+                "&.lap_table_header": {
+                  fontWeight: "bold",
+                  mb: 1,
                 },
               },
-            },
-          }}
-        >
-          {laps.length > 0 && (
-            <ol>
-              {laps.map((lap, index) => {
-                return (
-                  <li key={`lap_${index}`}>
-                    <span>{convertMillisecondsToTimerString(lap)} </span>
-                    {index > 0 && (
-                      <span>
-                        (+{convertMillisecondsToTimerString(laps[index] - laps[index - 1])})
-                      </span>
+            }}
+          >
+            <React.Fragment>
+              <p className={"lap_index lap_table_header"}>Lap</p>
+              <p className={"lap_time lap_table_header"}>Lap Time</p>
+              <p className={"overall_time lap_table_header"}>Overall</p>
+            </React.Fragment>
+            {laps.map((lap, index) => {
+              return (
+                <React.Fragment key={`lap_${index}`}>
+                  <p className={"lap_index"}>{index}</p>
+                  <p className={"lap_time"}>
+                    {convertMillisecondsToTimerString(
+                      index === 0 ? lap : laps[index] - laps[index - 1]
                     )}
-                  </li>
-                );
-              })}
-            </ol>
-          )}
-          {laps.length === 0 && <Typography>No laps recorded...</Typography>}
-        </Card>
-      </Box>
+                  </p>
+                  {index > 0 ? (
+                    <p className={"overall_time"}>{convertMillisecondsToTimerString(lap)}</p>
+                  ) : (
+                    <p className={"overall_time"}>{convertMillisecondsToTimerString(lap)}</p>
+                  )}
+                </React.Fragment>
+              );
+            })}
+          </Card>
+        </Box>
+      )}
     </>
   );
 };
