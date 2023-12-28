@@ -10,7 +10,7 @@ interface AppletProps {
 }
 
 const Applet: React.FC<AppletProps> = ({ title, description, children }) => {
-  const [showDescription, setShowDescription] = useState(true);
+  const [showDescription, setShowDescription] = useState(false);
 
   return (
     <Grid item xs={12} lg={4} md={6}>

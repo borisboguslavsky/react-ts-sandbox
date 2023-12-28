@@ -32,16 +32,19 @@ const NewItem: React.FC<{
       onSubmit={addItemHandler}
       style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}
     >
-      <TextField
-        label="Add Item"
-        InputLabelProps={{ shrink: true }}
-        placeholder="What do you need to do?"
-        type="text"
-        inputRef={textInputRef}
-      />
-      <Button variant="contained" type="submit" sx={{ marginTop: "0.5rem" }}>
-        Add Item
-      </Button>
+      <Box sx={{ display: "flex", gap: 1, alignItems: "stretch" }}>
+        <TextField
+          label="Add Item"
+          InputLabelProps={{ shrink: true }}
+          placeholder="What do you need to do?"
+          type="text"
+          inputRef={textInputRef}
+          sx={{ flexGrow: 1 }}
+        />
+        <Button variant="contained" type="submit" sx={{ fontSize: "1.5rem", p: 0 }}>
+          +
+        </Button>
+      </Box>
     </form>
   );
 };

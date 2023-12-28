@@ -26,20 +26,27 @@ export const Delay: React.FC = () => {
 
   return (
     <>
-      <TextField
-        label="Message:"
-        type="text"
-        inputRef={messageRef}
-        defaultValue="Message"
-        InputLabelProps={{ shrink: true }}
-      />
-      <TextField
-        label="Delay (ms):"
-        type="number"
-        inputRef={delayRef}
-        defaultValue={1000}
-        InputLabelProps={{ shrink: true }}
-      />
+      <Box
+        sx={{
+          display: "flex",
+          gap: 1,
+        }}
+      >
+        <TextField
+          label="Message:"
+          type="text"
+          inputRef={messageRef}
+          defaultValue="Message"
+          InputLabelProps={{ shrink: true }}
+        />
+        <TextField
+          label="Delay (ms):"
+          type="number"
+          inputRef={delayRef}
+          defaultValue={1000}
+          InputLabelProps={{ shrink: true }}
+        />
+      </Box>
       <Button variant="contained" disabled={isLoading} onClick={onGoHandler}>
         {isLoading ? `Waiting... ${delayRef.current!.value} ms` : "Go"}
       </Button>

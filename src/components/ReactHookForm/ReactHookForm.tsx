@@ -165,7 +165,7 @@ export const ReactHookForm = () => {
         </Button>
       </Box>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
-        <FormLabel>Form Submission:</FormLabel>
+        <FormLabel>Submitted Data:</FormLabel>
         <TextareaAutosize
           aria-label={"Output"}
           readOnly={true}

@@ -1,4 +1,4 @@
-import { Button, Card, FormLabel, TextField } from "@mui/material";
+import { Button, Card, FormLabel, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useContext } from "react";
 import ResetButton from "./ResetButton";
@@ -49,18 +49,25 @@ const NestedComponent = () => {
       </Box>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         <FormLabel>Context Data:</FormLabel>
-        <Card
-          elevation={2}
+        <Box
           sx={{
             display: "flex",
-            justifyContent: "space-around",
+            justifyContent: "space-between",
+            fontSize: "1.125rem",
+            mt: 1,
             marginBottom: "1rem",
+            backgroundColor: "rgba(0,0,0,0.125)",
+            p: 2,
+            borderRadius: "4px",
+            fontFamily: "monospace",
           }}
         >
+          <span>[</span>
           {appCtx.data.map((num, index) => {
-            return <p key={`key_${index}`}>{num}</p>;
+            return <span key={`key_${index}`}>{num}</span>;
           })}
-        </Card>
+          <span>]</span>
+        </Box>
       </Box>
       <Box sx={{ display: "flex", gap: "0.25rem" }}>
         <Button fullWidth onClick={incrementNumbers} variant="outlined">

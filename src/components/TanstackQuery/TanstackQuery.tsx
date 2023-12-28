@@ -43,7 +43,7 @@ const TanstackQuery = () => {
 export const UI = () => {
   const [queryArg, setQueryArg] = React.useState<QueryArg>("people");
   const [id, setId] = React.useState<number>(1);
-  const { data, error, status, refetch } = useStarWarsApi(queryArg, id);
+  const { data, error, isFetching, isLoading, refetch } = useStarWarsApi(queryArg, id);
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: "12px" }}>
@@ -84,7 +84,7 @@ export const UI = () => {
           exclusive
           fullWidth
           size="small"
-          sx={{ marginTop: "-1px" }}
+          sx={{ marginTop: "-1px", "& > button": { borderTop: "none" } }}
           onChange={(_event, newArg) => {
             setQueryArg(newArg);
           }}
@@ -98,20 +98,15 @@ export const UI = () => {
           </ToggleButton>
         </ToggleButtonGroup>
       </Box>
-      <FormLabel>Status:</FormLabel>
-      <TextareaAutosize readOnly={true} value={status} minRows={1} style={{ padding: "8px" }} />
       <FormLabel>Result:</FormLabel>
-      {status === "loading" ? (
-        <CircularProgress />
-      ) : (
-        <TextareaAutosize
-          readOnly={true}
-          value={JSON.stringify(error ? error : data, null, 2)}
-          minRows={20}
-          maxRows={20}
-          style={{ padding: "8px" }}
-        />
-      )}
+
+      <TextareaAutosize
+        readOnly={true}
+        value={isFetching || isLoading ? "loading" : JSON.stringify(error ? error : data, null, 2)}
+        minRows={12}
+        maxRows={12}
+        style={{ padding: "8px" }}
+      />
     </Box>
   );
 };

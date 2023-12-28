@@ -91,28 +91,30 @@ const ReducerExample = () => {
 
   return (
     <>
-      <TextField
-        label="Field 1"
-        InputLabelProps={{ shrink: true }}
-        id="field1"
-        value={formState.field1}
-        onChange={changeHandler}
-      />
-      <TextField
-        label="Field 1"
-        InputLabelProps={{ shrink: true }}
-        id="field2"
-        value={formState.field2}
-        onChange={changeHandler}
-      />
-      <TextField
-        label="Field 1"
-        InputLabelProps={{ shrink: true }}
-        id="field3"
-        value={formState.field3}
-        onChange={changeHandler}
-      />
-      <Box sx={{ display: "flex", gap: "0.5rem" }}>
+      <Box sx={{ display: "flex", gap: 1 }}>
+        <TextField
+          label="Field 1"
+          InputLabelProps={{ shrink: true }}
+          id="field1"
+          value={formState.field1}
+          onChange={changeHandler}
+        />
+        <TextField
+          label="Field 1"
+          InputLabelProps={{ shrink: true }}
+          id="field2"
+          value={formState.field2}
+          onChange={changeHandler}
+        />
+        <TextField
+          label="Field 1"
+          InputLabelProps={{ shrink: true }}
+          id="field3"
+          value={formState.field3}
+          onChange={changeHandler}
+        />
+      </Box>
+      <Box sx={{ display: "flex", gap: "0.5rem", "& > button": { flexGrow: 1, flexBasis: 0 } }}>
         <Button variant="outlined" onClick={(e) => submitHandler(e, "REVERSE")}>
           Reverse
         </Button>
