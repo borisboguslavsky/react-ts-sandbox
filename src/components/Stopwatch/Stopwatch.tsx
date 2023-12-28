@@ -3,14 +3,22 @@ import { Button, Typography, Box, Card, ListItem, ListItemText, FormLabel } from
 
 const Stopwatch = () => {
   const [isPaused, setIsPaused] = useState(true);
+  // Current milliseconds at the last pause. Used to accurately restart the stopwatch on resume.
+  const [pausedTime, setPausedTime] = useState(0);
+  // Total number of milliseconds elapsed for the whole stopwatch
   const [millisecondsElapsed, setMillisecondsElapsed] = useState(0);
 
   const [laps, setLaps] = useState<number[]>([]);
 
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused) {
+      setPausedTime(millisecondsElapsed);
+      return;
+    }
+    let startTimestamp = Date.now();
     const timer = setInterval(() => {
-      setMillisecondsElapsed((num) => num + 10);
+      const msElapsedSinceStart = Date.now() + pausedTime - startTimestamp;
+      setMillisecondsElapsed(msElapsedSinceStart);
     }, 10);
     return () => {
       clearInterval(timer);
@@ -21,17 +29,22 @@ const Stopwatch = () => {
     setIsPaused((bool) => !bool);
   };
 
-  const convertMillisecondsToTimerString = useMemo(() => {
-    return (milliseconds: number) => {
-      let minutes = Math.floor(milliseconds / 1000 / 60);
-      let seconds = Math.floor((milliseconds / 1000) % 60);
-      let ms = (milliseconds - seconds * 1000).toString().slice(0, 2);
-      ms = ms === "0" ? "00" : ms;
-      let secondsString = seconds.toString();
-      if (secondsString.length === 1) secondsString = "0" + secondsString;
-      return `${minutes}:${secondsString}:${ms}`;
-    };
-  }, []);
+  const convertMillisecondsToTimerString = (milliseconds: number) => {
+    const hours = Math.floor(milliseconds / 3600000);
+    const minutes = Math.floor((milliseconds % 3600000) / 60000);
+    const seconds = Math.floor((milliseconds % 60000) / 1000);
+    const remainingMs = milliseconds % 1000;
+
+    const paddedHours = hours.toString().padStart(2, "0");
+    const paddedMinutes = minutes.toString().padStart(2, "0");
+    const paddedSeconds = seconds.toString().padStart(2, "0");
+    const paddedMilliseconds = remainingMs.toString().padStart(3, "0");
+
+    const formattedTime = `${hours > 0 ? paddedHours + ":" : ""}${
+      minutes > 0 ? paddedMinutes + ":" : ""
+    }${paddedSeconds}.${paddedMilliseconds}`;
+    return formattedTime;
+  };
 
   const resetHandler = () => {
     setIsPaused(true);
@@ -42,6 +55,7 @@ const Stopwatch = () => {
   const addLapHandler = () => {
     setIsPaused(false);
     setMillisecondsElapsed(0);
+    setPausedTime(0);
     setLaps((laps) => [...laps, millisecondsElapsed]);
   };
 

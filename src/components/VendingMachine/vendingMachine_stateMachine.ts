@@ -78,10 +78,10 @@ export const vMachine = createMachine(
         }),
         on: {
           ADD5: {
-            target: "20",
+            target: "15",
           },
           ADD10: {
-            target: "25",
+            target: "20",
           },
           ADD25: {
             target: "35",

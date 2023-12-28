@@ -10,7 +10,6 @@ import Stopwatch from "./components/Stopwatch/Stopwatch";
 import TodoList from "./components/ToDo/ToDo";
 import Login from "./components/Login/Login";
 import ReducerExample from "./components/Reducer/Reducer";
-import Counter from "./components/Counter/Counter";
 import ReactHookForm from "./components/ReactHookForm/ReactHookForm";
 import VendingMachine from "./components/VendingMachine/VendingMachine";
 import FontTreeCheckbox from "./components/TreeSelect/TreeSelect";
@@ -94,13 +93,6 @@ function App() {
         description="A basic ToDo list component where users can add and remove items to the list."
       >
         <TodoList />
-      </Applet>
-
-      <Applet
-        title="Counter"
-        description="A counter component where users can increment and decrement the counter by the entered value."
-      >
-        <Counter />
       </Applet>
 
       <Applet
