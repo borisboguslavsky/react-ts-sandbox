@@ -1,8 +1,10 @@
 import React from "react";
-import { TreeView, TreeItem } from "@mui/lab";
+
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import CloseIcon from "@mui/icons-material/Close";
+import { TreeView } from "@mui/x-tree-view/TreeView";
+import { TreeItem } from "@mui/x-tree-view/TreeItem";
 import { Box, Button, Checkbox, FormControlLabel, List, ListItem } from "@mui/material";
 import { largeFontSet } from "./TreeSelectData";
 
