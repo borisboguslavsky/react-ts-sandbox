@@ -1,5 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
-import { Button, Typography, Box, Card, ListItem, ListItemText, FormLabel } from "@mui/material";
+import {
+  Button,
+  Typography,
+  Box,
+  Card,
+  ListItem,
+  ListItemText,
+  FormLabel,
+  List,
+} from "@mui/material";
 
 const Stopwatch = () => {
   const [isPaused, setIsPaused] = useState(true);
@@ -19,7 +28,7 @@ const Stopwatch = () => {
     const timer = setInterval(() => {
       const msElapsedSinceStart = Date.now() + pausedTime - startTimestamp;
       setMillisecondsElapsed(msElapsedSinceStart);
-    }, 10);
+    }, 33);
     return () => {
       clearInterval(timer);
     };
@@ -69,31 +78,74 @@ const Stopwatch = () => {
         <Button fullWidth variant="outlined" onClick={pausePlayHandler}>
           {isPaused ? (millisecondsElapsed === 0 ? "Start" : "Resume") : "Pause"}
         </Button>
-        <Button fullWidth variant="outlined" onClick={addLapHandler}>
+        <Button
+          disabled={millisecondsElapsed === 0 || isPaused}
+          fullWidth
+          variant="outlined"
+          onClick={addLapHandler}
+        >
           Lap
         </Button>
-        <Button fullWidth variant="outlined" onClick={resetHandler}>
+        <Button
+          disabled={millisecondsElapsed === 0}
+          fullWidth
+          variant="outlined"
+          onClick={resetHandler}
+        >
           Reset
         </Button>
       </Box>
 
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         <FormLabel>Laps:</FormLabel>
-        <Card elevation={2} sx={{ py: "6px", mt: "6px" }}>
-          {laps.map((lap, index) => {
-            return (
-              <ListItem key={`lap_${index}`}>
-                <ListItemText
-                  primary={`Lap ${index + 1} - ${convertMillisecondsToTimerString(lap)}`}
-                />
-              </ListItem>
-            );
-          })}
-          {laps.length === 0 && (
-            <ListItem>
-              <ListItemText primary="No laps recorded..." />
-            </ListItem>
+        <Card
+          elevation={2}
+          sx={{
+            p: 2,
+            display: "flex",
+            flexDirection: "column",
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "flex-start",
+            "& > *": {
+              m: 0,
+              p: 0,
+              width: "100%",
+            },
+            "& ol": {
+              listStyle: "none",
+              counterReset: "item",
+              "& li": {
+                counterIncrement: "item",
+                "&:before": {
+                  content: "counter(item)",
+                  mr: 1,
+                  opacity: 0.5,
+                },
+                "& span:nth-of-type(2)": {
+                  opacity: 0.5,
+                },
+              },
+            },
+          }}
+        >
+          {laps.length > 0 && (
+            <ol>
+              {laps.map((lap, index) => {
+                return (
+                  <li key={`lap_${index}`}>
+                    <span>{convertMillisecondsToTimerString(lap)} </span>
+                    {index > 0 && (
+                      <span>
+                        (+{convertMillisecondsToTimerString(laps[index] - laps[index - 1])})
+                      </span>
+                    )}
+                  </li>
+                );
+              })}
+            </ol>
           )}
+          {laps.length === 0 && <Typography>No laps recorded...</Typography>}
         </Card>
       </Box>
     </>
