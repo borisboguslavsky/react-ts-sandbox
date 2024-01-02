@@ -28,29 +28,27 @@ const Applet: React.FC<AppletProps> = ({ title, description, children }) => {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            marginBottom: "0.5rem",
+            marginBottom: "1rem",
           }}
         >
           <Typography variant="h5">{title}</Typography>
           {description && (
             <Button
-              // variant='outlined'
               onClick={() => setShowDescription((bool) => !bool)}
               sx={{
-                padding: "0.5rem",
-                width: "min-content",
-                height: "min-content",
                 minWidth: "unset",
+                padding: "4px",
+                border: `1px solid rgba(0, 0, 0, 0.125)`,
               }}
             >
-              <QuestionMarkIcon fontSize="large" sx={{ opacity: "0.75" }} />
+              <QuestionMarkIcon sx={{ opacity: 0.625 }} />
             </Button>
           )}
         </Box>
         {description &&
           showDescription &&
           (typeof description === "string" ? (
-            <Typography variant="body2" sx={{ marginBottom: "1rem" }}>
+            <Typography variant="body2" sx={{ marginBottom: "2rem" }}>
               {description}
             </Typography>
           ) : (
