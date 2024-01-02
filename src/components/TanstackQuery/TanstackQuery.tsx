@@ -6,10 +6,9 @@ import {
   TextareaAutosize,
   FormLabel,
   TextField,
-  CircularProgress,
 } from "@mui/material";
 import React from "react";
-import { useQuery, useQueryClient, QueryClient, QueryClientProvider } from "react-query";
+import { useQuery, QueryClient, QueryClientProvider } from "react-query";
 
 const BASE_URL = "https://swapi.dev/api";
 

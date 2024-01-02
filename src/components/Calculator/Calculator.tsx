@@ -1,4 +1,4 @@
-import { Box, Button, Grid, TextField, Typography, ButtonProps } from "@mui/material";
+import { Box, Button, Grid, TextField, ButtonProps } from "@mui/material";
 import { useState } from "react";
 
 /**
@@ -15,6 +15,11 @@ const stripDotsAfterFirst = (input: string) => {
   }
 
   return input; // If no '.' is found, return the original string
+};
+
+const convertValueToDisplayString = (value: number | null, inDecimalMode: boolean) => {
+  if (value === null) return "";
+  return stripDotsAfterFirst(`${value}${inDecimalMode ? "." : ""}`);
 };
 
 interface CalcButtonProps extends ButtonProps {
@@ -55,6 +60,7 @@ const CalcButton = ({ text, wide, ...rest }: CalcButtonProps) => {
 
 const Calculator = () => {
   const [prevValue, setPrevValue] = useState<number | null>(null);
+  const [operationString, setOperationString] = useState<string | null>(null);
   const [inDecimalMode, setInDecimalMode] = useState<boolean>(false);
   const [value, setValue] = useState<number | null>(0);
   const [operator, setOperator] = useState<"*" | "/" | "+" | "-" | null>(null);
@@ -62,7 +68,8 @@ const Calculator = () => {
   const handleInput = (input: string) => {
     if (input === "CLEAR") {
       setPrevValue(null);
-      setValue(0);
+      setOperationString(null);
+      setValue(null);
       setOperator(null);
       setInDecimalMode(false);
     }
@@ -71,9 +78,14 @@ const Calculator = () => {
       setValue((curVal) => {
         if (!curVal) return null;
         let str = curVal.toString().slice(0, -1);
-        if (str[str.length - 1] === ".") str = str.slice(0, -1);
-        if (str === "") return 0;
-        return inDecimalMode ? parseFloat(str) : parseInt(str);
+        if (str[str.length - 1] === ".") {
+          setInDecimalMode(false);
+        }
+        if (str === "") {
+          setInDecimalMode(false);
+          return null;
+        }
+        return Number(str);
       });
       setOperator(null);
     }
@@ -84,34 +96,43 @@ const Calculator = () => {
     }
 
     if (input === "DIVIDE") {
+      if (!value) return;
       setPrevValue(value);
+      setOperationString(`${value} /`);
       setInDecimalMode(false);
       setValue(null);
       setOperator("/");
     }
 
     if (input === "MULTIPLY") {
+      if (!value) return;
       setPrevValue(value);
+      setOperationString(`${value} ×`);
       setInDecimalMode(false);
       setValue(null);
       setOperator("*");
     }
 
     if (input === "SUBTRACT") {
+      if (!value) return;
       setPrevValue(value);
+      setOperationString(`${value} -`);
       setInDecimalMode(false);
       setValue(null);
       setOperator("-");
     }
 
     if (input === "ADD") {
+      if (!value) return;
       setPrevValue(value);
+      setOperationString(`${value} +`);
       setInDecimalMode(false);
       setValue(null);
       setOperator("+");
     }
 
     if (input === "DECIMAL") {
+      if (!value) setValue(0);
       setInDecimalMode(true);
     }
 
@@ -122,8 +143,8 @@ const Calculator = () => {
           return parseInt(curVal.toString() + input);
         });
       } else {
+        // TODO: leading zeroes in decimal don't work with this
         setValue((curVal) => {
-          // TODO: leading zeroes in decimal don't work with this
           if (!curVal) return parseFloat("0." + input);
           const valString = curVal.toString().includes(".")
             ? curVal.toString() + input
@@ -140,16 +161,19 @@ const Calculator = () => {
       if (operator === "/") newValue = prevValue / value;
       if (operator === "+") newValue = prevValue + value;
       if (operator === "-") newValue = prevValue - value;
+      newValue = newValue % 1 ? newValue : Number(newValue.toFixed(6).toString());
       setValue(newValue);
+      setOperationString(`${prevValue} ${operator} ${value} =`);
       setInDecimalMode(false);
       setOperator(null);
     }
   };
 
-  const stringifiedValue = value ? stripDotsAfterFirst(`${value}${inDecimalMode ? "." : ""}`) : "";
+  const stringifiedValue = convertValueToDisplayString(value, inDecimalMode);
 
   return (
     <Box>
+      <div style={{ width: "100%", minHeight: "24px", opacity: 0.5 }}>{operationString}</div>
       <TextField
         value={stringifiedValue}
         InputProps={{ readOnly: true }}

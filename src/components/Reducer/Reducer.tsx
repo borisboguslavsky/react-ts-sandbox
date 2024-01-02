@@ -67,25 +67,17 @@ const reducerFunction = (state: ReducerState, action: RedcuerAction) => {
 };
 
 const ReducerExample = () => {
-  // Using useReducer()
-  // const [state, dispatchFn] = useReducer(reducerFn, initialState, initialFn)
   const initialState: ReducerState = {
     field1: "it's rough",
     field2: "it's coarse",
     field3: "and it gets everywhere",
     allFieldsPopulated: true,
   };
-  const [formState, dispatchForm] = useReducer(reducerFunction, initialState, undefined);
+  const [formState, dispatchForm] = useReducer(reducerFunction, initialState);
 
-  const submitHandler = (e: React.FormEvent, type: ReducerTypes) => {
-    e.preventDefault();
-    dispatchForm({ type: type });
-  };
-
-  const changeHandler = (e: any) => {
-    // console.log((e.target as HTMLInputElement).id)
-    let field = (e.target as HTMLInputElement).id;
-    let value = (e.target as HTMLInputElement).value;
+  const changeHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    let field = e.target.id;
+    let value = e.target.value;
     dispatchForm({ type: "CHANGE", field: field, value: value });
   };
 
@@ -115,17 +107,17 @@ const ReducerExample = () => {
         />
       </Box>
       <Box sx={{ display: "flex", gap: "0.5rem", "& > button": { flexGrow: 1, flexBasis: 0 } }}>
-        <Button variant="outlined" onClick={(e) => submitHandler(e, "REVERSE")}>
+        <Button variant="outlined" onClick={() => dispatchForm({ type: "REVERSE" })}>
           Reverse
         </Button>
-        <Button variant="outlined" onClick={(e) => submitHandler(e, "UPPER")}>
+        <Button variant="outlined" onClick={() => dispatchForm({ type: "UPPER" })}>
           Uppercase
         </Button>
-        <Button variant="outlined" onClick={(e) => submitHandler(e, "LOWER")}>
+        <Button variant="outlined" onClick={() => dispatchForm({ type: "LOWER" })}>
           Lowercase
         </Button>
       </Box>
-      <Button variant="contained" onClick={(e) => submitHandler(e, "RESET")}>
+      <Button variant="contained" onClick={() => dispatchForm({ type: "RESET" })}>
         Reset
       </Button>
       <Box

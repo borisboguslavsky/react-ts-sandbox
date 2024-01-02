@@ -56,7 +56,8 @@ export const Delay: React.FC = () => {
           aria-label={"Output"}
           readOnly={true}
           value={output}
-          minRows={4}
+          minRows={1}
+          maxRows={1}
           style={{ padding: "8px" }}
         />
       </Box>

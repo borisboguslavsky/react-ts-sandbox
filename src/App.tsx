@@ -20,14 +20,14 @@ function App() {
     <Grid container spacing={2} sx={{ flexGrow: 1, maxWidth: "1200px", padding: "36px" }}>
       <Applet
         title="XState Vending Machine"
-        description="A state machine example using the XState library."
+        description="A vending machine demo that uses state machine built with the XState library."
       >
         <VendingMachine />
       </Applet>
 
       <Applet
         title="Tanstack Query"
-        description="A component that users @tanstack/react-query to fetch data from the Star Wars API."
+        description="A component that users @tanstack/react-query to fetch data from the swapi.dev REST API."
       >
         <TanstackQuery />
       </Applet>
@@ -41,23 +41,30 @@ function App() {
 
       <Applet
         title="React-Hook-Form"
-        description="A component that uses Material UI form elements and the react-hook-form library to control the overall form."
+        description="A component that uses the react-hook-form library to control the overall form and yup for client-side validation."
       >
         <ReactHookForm />
       </Applet>
 
       <Applet
         title="Delay"
-        description="A component that uses a promise to display an entered message after a specified delay (in ms)."
+        description="A component that uses a promise to display an entered message after a configurable delay (in ms)."
       >
         <Delay />
       </Applet>
 
       <Applet
         title="Example: useContext()"
-        description="A component with a nested child component that utilizes the useContext() hook to access/update app-wide state via a custom Provider component."
+        description="An example of how the useContext() hook can be used to access/update app-wide state via a custom Provider component."
       >
         <UseContext />
+      </Applet>
+
+      <Applet
+        title="Example: useReducer()"
+        description="An example of how the useReducer() hook can be used to execute complex actions."
+      >
+        <ReducerExample />
       </Applet>
 
       <Applet
@@ -72,13 +79,6 @@ function App() {
         description="A login form with basic validation that sends a request to https://jsonplaceholder.typicode.com/ if the form is valid and outputs the response in the textarea below."
       >
         <Login />
-      </Applet>
-
-      <Applet
-        title="Example: useReducer()"
-        description="A series of text input fields that utilize the useReducer() hook to execute actions across all of them."
-      >
-        <ReducerExample />
       </Applet>
 
       <Applet
