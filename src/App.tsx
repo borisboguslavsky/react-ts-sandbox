@@ -4,7 +4,7 @@ import Applet from "./components/Applet";
 
 import Delay from "./components/Delay/Delay";
 import UseContext from "./components/UseContext/UseContext";
-import Tree from "./components/Tree/Tree";
+import TreeV1 from "./components/Tree/Tree_V1/TreeV1";
 import Calculator from "./components/Calculator/Calculator";
 import Stopwatch from "./components/Stopwatch/Stopwatch";
 import TodoList from "./components/ToDo/ToDo";
@@ -12,12 +12,20 @@ import Login from "./components/Login/Login";
 import ReducerExample from "./components/Reducer/Reducer";
 import ReactHookForm from "./components/ReactHookForm/ReactHookForm";
 import VendingMachine from "./components/VendingMachine/VendingMachine";
-import FontTreeCheckbox from "./components/TreeSelect/TreeSelect";
+import FontTreeCheckbox from "./components/Tree/Tree_V3/TreeV3";
 import TanstackQuery from "./components/TanstackQuery/TanstackQuery";
+import TreeV4 from "./components/Tree/Tree_V4/TreeV4";
 
 function App() {
   return (
     <Grid container spacing={2} sx={{ flexGrow: 1, maxWidth: "1200px", padding: "36px" }}>
+      <Applet
+        title="Tree V4"
+        description="A recursive tree with the entire tree state stored using the react-dropdown-tree-select library."
+      >
+        <TreeV4 />
+      </Applet>
+
       <Applet
         title="XState Vending Machine"
         description="A vending machine demo that uses state machine built with the XState library."
@@ -71,7 +79,7 @@ function App() {
         title="File Tree"
         description="A file tree component that rescursively renders a series of nested unordered lists that represent a file structure."
       >
-        <Tree />
+        <TreeV1 />
       </Applet>
 
       <Applet

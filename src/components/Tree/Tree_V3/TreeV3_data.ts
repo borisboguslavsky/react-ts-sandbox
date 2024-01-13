@@ -1,4 +1,4 @@
-import { FontNode } from "./TreeSelect";
+import { FontNode } from "./TreeV3";
 
 export const smallSampleData = {
   id: "0",

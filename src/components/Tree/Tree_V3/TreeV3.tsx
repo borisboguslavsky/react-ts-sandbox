@@ -6,7 +6,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { TreeView } from "@mui/x-tree-view/TreeView";
 import { TreeItem } from "@mui/x-tree-view/TreeItem";
 import { Box, Button, Checkbox, FormControlLabel, List, ListItem } from "@mui/material";
-import { largeFontSet } from "./TreeSelectData";
+import { largeFontSet } from "./TreeV3_data";
 
 export interface FontNode {
   label: string;
@@ -22,7 +22,7 @@ export interface FontNode {
  * https://codesandbox.io/s/treeview-with-styled-checkboxes-gi4rm?file=/src/App.tsx
  * https://codesandbox.io/s/strange-euclid-ywcjxt?file=/src/App.js
  */
-const TreeSelect = () => {
+const TreeV3 = () => {
   const [selected, setSelected] = React.useState<string[]>([]);
 
   //node is always the root "Parent"
@@ -171,4 +171,4 @@ const TreeSelect = () => {
   );
 };
 
-export default TreeSelect;
+export default TreeV3;

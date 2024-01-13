@@ -1,5 +1,4 @@
 import {
-  ChevronRight,
   Folder,
   InsertDriveFile,
   KeyboardArrowDown,
@@ -7,11 +6,11 @@ import {
 } from "@mui/icons-material";
 import React, { useState } from "react";
 
-import classes from "./Tree.module.css";
+import classes from "./TreeV1.module.css";
 
-export interface TreeNode {
+export interface TreeNodeV1 {
   name: string;
-  children?: TreeNode[];
+  children?: TreeNodeV1[];
 }
 
 let DUMMY_DATA = {
@@ -30,7 +29,7 @@ let DUMMY_DATA = {
   ],
 };
 
-const Node: React.FC<{ node: TreeNode }> = (props) => {
+const TreeNodeV1: React.FC<{ node: TreeNodeV1 }> = (props) => {
   const [showChildren, setShowChildren] = useState<boolean>(true);
 
   const nodeCLickHandler = (event: React.MouseEvent): void => {
@@ -58,7 +57,7 @@ const Node: React.FC<{ node: TreeNode }> = (props) => {
       {props.node.children && showChildren && (
         <ul>
           {props.node.children!.map((child, index) => {
-            return <Node key={`${props.node.name}_${index}`} node={child} />;
+            return <TreeNodeV1 key={`${props.node.name}_${index}`} node={child} />;
           })}
         </ul>
       )}
@@ -66,8 +65,8 @@ const Node: React.FC<{ node: TreeNode }> = (props) => {
   );
 };
 
-const Tree: React.FC = () => {
-  return <ul className={classes.tree}>{<Node node={DUMMY_DATA} />}</ul>;
+const TreeV1: React.FC = () => {
+  return <ul className={classes.tree}>{<TreeNodeV1 node={DUMMY_DATA} />}</ul>;
 };
 
-export default Tree;
+export default TreeV1;
