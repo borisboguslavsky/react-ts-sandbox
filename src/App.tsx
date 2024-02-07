@@ -14,17 +14,32 @@ import ReactHookForm from "./components/ReactHookForm/ReactHookForm";
 import VendingMachine from "./components/VendingMachine/VendingMachine";
 import FontTreeCheckbox from "./components/Tree/Tree_V3/TreeV3";
 import TanstackQuery from "./components/TanstackQuery/TanstackQuery";
-import TreeV4 from "./components/Tree/Tree_V4/TreeV4";
+// import TreeV4 from "./components/Tree/Tree_V4/TreeV4";
+import AGGrid from "./components/AGGrid/AGGrid";
 
 function App() {
   return (
-    <Grid container spacing={2} sx={{ flexGrow: 1, maxWidth: "1200px", padding: "36px" }}>
+    <Grid
+      container
+      spacing={2}
+      sx={{ flexGrow: 1, maxWidth: "1200px", padding: "36px" }}
+    >
       <Applet
+        title="AG Grid"
+        description="An example of using AG Grid."
+        xs={12}
+        lg={12}
+        md={12}
+      >
+        <AGGrid />
+      </Applet>
+
+      {/* <Applet
         title="Tree V4"
         description="A recursive tree with the entire tree state stored using the react-dropdown-tree-select library."
       >
         <TreeV4 />
-      </Applet>
+      </Applet> */}
 
       <Applet
         title="XState Vending Machine"
