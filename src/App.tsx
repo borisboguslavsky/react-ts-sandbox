@@ -19,16 +19,12 @@ import AGGrid from "./components/AGGrid/AGGrid";
 
 function App() {
   return (
-    <Grid
-      container
-      spacing={2}
-      sx={{ flexGrow: 1, maxWidth: "1200px", padding: "36px" }}
-    >
+    <Grid container spacing={2} sx={{ flexGrow: 1, maxWidth: "1200px", padding: "36px" }}>
       <Applet
-        title="AG Grid"
-        description="An example of using AG Grid."
+        title="AG Grid + Zen Observable"
+        description="Using a Zen Observable to continuously update an AG Grid."
         xs={12}
-        lg={12}
+        lg={8}
         md={12}
       >
         <AGGrid />
@@ -50,16 +46,9 @@ function App() {
 
       <Applet
         title="Tanstack Query"
-        description="A component that users @tanstack/react-query to fetch data from the swapi.dev REST API."
+        description="A component that uses @tanstack/react-query to fetch data from the swapi.dev REST API."
       >
         <TanstackQuery />
-      </Applet>
-
-      <Applet
-        title="Tree Select"
-        description="A tree view component with selectable nodes depicting a font tree with font families and sub-fonts. Uses MUI <TreeView>"
-      >
-        <FontTreeCheckbox />
       </Applet>
 
       <Applet
@@ -67,6 +56,13 @@ function App() {
         description="A component that uses the react-hook-form library to control the overall form and yup for client-side validation."
       >
         <ReactHookForm />
+      </Applet>
+
+      <Applet
+        title="Tree Select"
+        description="A tree view component with selectable nodes depicting a font tree with font families and sub-fonts. Uses MUI <TreeView>"
+      >
+        <FontTreeCheckbox />
       </Applet>
 
       <Applet

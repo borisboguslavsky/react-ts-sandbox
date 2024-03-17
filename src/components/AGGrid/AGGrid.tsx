@@ -1,36 +1,40 @@
-import { Box, Button } from "@mui/material";
-import { ColDef, GridApi } from "ag-grid-community";
+import { Box, Button, TextField } from "@mui/material";
+import { ColDef, GridApi, GridReadyEvent } from "ag-grid-community";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { AgGridReact } from "ag-grid-react";
 import React, { useState } from "react";
+import { RowData, dataGridStore } from "./gridStore";
 
-const FAIL_CHANCE = 0.5;
-
-type RowData = {
-  make: string;
-  model: string;
-  price: number;
-  electric: boolean;
-};
+const FAIL_CHANCE = 0.2;
 
 type FetchOptions = {
   guaranteeSuccess?: boolean;
+  numberOfRows?: number;
 };
 
-const fetchData = async ({ guaranteeSuccess = false }: FetchOptions): Promise<RowData[]> => {
+const fetchData = async ({
+  guaranteeSuccess = false,
+  numberOfRows = 5,
+}: FetchOptions): Promise<RowData[]> => {
   return new Promise((resolve, reject) => {
     const failChance = Math.random();
+
     if (guaranteeSuccess === false && failChance < FAIL_CHANCE) {
-      reject("FAILED");
+      reject((reason: string) => "FAILED");
     }
-    resolve([
-      { make: "Tesla", model: "Model Y", price: 64950, electric: true },
-      { make: "Ford", model: "F-Series", price: 33850, electric: false },
-      { make: "Toyota", model: "Corolla", price: 29600, electric: false },
-      { make: "Mazda", model: "CX-5", price: 29945, electric: false },
-      { make: "Honda", model: "CRV", price: 27500, electric: false },
-    ]);
+
+    const mockData: RowData[] = Array(numberOfRows)
+      .fill(0)
+      .map((_, i) => ({
+        col1: (Math.random() * 100).toFixed(2),
+        col2: (Math.random() * 100).toFixed(2),
+        col3: (Math.random() * 100).toFixed(2),
+        col4: (Math.random() * 100).toFixed(2),
+        col5: (Math.random() * 100).toFixed(2),
+      }));
+
+    resolve(mockData);
   });
 };
 
@@ -41,11 +45,12 @@ const AGGrid: React.FC = () => {
   const [rowData, setRowData] = useState<RowData[]>();
 
   // Column Definitions: Defines & controls grid columns.
-  const [colDefs, setColDefs] = useState<ColDef<RowData, any>[]>([
-    { field: "make", flex: 1, minWidth: 150, suppressSizeToFit: true },
-    { field: "model", flex: 1, minWidth: 150, suppressSizeToFit: true },
-    { field: "price", flex: 1, minWidth: 150, suppressSizeToFit: true },
-    { field: "electric", flex: 1, minWidth: 150, suppressSizeToFit: true },
+  const [colDefs] = useState<ColDef<RowData, any>[]>([
+    { field: "col1", flex: 1, minWidth: 100 },
+    { field: "col2", flex: 1, minWidth: 100 },
+    { field: "col3", flex: 1, minWidth: 100 },
+    { field: "col4", flex: 1, minWidth: 100 },
+    { field: "col5", flex: 1, minWidth: 100 },
   ]);
 
   const refetchRows = (fetchOptions?: FetchOptions) => {
@@ -63,6 +68,10 @@ const AGGrid: React.FC = () => {
     });
   }, []);
 
+  const onGridReady = (params: GridReadyEvent) => {
+    dataGridStore.gridApi = params.api;
+  };
+
   return (
     <Box
       sx={{
@@ -73,11 +82,28 @@ const AGGrid: React.FC = () => {
       }}
       className={"ag-theme-quartz"}
     >
-      <Button variant={"outlined"} onClick={() => refetchRows({})}>
-        Fetch
-      </Button>
+      <Box
+        sx={{
+          display: "flex",
+          gap: 1,
+        }}
+      >
+        <Button variant={"outlined"} onClick={() => refetchRows({})}>
+          Manual Re-Fetch
+        </Button>
+        <TextField label={"Update Interval"} size="small" />
+      </Box>
       <Box height={"350px"}>
-        <AgGridReact<RowData> ref={gridRef} rowData={rowData} columnDefs={colDefs} />
+        <AgGridReact<RowData>
+          ref={gridRef}
+          rowData={rowData}
+          columnDefs={colDefs}
+          onGridReady={onGridReady}
+          suppressColumnMoveAnimation={true}
+          suppressColumnVirtualisation={true}
+          suppressRowVirtualisation={false}
+          suppressRowClickSelection={true}
+        />
       </Box>
     </Box>
   );
