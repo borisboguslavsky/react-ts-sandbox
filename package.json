@@ -1,5 +1,5 @@
 {
-  "name": "tree",
+  "name": "react-ts-sandbox",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,34 +7,29 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "deploy": "yarn build && gh-pages -d dist"
+    "deploy": "yarn build && gh-pages -d dist",
+    "type-check": "tsc"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.3",
-    "@emotion/styled": "^11.11.0",
-    "@fontsource/roboto": "^5.0.8",
-    "@mui/icons-material": "^5.15.2",
-    "@mui/lab": "^5.0.0-alpha.158",
-    "@mui/material": "^5.15.2",
-    "@mui/x-tree-view": "^6.17.0",
-    "@xstate/react": "^4.0.2",
-    "ag-grid-community": "^31.0.3",
-    "ag-grid-react": "^31.0.3",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@fontsource/roboto": "^5.0.13",
+    "@mui/icons-material": "^5.15.20",
+    "@mui/material": "^5.15.20",
+    "@xstate/react": "^4.1.1",
     "gh-pages": "^6.1.1",
-    "prettier": "^3.2.5",
-    "rc-tree-select": "^5.16.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-dropdown-tree-select": "^2.8.0",
-    "react-hook-form": "^7.49.2",
+    "prettier": "^3.3.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.52.0",
     "react-query": "^3.39.3",
-    "xstate": "^5.4.1"
+    "xstate": "^5.13.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.45",
-    "@types/react-dom": "^18.2.18",
-    "@vitejs/plugin-react": "^4.2.1",
-    "typescript": "^5.3.3",
-    "vite": "^5.0.12"
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.4.5",
+    "vite": "^5.3.1"
   }
 }

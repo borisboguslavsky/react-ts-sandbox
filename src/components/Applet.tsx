@@ -1,20 +1,19 @@
-import { useState } from "react";
-
-import { Box, Button, Typography, Paper, Grid, GridTypeMap, GridProps } from "@mui/material";
+import { Paper, Box, Button, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
-import { OverridableComponent } from "@mui/material/OverridableComponent";
+import { useState } from "react";
 
 type AppletProps = {
   title: string;
   description?: string | React.ReactNode;
-  children?: React.ReactNode;
-} & GridProps;
+  component: () => JSX.Element;
+};
 
-const Applet: React.FC<AppletProps> = ({ title, description, children, xs = 12, lg = 4, md = 6 }) => {
+const Applet = ({ title, description, component }: AppletProps) => {
   const [showDescription, setShowDescription] = useState(false);
 
   return (
-    <Grid item xs={xs} lg={lg} md={md}>
+    <Grid item xs={12} md={6} lg={4}>
       <Paper
         elevation={12}
         sx={{
@@ -63,7 +62,7 @@ const Applet: React.FC<AppletProps> = ({ title, description, children, xs = 12, 
             gap: "1rem",
           }}
         >
-          {children}
+          {component()}
         </Box>
       </Paper>
     </Grid>

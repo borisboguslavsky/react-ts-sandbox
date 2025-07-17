@@ -1,9 +1,8 @@
-import React from "react";
 import { useMachine, useSelector } from "@xstate/react";
 import { Box, Button, Card, List, ListItem, ListItemText, Typography } from "@mui/material";
 import { vMachine } from "./vendingMachine_stateMachine";
 
-const VendingMachine: React.FC = () => {
+const VendingMachine = () => {
   const [state, send, actorRef] = useMachine(vMachine);
   const { coinsInserted, coinsInReturn, dispensedDrinks } = useSelector(
     actorRef,

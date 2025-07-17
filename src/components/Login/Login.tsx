@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 
-import { Button, FormLabel, TextareaAutosize, TextField } from "@mui/material";
 import { Box } from "@mui/system";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import FormLabel from "@mui/material/FormLabel";
 
-const Login: React.FC = () => {
+const Login = () => {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [output, setOutput] = useState("");
@@ -76,7 +78,7 @@ const Login: React.FC = () => {
       </form>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         <FormLabel>API Response:</FormLabel>
-        <TextareaAutosize readOnly value={output ? output : ""} minRows={8} />
+        <pre>{output ? output : ""}</pre>
       </Box>
     </>
   );

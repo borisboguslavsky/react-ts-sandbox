@@ -10,7 +10,7 @@ import {
 import React from "react";
 import { useQuery, QueryClient, QueryClientProvider } from "react-query";
 
-const BASE_URL = "https://swapi.dev/api";
+const BASE_URL = "https://swapi.info/api";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +23,7 @@ const useStarWarsApi = (queryArg: QueryArg, number: number) => {
       console.log(URL);
       const data = await fetch(URL);
       const json = await data.json();
+      console.log(json);
       return json;
     },
     enabled: false,

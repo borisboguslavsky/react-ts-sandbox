@@ -57,7 +57,7 @@ interface TodoItem {
   text: string;
 }
 
-const TodoList: React.FC = () => {
+const TodoList = () => {
   const [items, setItems] = useState<TodoItem[]>([]);
 
   const addItem = (newItem: TodoItem) => {
