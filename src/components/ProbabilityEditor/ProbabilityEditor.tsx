@@ -1,29 +1,54 @@
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useState } from "react";
-import CurveVisualizer from "./CurveVisualizer";
+import Curve from "./components/Curve";
+import { BarGraph } from "./components/BarGraph";
+import { InputsBell, InputsFlat } from "./components/Inputs";
 
-export enum Mode {
+export enum DistributionType {
   Flat = "Flat",
   Bell = "Bell",
-  BiasMin = "Bias Min",
-  BiasMax = "Bias Max",
 }
 
+export type FlatProbabilityParams = {
+  min: number;
+  max: number;
+  step: number;
+  bias: number; // 0 to 1
+};
+
+export type BellProbabilityParams = {
+  min: number;
+  max: number;
+  step: number;
+  bias: number; // 0 to 1
+  width: number; // standard deviation
+};
+
 const ProbabilityEditor = () => {
-  const [mode, setMode] = useState<Mode>(Mode.Flat);
+  const [mode, setMode] = useState<DistributionType>(DistributionType.Flat);
+  const [flatParams, setFlatParams] = useState<FlatProbabilityParams>({
+    min: 0,
+    max: 100,
+    step: 1,
+    bias: 0.5,
+  });
+  const [bellParams, setBellParams] = useState<BellProbabilityParams>({
+    min: 0,
+    max: 100,
+    step: 1,
+    bias: 0.5,
+    width: 5,
+  });
 
   return (
-    <Box>
-      <CurveVisualizer
-        mode={mode}
-        params={{
-          apexPosition: 50,
-          slope: 50,
-          dropPosition: 50,
-          ascentPosition: 50,
-        }}
-      />
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 2,
+      }}
+    >
       <ToggleButtonGroup
         value={mode}
         exclusive
@@ -33,12 +58,32 @@ const ProbabilityEditor = () => {
           setMode(newArg);
         }}
       >
-        {Object.values(Mode).map((modeValue) => (
+        {Object.values(DistributionType).map((modeValue) => (
           <ToggleButton key={modeValue} value={modeValue}>
             {modeValue}
           </ToggleButton>
         ))}
       </ToggleButtonGroup>
+
+      <Box sx={{ position: "relative", width: "100%", height: "150px" }}>
+        <BarGraph mode={mode} flatParams={flatParams} bellParams={bellParams} />
+        <Curve mode={mode} flatParams={flatParams} bellParams={bellParams} />
+      </Box>
+
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 2,
+        }}
+      >
+        {mode === DistributionType.Flat && (
+          <InputsFlat params={flatParams} setParams={setFlatParams} />
+        )}
+        {mode === DistributionType.Bell && (
+          <InputsBell params={bellParams} setParams={setBellParams} />
+        )}
+      </Box>
     </Box>
   );
 };
