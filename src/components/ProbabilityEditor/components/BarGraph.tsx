@@ -10,8 +10,6 @@ import {
   FlatProbabilityParams,
 } from "../ProbabilityEditor";
 
-const SAMPLE_NUMBER = 100000;
-
 export const BarGraph = ({
   mode,
   flatParams,
@@ -22,6 +20,7 @@ export const BarGraph = ({
   bellParams: BellProbabilityParams;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [sampleNumber, setSampleNumber] = useState(50000);
   const [buckets, setBuckets] = useState<number[]>([]);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
@@ -46,7 +45,7 @@ export const BarGraph = ({
 
   const generateSampleSet = () => {
     if (mode === DistributionType.Bell) {
-      const newNumbers = Array.from({ length: SAMPLE_NUMBER }, () =>
+      const newNumbers = Array.from({ length: sampleNumber }, () =>
         rngBell(bellParams.min, bellParams.max, bellParams.step, bellParams.bias, bellParams.width)
       );
       const buckets = generateBuckets(newNumbers);
@@ -54,7 +53,7 @@ export const BarGraph = ({
       return;
     }
     if (mode === DistributionType.Flat) {
-      const newNumbers = Array.from({ length: SAMPLE_NUMBER }, () =>
+      const newNumbers = Array.from({ length: sampleNumber }, () =>
         rngFlat(flatParams.min, flatParams.max, flatParams.step, flatParams.bias)
       );
       const buckets = generateBuckets(newNumbers);
@@ -110,25 +109,36 @@ export const BarGraph = ({
           Generate
         </Button>
       </Box>
-      {width > 0 && height > 0 && (
-        <svg width={width} height={height}>
-          {buckets.map((value, index) => {
-            const barWidth = width / buckets.length;
-            const barHeight = value * height; // 2 to fit in the SVG height
-            const x = index * barWidth;
-            return (
-              <rect
-                key={`bucket_${index}`}
-                x={x}
-                y={height - barHeight}
-                width={barWidth - 1} // -1 to create a small gap between bars
-                height={barHeight}
-                fill="blue"
-              />
-            );
-          })}
-        </svg>
-      )}
+      <Bars width={width} height={height} buckets={buckets} />
     </div>
+  );
+};
+
+const Bars = ({ width, height, buckets }: { width: number; height: number; buckets: number[] }) => {
+  if (buckets.length === 0 || width <= 0 || height <= 0) {
+    return null;
+  }
+
+  const barWidth = width / buckets.length;
+
+  console.log(buckets.length);
+
+  return (
+    <svg width={width} height={height}>
+      {buckets.map((value, index) => {
+        const barHeight = value * height;
+        const x = index * barWidth;
+        return (
+          <rect
+            key={`bucket_${index}`}
+            x={x}
+            y={height - barHeight}
+            width={barWidth - 1} // -1 to create a small gap between bars
+            height={barHeight}
+            fill="blue"
+          />
+        );
+      })}
+    </svg>
   );
 };

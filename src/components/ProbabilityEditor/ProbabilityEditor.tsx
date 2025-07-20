@@ -65,7 +65,16 @@ const ProbabilityEditor = () => {
         ))}
       </ToggleButtonGroup>
 
-      <Box sx={{ position: "relative", width: "100%", height: "150px" }}>
+      <Box
+        sx={{
+          position: "relative",
+          width: "100%",
+          height: "150px",
+          border: "1px solid rgba(0, 0, 0, 0.25)",
+          overflow: "hidden",
+          borderRadius: "4px",
+        }}
+      >
         <BarGraph mode={mode} flatParams={flatParams} bellParams={bellParams} />
         <Curve mode={mode} flatParams={flatParams} bellParams={bellParams} />
       </Box>
