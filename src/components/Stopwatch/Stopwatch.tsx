@@ -122,7 +122,7 @@ const Stopwatch = () => {
             {laps.map((lap, index) => {
               return (
                 <React.Fragment key={`lap_${index}`}>
-                  <p className={"lap_index"}>{index}</p>
+                  <p className={"lap_index"}>{index + 1}</p>
                   <p className={"lap_time"}>
                     {convertMillisecondsToTimerString(
                       index === 0 ? lap : laps[index] - laps[index - 1]

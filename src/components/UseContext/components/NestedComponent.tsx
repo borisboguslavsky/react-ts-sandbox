@@ -2,7 +2,7 @@ import { Button, Card, FormLabel, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useContext } from "react";
 import ResetButton from "./ResetButton";
-import { AppContext } from "./UseContext";
+import { AppContext } from "../ReactUseContext";
 
 const NestedComponent = () => {
   const appCtx = useContext(AppContext);

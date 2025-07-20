@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-import NestedComponent from "./NestedComponent";
+import NestedComponent from "./components/NestedComponent";
 
 export const DUMMY_DATA = [4, 8, 15, 16, 23, 42];
 
@@ -42,7 +42,7 @@ const AppContextProvider: React.FC<{ children: React.ReactNode }> = (props) => {
   );
 };
 
-const UseContext = () => {
+const ReactUseContext = () => {
   return (
     <>
       <AppContextProvider>
@@ -52,4 +52,4 @@ const UseContext = () => {
   );
 };
 
-export default UseContext;
+export default ReactUseContext;

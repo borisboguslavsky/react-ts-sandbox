@@ -62,14 +62,17 @@ const Login = () => {
             type="email"
             value={emailValue}
             onChange={(e) => setEmailValue(e.target.value)}
+            required
           />
           <TextField
             label="Password"
             InputLabelProps={{ shrink: true }}
             id="passwordField"
             type="password"
+            autoComplete="current-password"
             value={passwordValue}
             onChange={(e) => setPasswordValue(e.target.value)}
+            required
           />
           <Button type="submit" variant="contained">
             Submit

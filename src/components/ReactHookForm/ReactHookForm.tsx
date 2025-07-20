@@ -106,7 +106,8 @@ export const ReactHookForm = () => {
               }}
               renderTags={(value: readonly string[], getTagProps) => {
                 return value.map((option: string, index: number) => {
-                  return <Chip variant={"filled"} label={option} {...getTagProps({ index })} />;
+                  const { key, ...otherChipProps } = getTagProps({ index });
+                  return <Chip variant={"filled"} label={option} key={key} {...otherChipProps} />;
                 });
               }}
               renderOption={(props, option, state) => {

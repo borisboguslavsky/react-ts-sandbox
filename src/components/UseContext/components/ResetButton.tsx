@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import { useContext } from "react";
-import { AppContext, DUMMY_DATA } from "./UseContext";
+import { AppContext, DUMMY_DATA } from "../ReactUseContext";
 
 const ResetButton = () => {
   const appCtx = useContext(AppContext);

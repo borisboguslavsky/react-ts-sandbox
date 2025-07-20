@@ -1,9 +1,9 @@
 import { useMachine, useSelector } from "@xstate/react";
 import { Box, Button, Card, List, ListItem, ListItemText, Typography } from "@mui/material";
-import { vMachine } from "./vendingMachine_stateMachine";
+import { createStateMachine } from "./util/createStateMachine";
 
-const VendingMachine = () => {
-  const [state, send, actorRef] = useMachine(vMachine);
+const XStateVendingMachine = () => {
+  const [state, send, actorRef] = useMachine(createStateMachine);
   const { coinsInserted, coinsInReturn, dispensedDrinks } = useSelector(
     actorRef,
     (state) => state.context
@@ -124,4 +124,4 @@ const VendingMachine = () => {
   );
 };
 
-export default VendingMachine;
+export default XStateVendingMachine;

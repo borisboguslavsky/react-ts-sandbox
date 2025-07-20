@@ -1,12 +1,12 @@
 import Applet from "./components/Applet";
-import UseContext from "./components/UseContext/UseContext";
+import ReactUseContext from "./components/UseContext/ReactUseContext";
 import Calculator from "./components/Calculator/Calculator";
 import Stopwatch from "./components/Stopwatch/Stopwatch";
-import TodoList from "./components/ToDo/ToDo";
+import TodoList from "./components/ToDoList/ToDoList";
 import Login from "./components/Login/Login";
-import ReducerExample from "./components/Reducer/Reducer";
+import ReactUseReducer from "./components/Reducer/ReactUseReducer";
 import ReactHookForm from "./components/ReactHookForm/ReactHookForm";
-import VendingMachine from "./components/VendingMachine/VendingMachine";
+import XStateVendingMachine from "./components/VendingMachine/XStateVendingMachine";
 import TanstackQuery from "./components/TanstackQuery/TanstackQuery";
 import ProbabilityEditor from "./components/ProbabilityEditor/ProbabilityEditor";
 import Grid from "@mui/material/Grid";
@@ -29,7 +29,7 @@ const APPLETS: Record<string, AppletMetadata> = {
   ["XState Vending Machine"]: {
     title: "X-State Vending Machine",
     description: "A vending machine demo that uses state machine built with the XState library.",
-    component: VendingMachine,
+    component: XStateVendingMachine,
     show: true,
   },
   ["Tanstack Query"]: {
@@ -77,13 +77,13 @@ const APPLETS: Record<string, AppletMetadata> = {
     title: "React.useContext()",
     description:
       "An example of how the useContext() hook can be used to access/update app-wide state via a custom Provider component.",
-    component: UseContext,
+    component: ReactUseContext,
     show: true,
   },
   ["Reducer"]: {
     title: "React.useReducer()",
     description: "An example of how the useReducer() hook can be used to execute complex actions.",
-    component: ReducerExample,
+    component: ReactUseReducer,
     show: true,
   },
 };

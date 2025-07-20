@@ -66,7 +66,7 @@ const reducerFunction = (state: ReducerState, action: RedcuerAction) => {
   return state;
 };
 
-const ReducerExample = () => {
+const ReactUseReducer = () => {
   const initialState: ReducerState = {
     field1: "it's rough",
     field2: "it's coarse",
@@ -133,4 +133,4 @@ const ReducerExample = () => {
   );
 };
 
-export default ReducerExample;
+export default ReactUseReducer;
