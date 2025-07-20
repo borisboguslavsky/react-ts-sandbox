@@ -1,37 +1,40 @@
-const generateBuckets = (rawData: number[]) => {
-  // sort random number array by value, ascending
-  const data = [...rawData].sort((a, b) => a - b);
-
+const generateBuckets = (data: number[], min: number, max: number, step: number): number[] => {
   // how many unique values in the data by set
-  const numUniqueValues = new Set(data).size;
+  const numPossibleValues = Math.floor((max - min) / step);
+
+  console.log("Number of possible values:", numPossibleValues);
+
+  console.log(data);
 
   // have at most 100 buckets
-  let numBuckets = Math.min(70, numUniqueValues);
+  let numBuckets = Math.min(100, numPossibleValues);
 
   // partition the sorted array into buckets
   const buckets: number[][] = Array.from({ length: numBuckets }, () => []);
 
   // what range of values each bucket will cover
-  const bucketScope = data[data.length - 1] / numBuckets;
+  const bucketScope = (max - min) / numBuckets;
 
-  for (let i = 0; i < data.length; i++) {
-    const value = data[i];
-    let bucketIndex = Math.floor(value / bucketScope);
+  // LEAVE FOR DEBUGGING:
+  // const bucketScopeMap: Record<number, [number, number]> = buckets.reduce(
+  //   (acc, _, bucketIndex) => {
+  //     const start = min + bucketIndex * bucketScope;
+  //     const end = start + bucketScope;
+  //     acc[bucketIndex] = [start, end];
+  //     return acc;
+  //   },
+  //   {} as Record<number, [number, number]>
+  // );
+  // console.log("Bucket scope:", bucketScope);
 
-    if (bucketIndex === numBuckets) {
-      bucketIndex -= 1;
-    }
-    if (bucketIndex < 0) {
-      bucketIndex = 0;
-    }
+  // place data in corresponding bucket
+  for (const value of data) {
+    let bucketIndex = Math.floor((value - min) / bucketScope);
 
-    try {
-      buckets[bucketIndex].push(value);
-    } catch (error) {
-      console.error(
-        `Error adding value ${value} to bucket ${bucketIndex} with scope ${bucketScope}`
-      );
+    if (!buckets[bucketIndex]) {
+      continue;
     }
+    buckets[bucketIndex].push(value);
   }
 
   // map the size of each bucket to a height value
@@ -43,4 +46,5 @@ const generateBuckets = (rawData: number[]) => {
 
   return normalizedHeights;
 };
+
 export default generateBuckets;

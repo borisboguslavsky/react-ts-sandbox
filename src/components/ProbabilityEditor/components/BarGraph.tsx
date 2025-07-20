@@ -20,7 +20,7 @@ export const BarGraph = ({
   bellParams: BellProbabilityParams;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [sampleNumber, setSampleNumber] = useState(50000);
+  const [sampleNumber, setSampleNumber] = useState(200000);
   const [buckets, setBuckets] = useState<number[]>([]);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
@@ -48,7 +48,7 @@ export const BarGraph = ({
       const newNumbers = Array.from({ length: sampleNumber }, () =>
         rngBell(bellParams.min, bellParams.max, bellParams.step, bellParams.bias, bellParams.width)
       );
-      const buckets = generateBuckets(newNumbers);
+      const buckets = generateBuckets(newNumbers, bellParams.min, bellParams.max, bellParams.step);
       setBuckets(buckets);
       return;
     }
@@ -56,7 +56,7 @@ export const BarGraph = ({
       const newNumbers = Array.from({ length: sampleNumber }, () =>
         rngFlat(flatParams.min, flatParams.max, flatParams.step, flatParams.bias)
       );
-      const buckets = generateBuckets(newNumbers);
+      const buckets = generateBuckets(newNumbers, flatParams.min, flatParams.max, flatParams.step);
       setBuckets(buckets);
       return;
     }
@@ -120,8 +120,6 @@ const Bars = ({ width, height, buckets }: { width: number; height: number; bucke
   }
 
   const barWidth = width / buckets.length;
-
-  console.log(buckets.length);
 
   return (
     <svg width={width} height={height}>
