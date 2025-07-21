@@ -32,8 +32,15 @@ const APPLETS: Record<string, AppletMetadata> = {
     component: XStateVendingMachine,
     show: true,
   },
-  ["Tanstack Query"]: {
-    title: "Tanstack Query",
+  ["Calculator"]: {
+    title: "Calculator",
+    description:
+      "A basic calculator app where users can add, subtract, multiply, and divide two numbers.",
+    component: Calculator,
+    show: true,
+  },
+  ["TanStack Query"]: {
+    title: "TanStack Query",
     description:
       "A component that uses @tanstack/react-query to fetch data from the swapi.dev REST API.",
     component: TanstackQuery,
@@ -57,13 +64,6 @@ const APPLETS: Record<string, AppletMetadata> = {
     title: "Todo List",
     description: "A basic ToDo list component where users can add and remove items to the list.",
     component: TodoList,
-    show: true,
-  },
-  ["Calculator"]: {
-    title: "Calculator",
-    description:
-      "A basic calculator app where users can add, subtract, multiply, and divide two numbers.",
-    component: Calculator,
     show: true,
   },
   ["Mock Login"]: {
