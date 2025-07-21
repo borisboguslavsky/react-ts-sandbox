@@ -51,7 +51,7 @@ const CalcButton = ({ text, wide, ...rest }: CalcButtonProps) => {
         },
       }}
     >
-      <Button variant="outlined" {...rest}>
+      <Button variant="outlined" size={"small"} {...rest}>
         {text}
       </Button>
     </Grid>

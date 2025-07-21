@@ -27,8 +27,8 @@ const Applet = ({ title, description, component }: AppletProps) => {
           sx={{
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "center",
-            marginBottom: "1rem",
+            alignItems: "flex-start",
+            marginBottom: 2,
           }}
         >
           <Typography variant="h5">{title}</Typography>
@@ -41,14 +41,14 @@ const Applet = ({ title, description, component }: AppletProps) => {
                 border: `1px solid rgba(0, 0, 0, 0.125)`,
               }}
             >
-              <QuestionMarkIcon sx={{ opacity: 0.625 }} />
+              <QuestionMarkIcon />
             </Button>
           )}
         </Box>
         {description &&
           showDescription &&
           (typeof description === "string" ? (
-            <Typography variant="body2" sx={{ marginBottom: "2rem" }}>
+            <Typography variant="caption" sx={{ marginBottom: 2 }}>
               {description}
             </Typography>
           ) : (
@@ -59,7 +59,7 @@ const Applet = ({ title, description, component }: AppletProps) => {
             marginTop: "0.5rem",
             display: "flex",
             flexDirection: "column",
-            gap: "1rem",
+            gap: 2,
           }}
         >
           {component()}

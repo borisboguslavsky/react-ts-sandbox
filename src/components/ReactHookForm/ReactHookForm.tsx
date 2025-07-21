@@ -141,27 +141,31 @@ export const ReactHookForm = () => {
           )}
         />
 
-        <Box sx={{ display: "flex", gap: "0.5rem", justifyContent: "space-between" }}>
-          <Button
-            variant="outlined"
-            fullWidth
-            onClick={() => {
-              setSubmittedFormData(undefined);
-              reset(emptyFormValues);
-            }}
-          >
-            Clear
-          </Button>
-          <Button
-            variant="outlined"
-            fullWidth
-            onClick={() => {
-              setSubmittedFormData(undefined);
-              reset(defaultFormValues);
-            }}
-          >
-            Defaults
-          </Button>
+        <Box
+          sx={{ display: "flex", flexDirection: "column", gap: 1, justifyContent: "space-between" }}
+        >
+          <Box sx={{ display: "flex", gap: 1 }}>
+            <Button
+              variant="outlined"
+              fullWidth
+              onClick={() => {
+                setSubmittedFormData(undefined);
+                reset(emptyFormValues);
+              }}
+            >
+              Clear
+            </Button>
+            <Button
+              variant="outlined"
+              fullWidth
+              onClick={() => {
+                setSubmittedFormData(undefined);
+                reset(defaultFormValues);
+              }}
+            >
+              Defaults
+            </Button>
+          </Box>
           <Button type="submit" variant="contained" fullWidth>
             Submit
           </Button>
@@ -172,7 +176,7 @@ export const ReactHookForm = () => {
             aria-label={"Output"}
             readOnly={true}
             value={submittedFormData ? JSON.stringify(submittedFormData, null, 2) : ""}
-            minRows={4}
+            minRows={9}
             style={{ padding: "8px" }}
           />
         </Box>

@@ -4,6 +4,7 @@ import { Box } from "@mui/system";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import FormLabel from "@mui/material/FormLabel";
+import { TextareaAutosize } from "@mui/material";
 
 const Login = () => {
   const [emailValue, setEmailValue] = useState("");
@@ -80,8 +81,14 @@ const Login = () => {
         </Box>
       </form>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
-        <FormLabel>API Response:</FormLabel>
-        <pre>{output ? output : ""}</pre>
+        <FormLabel>Response:</FormLabel>
+        <TextareaAutosize
+          aria-label={"Output"}
+          readOnly={true}
+          value={output ? output : ""}
+          minRows={7}
+          style={{ padding: "8px" }}
+        />
       </Box>
     </>
   );

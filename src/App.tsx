@@ -74,14 +74,14 @@ const APPLETS: Record<string, AppletMetadata> = {
     show: true,
   },
   ["Context"]: {
-    title: "React.useContext()",
+    title: "React useContext()",
     description:
       "An example of how the useContext() hook can be used to access/update app-wide state via a custom Provider component.",
     component: ReactUseContext,
     show: true,
   },
   ["Reducer"]: {
-    title: "React.useReducer()",
+    title: "React useReducer()",
     description: "An example of how the useReducer() hook can be used to execute complex actions.",
     component: ReactUseReducer,
     show: true,

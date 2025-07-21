@@ -75,6 +75,8 @@ const XStateVendingMachine = () => {
             disabled={dispensedDrinks.length === 0}
             onClick={() => send({ type: "TAKE_DRINKS" })}
             fullWidth
+            size={"small"}
+            sx={{ textTransform: "none", fontWeight: 400 }}
             variant="outlined"
           >
             Take Drink(s)
@@ -83,6 +85,8 @@ const XStateVendingMachine = () => {
             disabled={coinsInserted === 0}
             onClick={() => send({ type: "RETURN" })}
             fullWidth
+            size={"small"}
+            sx={{ textTransform: "none", fontWeight: 400 }}
             variant="outlined"
           >
             Coin Return
@@ -91,6 +95,8 @@ const XStateVendingMachine = () => {
             disabled={coinsInReturn === 0}
             onClick={() => send({ type: "TAKE_COINS" })}
             fullWidth
+            size={"small"}
+            sx={{ textTransform: "none", fontWeight: 400 }}
             variant="outlined"
           >
             Take Coins
@@ -111,13 +117,13 @@ const XStateVendingMachine = () => {
           gridRowGap: "0px",
         }}
       >
-        <Typography color={"green"}>Coins Inserted:</Typography>
+        <Typography color={"green"}>Coins inserted:</Typography>
         <Typography color={"green"}>{coinsInserted}¢ / 50¢</Typography>
-        <Typography>Coins In Return:</Typography>
+        <Typography>Coin return:</Typography>
         <Typography>{coinsInReturn}¢</Typography>
         <Typography color={"orange"}>Drink in dispenser</Typography>
         <Typography color={"orange"}>[{dispensedDrinks.join(", ")}]</Typography>
-        <Typography color={"lightgrey"}>Current State:</Typography>
+        <Typography color={"lightgrey"}>State:</Typography>
         <Typography color={"lightgrey"}>{`"${state.value}"`}</Typography>
       </Card>
     </>

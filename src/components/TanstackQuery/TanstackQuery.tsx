@@ -98,15 +98,19 @@ export const UI = () => {
           </ToggleButton>
         </ToggleButtonGroup>
       </Box>
-      <FormLabel>Result:</FormLabel>
 
-      <TextareaAutosize
-        readOnly={true}
-        value={isFetching || isLoading ? "loading" : JSON.stringify(error ? error : data, null, 2)}
-        minRows={12}
-        maxRows={12}
-        style={{ padding: "8px" }}
-      />
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <FormLabel>Result:</FormLabel>
+        <TextareaAutosize
+          readOnly={true}
+          value={
+            isFetching || isLoading ? "loading" : JSON.stringify(error ? error : data, null, 2)
+          }
+          minRows={12}
+          maxRows={12}
+          style={{ padding: "8px" }}
+        />
+      </Box>
     </Box>
   );
 };

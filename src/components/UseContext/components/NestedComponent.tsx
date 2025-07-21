@@ -55,7 +55,7 @@ const NestedComponent = () => {
             justifyContent: "space-between",
             fontSize: "1.125rem",
             mt: 1,
-            marginBottom: "1rem",
+            marginBottom: 2,
             backgroundColor: "rgba(0,0,0,0.125)",
             p: 2,
             borderRadius: "4px",
@@ -69,13 +69,15 @@ const NestedComponent = () => {
           <span>]</span>
         </Box>
       </Box>
-      <Box sx={{ display: "flex", gap: "0.25rem" }}>
-        <Button fullWidth onClick={incrementNumbers} variant="outlined">
-          Increment
-        </Button>
-        <Button fullWidth onClick={decrementNumbers} variant="outlined">
-          Decrement
-        </Button>
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+        <Box sx={{ display: "flex", gap: 1 }}>
+          <Button fullWidth onClick={incrementNumbers} variant="outlined">
+            Increment
+          </Button>
+          <Button fullWidth onClick={decrementNumbers} variant="outlined">
+            Decrement
+          </Button>
+        </Box>
         <ResetButton />
       </Box>
     </>

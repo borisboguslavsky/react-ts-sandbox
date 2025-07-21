@@ -101,7 +101,14 @@ const TodoList = () => {
                     }
                   >
                     <Checkbox />
-                    <Typography>{item.text}</Typography>
+                    <Typography
+                      variant="caption"
+                      sx={{
+                        lineBreak: "anywhere",
+                      }}
+                    >
+                      {item.text}
+                    </Typography>
                   </ListItem>
                 );
               })}

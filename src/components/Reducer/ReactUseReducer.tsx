@@ -1,5 +1,8 @@
+import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { Box } from "@mui/system";
-import { Button, Card, FormControlLabel, TextField, Typography, Checkbox } from "@mui/material";
+import { Button, TextField, Typography, Checkbox } from "@mui/material";
 import React, { useReducer } from "react";
 
 interface ReducerState {
@@ -106,28 +109,34 @@ const ReactUseReducer = () => {
           onChange={changeHandler}
         />
       </Box>
-      <Box sx={{ display: "flex", gap: "0.5rem", "& > button": { flexGrow: 1, flexBasis: 0 } }}>
-        <Button variant="outlined" onClick={() => dispatchForm({ type: "REVERSE" })}>
-          Reverse
-        </Button>
-        <Button variant="outlined" onClick={() => dispatchForm({ type: "UPPER" })}>
-          Uppercase
-        </Button>
-        <Button variant="outlined" onClick={() => dispatchForm({ type: "LOWER" })}>
-          Lowercase
+
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+        <Box sx={{ display: "flex", gap: 1 }}>
+          <Button fullWidth variant="outlined" onClick={() => dispatchForm({ type: "REVERSE" })}>
+            <SwapHorizIcon />
+          </Button>
+          <Button fullWidth variant="outlined" onClick={() => dispatchForm({ type: "UPPER" })}>
+            <ArrowUpwardIcon />
+          </Button>
+          <Button fullWidth variant="outlined" onClick={() => dispatchForm({ type: "LOWER" })}>
+            <ArrowDownwardIcon />
+          </Button>
+        </Box>
+        <Button variant="contained" onClick={() => dispatchForm({ type: "RESET" })}>
+          Reset
         </Button>
       </Box>
-      <Button variant="contained" onClick={() => dispatchForm({ type: "RESET" })}>
-        Reset
-      </Button>
+
       <Box
         sx={{
           display: "flex",
           alignItems: "center",
         }}
       >
-        <Checkbox readOnly disabled checked={formState.allFieldsPopulated} />
-        <Typography>All fields populated</Typography>
+        {/* <Checkbox readOnly disabled checked={formState.allFieldsPopulated} /> */}
+        <Typography variant="caption">
+          All fields populated: {formState.allFieldsPopulated ? "TRUE" : "FALSE"}
+        </Typography>
       </Box>
     </>
   );
