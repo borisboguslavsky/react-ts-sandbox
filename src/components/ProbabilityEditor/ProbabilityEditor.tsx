@@ -1,32 +1,21 @@
-import { ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useState } from "react";
-import Curve from "./components/Curve";
+import { Curve } from "./components/Curve";
 import { BarGraph } from "./components/BarGraph";
-import { InputsBell, InputsFlat } from "./components/Inputs";
+import { BellProbabilityParams, Parameters_Bell } from "./components/Parameters_Bell";
+import { FlatProbabilityParams, Parameters_Flat } from "./components/Parameters_Flat";
+import { SampleGenerator } from "./components/SampleGenerator";
 
 export enum DistributionType {
   Flat = "Flat",
-  Bell = "Bell",
+  Normal = "Normal",
 }
 
-export type FlatProbabilityParams = {
-  min: number;
-  max: number;
-  step: number;
-  bias: number; // 0 to 1
-};
-
-export type BellProbabilityParams = {
-  min: number;
-  max: number;
-  step: number;
-  bias: number; // 0 to 1
-  width: number; // standard deviation
-};
-
 const ProbabilityEditor = () => {
-  const [mode, setMode] = useState<DistributionType>(DistributionType.Flat);
+  const [mode, setMode] = useState<DistributionType>(DistributionType.Normal);
+  const [sampleNumber, setSampleNumber] = useState(200000);
+  const [buckets, setBuckets] = useState<number[]>([]);
   const [flatParams, setFlatParams] = useState<FlatProbabilityParams>({
     min: 0,
     max: 100,
@@ -46,7 +35,6 @@ const ProbabilityEditor = () => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        gap: 2,
       }}
     >
       <ToggleButtonGroup
@@ -55,6 +43,7 @@ const ProbabilityEditor = () => {
         fullWidth
         size="small"
         onChange={(_event, newArg) => {
+          setBuckets([]);
           setMode(newArg);
         }}
       >
@@ -67,16 +56,33 @@ const ProbabilityEditor = () => {
 
       <Box
         sx={{
-          position: "relative",
-          width: "100%",
-          height: "150px",
+          my: 2,
           border: "1px solid rgba(0, 0, 0, 0.25)",
           overflow: "hidden",
           borderRadius: "4px",
         }}
       >
-        <BarGraph mode={mode} flatParams={flatParams} bellParams={bellParams} />
-        <Curve mode={mode} flatParams={flatParams} bellParams={bellParams} />
+        <Box
+          sx={{
+            position: "relative",
+            width: "100%",
+            height: "150px",
+            borderBottom: "1px solid rgba(0, 0, 0, 0.25)",
+          }}
+        >
+          <BarGraph buckets={buckets} />
+          <Curve mode={mode} flatParams={flatParams} bellParams={bellParams} />
+        </Box>
+
+        <SampleGenerator
+          mode={mode}
+          flatParams={flatParams}
+          bellParams={bellParams}
+          buckets={buckets}
+          setBuckets={setBuckets}
+          sampleNumber={sampleNumber}
+          setSampleNumber={setSampleNumber}
+        />
       </Box>
 
       <Box
@@ -84,13 +90,17 @@ const ProbabilityEditor = () => {
           display: "flex",
           flexDirection: "column",
           gap: 2,
+          border: "1px solid rgba(0, 0, 0, 0.25)",
+          borderRadius: "4px",
+          p: 1,
         }}
       >
+        <Typography variant="caption">RNG Parameters</Typography>
         {mode === DistributionType.Flat && (
-          <InputsFlat params={flatParams} setParams={setFlatParams} />
+          <Parameters_Flat params={flatParams} setParams={setFlatParams} />
         )}
-        {mode === DistributionType.Bell && (
-          <InputsBell params={bellParams} setParams={setBellParams} />
+        {mode === DistributionType.Normal && (
+          <Parameters_Bell params={bellParams} setParams={setBellParams} />
         )}
       </Box>
     </Box>

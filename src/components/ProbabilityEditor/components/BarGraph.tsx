@@ -1,27 +1,7 @@
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button/Button";
 import { useEffect, useRef, useState } from "react";
-import rngBell from "../util/rngBell";
-import generateBuckets from "../util/generateBuckets";
-import rngFlat from "../util/rngFlat";
-import {
-  BellProbabilityParams,
-  DistributionType,
-  FlatProbabilityParams,
-} from "../ProbabilityEditor";
 
-export const BarGraph = ({
-  mode,
-  flatParams,
-  bellParams,
-}: {
-  mode: DistributionType;
-  flatParams: FlatProbabilityParams;
-  bellParams: BellProbabilityParams;
-}) => {
+export const BarGraph = ({ buckets }: { buckets: number[] }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [sampleNumber, setSampleNumber] = useState(200000);
-  const [buckets, setBuckets] = useState<number[]>([]);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   const { width, height } = dimensions;
@@ -43,29 +23,6 @@ export const BarGraph = ({
     };
   }, []);
 
-  const generateSampleSet = () => {
-    if (mode === DistributionType.Bell) {
-      const newNumbers = Array.from({ length: sampleNumber }, () =>
-        rngBell(bellParams.min, bellParams.max, bellParams.step, bellParams.bias, bellParams.width)
-      );
-      const buckets = generateBuckets(newNumbers, bellParams.min, bellParams.max, bellParams.step);
-      setBuckets(buckets);
-      return;
-    }
-    if (mode === DistributionType.Flat) {
-      const newNumbers = Array.from({ length: sampleNumber }, () =>
-        rngFlat(flatParams.min, flatParams.max, flatParams.step, flatParams.bias)
-      );
-      const buckets = generateBuckets(newNumbers, flatParams.min, flatParams.max, flatParams.step);
-      setBuckets(buckets);
-      return;
-    }
-  };
-
-  const clearSampleSet = () => {
-    setBuckets([]);
-  };
-
   return (
     <div
       style={{
@@ -77,38 +34,6 @@ export const BarGraph = ({
       }}
       ref={containerRef}
     >
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: 4,
-          right: 4,
-          display: "flex",
-          gap: 1,
-        }}
-      >
-        <Button
-          sx={{
-            textTransform: "none",
-            padding: "0px",
-          }}
-          variant="contained"
-          size="small"
-          onClick={clearSampleSet}
-        >
-          Clear
-        </Button>
-        <Button
-          sx={{
-            textTransform: "none",
-            padding: "0px",
-          }}
-          variant="contained"
-          size="small"
-          onClick={generateSampleSet}
-        >
-          Generate
-        </Button>
-      </Box>
       <Bars width={width} height={height} buckets={buckets} />
     </div>
   );
@@ -133,7 +58,7 @@ const Bars = ({ width, height, buckets }: { width: number; height: number; bucke
             y={height - barHeight}
             width={barWidth - 1} // -1 to create a small gap between bars
             height={barHeight}
-            fill="blue"
+            fill="rgba(0, 90, 240, 0.75)"
           />
         );
       })}
