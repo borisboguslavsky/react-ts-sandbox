@@ -90,7 +90,7 @@ const APPLETS: Record<string, AppletMetadata> = {
 
 const App = () => {
   return (
-    <Grid container spacing={2} sx={{ flexGrow: 1, maxWidth: "1200px", padding: "36px" }}>
+    <Grid container spacing={2} sx={{ flexGrow: 1, maxWidth: "1120px", p: 2 }}>
       {Object.entries(APPLETS).map(([key, applet]) => {
         if (!applet.show) return null;
         return (

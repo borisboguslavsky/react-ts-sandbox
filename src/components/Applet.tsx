@@ -15,7 +15,7 @@ const Applet = ({ title, description, component }: AppletProps) => {
   return (
     <Grid item xs={12} md={6} lg={4}>
       <Paper
-        elevation={12}
+        elevation={3}
         sx={{
           padding: "16px",
           display: "flex",
