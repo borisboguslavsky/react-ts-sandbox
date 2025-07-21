@@ -20,29 +20,16 @@ const getPathData = (
 
   if (mode === DistributionType.Flat) {
     const { bias } = params as FlatProbabilityParams;
+
     let startY = 0;
     let endY = 0;
 
-    // A small constant to prevent log(0) which is -Infinity
-    const epsilon = 1e-10;
-
     if (bias > 0.5) {
-      // End point is fixed at top-right.
-      endY = 0;
-      // Map bias from [0.5, 1] to a logarithmic scale for startY
-      const normalizedBias = (bias - 0.5) * 2; // -> [0, 1]
-      const logValue = -Math.log(1 - normalizedBias + epsilon);
-      // Normalize the log value to the height. The effective range of logValue is scaled.
-      startY = Math.min(logValue * 20, height); // Multiplier adjusts curve steepness
-    } else if (bias < 0.5) {
-      // Start point is fixed at top-left.
-      startY = 0;
-      // Map bias from [0, 0.5] to a logarithmic scale for endY
-      const normalizedBias = (0.5 - bias) * 2; // -> [0, 1]
-      const logValue = -Math.log(1 - normalizedBias + epsilon);
-      endY = Math.min(logValue * 20, height); // Multiplier adjusts curve steepness
+      startY = height - (1 - 1 / bias) * height * -1;
     }
-    // if bias is 0.5, startY and endY remain 0, creating a flat line at the top.
+    if (bias < 0.5) {
+      endY = height - (1 - 1 / (1 - bias)) * height * -1;
+    }
 
     return `M 0 ${startY} L ${width} ${endY}`;
   }

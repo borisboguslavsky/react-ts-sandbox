@@ -49,4 +49,5 @@ function rngFlat(min: number, max: number, step: number, bias: number): number {
   // Clamp the value to be within the max bound, as the last step can sometimes exceed it.
   return Math.min(value, max);
 }
+
 export default rngFlat;

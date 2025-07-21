@@ -46,4 +46,5 @@ function rngBell(min: number, max: number, step: number, bias: number, width: nu
 
   return value;
 }
+
 export default rngBell;
