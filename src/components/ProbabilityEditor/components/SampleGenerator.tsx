@@ -1,3 +1,5 @@
+import BarChartIcon from "@mui/icons-material/BarChart";
+import ClearIcon from "@mui/icons-material/Clear";
 import Box from "@mui/material/Box";
 import { DistributionType } from "../ProbabilityEditor";
 
@@ -7,7 +9,7 @@ import rngFlat from "../util/rngFlat";
 import { BellProbabilityParams } from "./Parameters_Bell";
 import { FlatProbabilityParams } from "./Parameters_Flat";
 import Button from "@mui/material/Button";
-import { TextField } from "@mui/material";
+import { IconButton, TextField } from "@mui/material";
 
 export const SampleGenerator = ({
   mode,
@@ -74,26 +76,12 @@ export const SampleGenerator = ({
           ml: "auto",
         }}
       >
-        <Button
-          sx={{
-            textTransform: "none",
-          }}
-          variant="outlined"
-          size="small"
-          onClick={clearSampleSet}
-        >
-          Clear
-        </Button>
-        <Button
-          sx={{
-            textTransform: "none",
-          }}
-          variant="contained"
-          size="small"
-          onClick={generateSampleSet}
-        >
-          Generate
-        </Button>
+        <IconButton size="small" onClick={clearSampleSet}>
+          <ClearIcon />
+        </IconButton>
+        <IconButton size="small" onClick={generateSampleSet}>
+          <BarChartIcon />
+        </IconButton>
       </Box>
     </Box>
   );

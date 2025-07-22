@@ -14,13 +14,13 @@ export enum DistributionType {
 
 const ProbabilityEditor = () => {
   const [mode, setMode] = useState<DistributionType>(DistributionType.Normal);
-  const [sampleNumber, setSampleNumber] = useState(200000);
+  const [sampleNumber, setSampleNumber] = useState(100000);
   const [buckets, setBuckets] = useState<number[]>([]);
   const [flatParams, setFlatParams] = useState<FlatProbabilityParams>({
     min: 0,
     max: 100,
     step: 1,
-    bias: 0.5,
+    bias: 1,
   });
   const [bellParams, setBellParams] = useState<BellProbabilityParams>({
     min: 0,
