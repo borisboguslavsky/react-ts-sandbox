@@ -10,6 +10,7 @@ import {
   FormControlLabel,
   FormLabel,
   TextareaAutosize,
+  Stack,
 } from "@mui/material";
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
@@ -56,30 +57,32 @@ export const ReactHookForm = () => {
           gap: 2,
         }}
       >
-        <Controller
-          name="firstName"
-          control={control}
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="First Name"
-              value={value}
-              onChange={onChange}
-              InputLabelProps={{ shrink: true }}
-            />
-          )}
-        />
-        <Controller
-          name="lastName"
-          control={control}
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="Last Name"
-              value={value}
-              onChange={onChange}
-              InputLabelProps={{ shrink: true }}
-            />
-          )}
-        />
+        <Stack direction="row" spacing={1}>
+          <Controller
+            name="firstName"
+            control={control}
+            render={({ field: { onChange, value }, fieldState: { error } }) => (
+              <TextField
+                label="First Name"
+                value={value}
+                onChange={onChange}
+                InputLabelProps={{ shrink: true }}
+              />
+            )}
+          />
+          <Controller
+            name="lastName"
+            control={control}
+            render={({ field: { onChange, value }, fieldState: { error } }) => (
+              <TextField
+                label="Last Name"
+                value={value}
+                onChange={onChange}
+                InputLabelProps={{ shrink: true }}
+              />
+            )}
+          />
+        </Stack>
 
         <Controller
           name="autocomplete"
@@ -162,12 +165,12 @@ export const ReactHookForm = () => {
                 reset(defaultFormValues);
               }}
             >
-              Defaults
+              Reset
+            </Button>
+            <Button type="submit" fullWidth variant="contained">
+              Submit
             </Button>
           </Box>
-          <Button type="submit" variant="contained" fullWidth>
-            Submit
-          </Button>
         </Box>
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           <FormLabel>Submitted Data:</FormLabel>

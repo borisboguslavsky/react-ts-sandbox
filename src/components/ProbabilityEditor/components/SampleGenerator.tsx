@@ -76,12 +76,18 @@ export const SampleGenerator = ({
           ml: "auto",
         }}
       >
-        <IconButton size="small" onClick={clearSampleSet}>
+        <Button variant="contained" size="small" onClick={generateSampleSet}>
+          Generate
+        </Button>
+        <Button variant="outlined" size="small" onClick={clearSampleSet}>
+          Clear
+        </Button>
+        {/* <IconButton size="small" onClick={clearSampleSet}>
           <ClearIcon />
-        </IconButton>
-        <IconButton size="small" onClick={generateSampleSet}>
+        </IconButton> */}
+        {/* <IconButton size="small" onClick={generateSampleSet}>
           <BarChartIcon />
-        </IconButton>
+        </IconButton> */}
       </Box>
     </Box>
   );
