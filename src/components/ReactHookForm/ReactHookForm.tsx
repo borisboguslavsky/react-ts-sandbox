@@ -128,14 +128,13 @@ export const ReactHookForm = () => {
             <>
               <RadioGroup
                 aria-labelledby="demo-radio-buttons-group-label"
-                defaultValue="2"
+                defaultValue="A"
                 onChange={() => {}}
                 name="radio-buttons-group"
                 row
               >
-                <FormControlLabel value="1" control={<Radio />} label="Option 1" />
-                <FormControlLabel value="2" control={<Radio />} label="Option 2" />
-                <FormControlLabel value="3" control={<Radio />} label="Option 3" />
+                <FormControlLabel value="A" control={<Radio />} label="Option A" />
+                <FormControlLabel value="B" control={<Radio />} label="Option B" />
               </RadioGroup>
             </>
           )}

@@ -104,6 +104,8 @@ const Stopwatch = () => {
               display: "grid",
               gridTemplateColumns: "repeat(3, 1fr)",
               columnGap: 1,
+              maxHeight: "200px",
+              overflowY: "auto",
               "& > p": {
                 m: 0,
                 textAlign: "center",

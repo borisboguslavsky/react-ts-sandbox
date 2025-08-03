@@ -6,7 +6,7 @@ I use this repo as a sandbox environment to try out libraries, self-imposed codi
 
 # Live Demo
 
-https://borisboguslavsky.github.io/react-ts-practice/
+https://borisboguslavsky.github.io/react-ts-sandbox/
 
 # Components
 
