@@ -2,6 +2,7 @@
   "name": "react-ts-sandbox",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://borisboguslavsky.github.io/react-ts-sandbox",
   "type": "module",
   "scripts": {
     "dev": "vite",
