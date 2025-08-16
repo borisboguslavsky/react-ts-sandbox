@@ -13,7 +13,9 @@ import {
   Stack,
 } from "@mui/material";
 import React from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, Resolver } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 interface FormValues {
   firstName: string;
@@ -36,9 +38,20 @@ const defaultFormValues = {
   radioGroup: "Option 2",
 };
 
+// Define validation schema using Yup
+const validationSchema = yup.object().shape({
+  firstName: yup.string().required("First name is required"),
+  lastName: yup.string().required("Last name is required"),
+  autocomplete: yup.array().of(yup.string().default("")).default([]).required(),
+  radioGroup: yup.string().default("").required(),
+});
+
 export const ReactHookForm = () => {
+  const formResolver: Resolver<FormValues> = yupResolver(validationSchema);
+
   const { handleSubmit, control, reset } = useForm<FormValues>({
     defaultValues: defaultFormValues,
+    resolver: formResolver,
   });
 
   const [submittedFormData, setSubmittedFormData] = React.useState<FormValues>();
@@ -67,6 +80,8 @@ export const ReactHookForm = () => {
                 value={value}
                 onChange={onChange}
                 InputLabelProps={{ shrink: true }}
+                error={!!error}
+                helperText={error ? error.message : null}
               />
             )}
           />
@@ -79,6 +94,8 @@ export const ReactHookForm = () => {
                 value={value}
                 onChange={onChange}
                 InputLabelProps={{ shrink: true }}
+                error={!!error}
+                helperText={error ? error.message : null}
               />
             )}
           />
@@ -132,7 +149,7 @@ export const ReactHookForm = () => {
               <RadioGroup
                 aria-labelledby="demo-radio-buttons-group-label"
                 defaultValue="A"
-                onChange={() => {}}
+                onChange={(_, newVal) => onChange(newVal)}
                 name="radio-buttons-group"
                 row
               >

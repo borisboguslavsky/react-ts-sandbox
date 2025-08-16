@@ -15,6 +15,7 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@fontsource/roboto": "^5.0.13",
+    "@hookform/resolvers": "^5.2.1",
     "@mui/icons-material": "^5.15.20",
     "@mui/material": "^5.15.20",
     "@xstate/react": "^4.1.1",
@@ -24,7 +25,8 @@
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.52.0",
     "react-query": "^3.39.3",
-    "xstate": "^5.13.0"
+    "xstate": "^5.13.0",
+    "yup": "^1.7.0"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
